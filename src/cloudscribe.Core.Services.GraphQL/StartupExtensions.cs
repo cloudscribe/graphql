@@ -1,4 +1,4 @@
-﻿using cloudscribe.Core.Services;
+﻿using cloudscribe.Core.Services.GraphQL;
 using System;
 using System.Collections.Generic;
 using System.Text;

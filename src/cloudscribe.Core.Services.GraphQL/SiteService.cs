@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Core.Services
+namespace cloudscribe.Core.Services.GraphQL
 {
     public class SiteService
     {

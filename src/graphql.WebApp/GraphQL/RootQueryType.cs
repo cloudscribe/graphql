@@ -1,5 +1,5 @@
 ﻿using cloudscribe.Core.Models.GraphQL;
-using cloudscribe.Core.Services;
+using cloudscribe.Core.Services.GraphQL;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
