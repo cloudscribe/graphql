@@ -1,6 +1,8 @@
 ﻿using graphql.WebApp;
+using GraphQL.Client.Http;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Mvc.Testing;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -18,8 +20,38 @@ namespace graphql.IntegrationTests
 
         public HttpClient GetUnauthenticatedClient()
         {
+            
             return _factory.CreateClient();
         }
+
+        public HttpMessageHandler GetHandler()
+        {
+            return _factory.Server.CreateHandler();
+        }
+
+        public async Task<GraphQLHttpClient> GetAuthenticatedGraphQLClient(string userName = "admin@admin.com", string password = "admin")
+        {
+            var client = await GetAuthenticatedClient(userName, password);
+            var clientOptions = new GraphQLHttpClientOptions
+            {
+                HttpMessageHandler = GetHandler(),
+                EndPoint = new Uri("http://localhost/graphql")
+            };
+            return client.AsGraphQLClient(clientOptions);
+
+        }
+
+        public GraphQLHttpClient GetUnauthenticatedGraphQLClient()
+        {
+            var client = _factory.CreateClient();
+            var clientOptions = new GraphQLHttpClientOptions
+            {
+                HttpMessageHandler = GetHandler(),
+                EndPoint = new Uri("http://localhost/graphql")
+            };
+            return client.AsGraphQLClient(clientOptions);
+        }
+
 
         public async Task<HttpClient> GetAuthenticatedClient(string userName = "admin@admin.com", string password = "admin")
         {
