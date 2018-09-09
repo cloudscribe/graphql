@@ -77,6 +77,13 @@ namespace graphql.WebApp
             // This is a custom extension method in Config/Localization.cs
             services.SetupLocalization();
 
+            // This is a custom extension method in Config/IdentityServerIntegration.cs
+            var setupApiAuthentication = _configuration.GetValue<bool>("AppSettings:SetupApiAuthentication");
+            if (setupApiAuthentication)
+            {
+                services.SetupIdentityServerApiAuthentication();
+            }
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

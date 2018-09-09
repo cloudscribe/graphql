@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -84,6 +86,20 @@ namespace Microsoft.Extensions.DependencyInjection
 
             }
 
+
+            return services;
+        }
+
+        public static IServiceCollection SetupIdentityServerApiAuthentication(this IServiceCollection services)
+        {
+            services.AddAuthentication()
+                .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.Authority = "https://localhost:44399";
+
+                    options.ApiName = "api";
+                    options.ApiSecret = "secret";
+                });
 
             return services;
         }

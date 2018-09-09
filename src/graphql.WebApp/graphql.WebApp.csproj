@@ -32,6 +32,8 @@
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0" />
 
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
+
     <PackageReference Include="cloudscribe.Core.Web" Version="3.1.*" />
     <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap4" Version="3.1.*" />
     <PackageReference Include="cloudscribe.Web.StaticFiles" Version="1.0.*" />
