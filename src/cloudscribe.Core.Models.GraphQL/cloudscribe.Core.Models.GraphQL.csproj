@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="cloudscribe.Core.Models" Version="3.0.6" />
+    <PackageReference Include="GraphQL" Version="2.0.0" />
+
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
+    
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Core.Services\cloudscribe.Core.Services.csproj" />
+  </ItemGroup>
+
+</Project>

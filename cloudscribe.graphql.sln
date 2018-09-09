@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1F86FC96-EAD2-4C35-8C12-C930F5869E42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B72E95CA-797B-4EBD-9793-AA00E75A0F6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.WebApp", "src\graphql.WebApp\graphql.WebApp.csproj", "{A1592269-258F-48AA-A722-CBC55EEA3C75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.IntegrationTests", "test\graphql.IntegrationTests\graphql.IntegrationTests.csproj", "{B30E1EEA-C9E1-4800-8C3D-D14C58399438}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Core.Models.GraphQL", "src\cloudscribe.Core.Models.GraphQL\cloudscribe.Core.Models.GraphQL.csproj", "{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Core.Services", "src\cloudscribe.Core.Services\cloudscribe.Core.Services.csproj", "{6956A10A-F4EE-4A25-BBA3-9C0D4835354E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6956A10A-F4EE-4A25-BBA3-9C0D4835354E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6956A10A-F4EE-4A25-BBA3-9C0D4835354E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6956A10A-F4EE-4A25-BBA3-9C0D4835354E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6956A10A-F4EE-4A25-BBA3-9C0D4835354E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1592269-258F-48AA-A722-CBC55EEA3C75} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{B30E1EEA-C9E1-4800-8C3D-D14C58399438} = {B72E95CA-797B-4EBD-9793-AA00E75A0F6F}
+		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{6956A10A-F4EE-4A25-BBA3-9C0D4835354E} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}
+	EndGlobalSection
+EndGlobal
