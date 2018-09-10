@@ -40,9 +40,18 @@ namespace cloudscribe.Core.Services.GraphQL
                 var queries = scopedServices.GetService<ISiteQueries>();
                 return await queries.GetList(cancellationToken).ConfigureAwait(false);
 
-            }
+            }      
+        }
 
-                
+        public async Task<ISiteSettings> GetSite(Guid id, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var queries = scopedServices.GetService<ISiteQueries>();
+                return await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
+
+            }
         }
     }
 }

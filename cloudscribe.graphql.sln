@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.IntegrationTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Models.GraphQL", "src\cloudscribe.Core.Models.GraphQL\cloudscribe.Core.Models.GraphQL.csproj", "{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Core.Services.GraphQL", "src\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj", "{45334909-80EC-4BFC-9392-F244BA8DFCF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Services.GraphQL", "src\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj", "{45334909-80EC-4BFC-9392-F244BA8DFCF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Extensions.GraphQL", "src\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj", "{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438} = {B72E95CA-797B-4EBD-9793-AA00E75A0F6F}
 		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{45334909-80EC-4BFC-9392-F244BA8DFCF7} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}

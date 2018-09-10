@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-16"?>
+<post>
+  <id>post-1</id>
+  <title>Post 1</title>
+  <slug>post-1</slug>
+  <correlationkey />
+  <author>Admin</author>
+  <pubDate>2018-09-10T12:39:06.2791824Z</pubDate>
+  <lastModified>2018-09-10T12:39:06</lastModified>
+  <excerpt>post 1</excerpt>
+  <content>&lt;p&gt;Lorem ipsum dolor sit amet, id tale facilisis complectitur quo, vel at aeque eirmod, simul persius numquam quo no. Ex mundi primis diceret cum. Euismod disputando sea ei. An discere patrioque sed, brute soluta antiopam at cum. Mucius scriptorem referrentur et his, quis munere qui id. At qui consulatu adversarium consequuntur, est no agam rebum. Cum modo nusquam maluisset ea, causae pertinacia intellegam ut eum.&lt;/p&gt;
+
+&lt;p&gt;Per corpora contentiones ei. Zril soleat oporteat id has, ex sumo lobortis honestatis mei. Mei tale malorum no. Quot electram consequat nam cu, quo ut quando legimus, id est aeque tollit partem.&lt;/p&gt;
+
+&lt;p&gt;An euismod postulant quo, eos nostrud assentior at. Mea ea tota vocent consequat, cu volumus hendrerit quo, ut quo inimicus euripidis. Ea molestiae deseruisse mei, id eos viderer tibique. Constituam necessitatibus his ea. Vim suas graecis te, in nam sumo scaevola urbanitas. Ea qui fugit utroque reprehendunt, maiorum voluptatum ad eam.&lt;/p&gt;
+
+&lt;p&gt;At mea graeco fierent, no agam liber saperet sed, purto tacimates inimicus ea vis. Ea eos ridens mandamus. Usu ex deserunt tincidunt contentiones, volumus necessitatibus ad usu. Primis melius aliquid has id.&lt;/p&gt;
+</content>
+  <contentType>html</contentType>
+  <imageUrl />
+  <thumbnailUrl />
+  <createdUtc>2018-09-10T12:39:06</createdUtc>
+  <createdByUser>admin</createdByUser>
+  <lastModifiedByUser>admin</lastModifiedByUser>
+  <draftAuthor />
+  <draftContent />
+  <draftPubDate />
+  <templateKey />
+  <serializedModel />
+  <draftSerializedModel />
+  <serializer />
+  <blogId>5961f387-accd-49dc-b962-44029d0803ae</blogId>
+  <ispublished>true</ispublished>
+  <isFeatured>false</isFeatured>
+  <autoTeaser />
+  <teaserOverride />
+  <suppressTeaser>false</suppressTeaser>
+  <categories>
+    <category>foo</category>
+  </categories>
+  <comments></comments>
+</post>

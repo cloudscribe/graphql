@@ -23,8 +23,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddGraphQLModelsForCloudscribeCore();
 
 
-            services.AddSingleton<RootQueryType>();
-            services.AddSingleton<ISchema, RootSchema>();
+            //services.AddSingleton<RootQueryType>();
+            //services.AddSingleton<ISchema, RootSchema>();
+            services.AddGraphQLCompositeSchemaAndQuery();
 
             services.AddGraphQL(_ =>
             {

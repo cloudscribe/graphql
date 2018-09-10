@@ -1,4 +1,5 @@
 ﻿using cloudscribe.Core.Models.GraphQL;
+using cloudscribe.Extensions.GraphQL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<SiteType>();
             services.AddSingleton<SiteInfoType>();
+
+            services.AddSingleton<IGraphQueryMarker, CoreQuery>();
 
 
             return services;

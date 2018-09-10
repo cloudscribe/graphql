@@ -11,5 +11,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
     
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj" />
+    <ProjectReference Include="..\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj" />
+  </ItemGroup>
 
 </Project>
