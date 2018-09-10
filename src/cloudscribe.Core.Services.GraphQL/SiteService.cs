@@ -53,5 +53,22 @@ namespace cloudscribe.Core.Services.GraphQL
 
             }
         }
+
+        public async Task<ISiteSettings> UpdateSiteName(Guid id, string newName, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var queries = scopedServices.GetService<ISiteQueries>();
+                var commands = scopedServices.GetService<ISiteCommands>();
+                var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
+                site.SiteName = newName;
+                await commands.Update(site).ConfigureAwait(false);
+
+                return site;
+
+            }
+        }
+
     }
 }

@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<SiteInfoType>();
 
             services.AddSingleton<IGraphQueryMarker, CoreQuery>();
+            services.AddSingleton<IGraphMutationMarker, CoreMutation>();
 
 
             return services;
