@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace graphql.WebApp.GraphQL
+namespace cloudscribe.Extensions.GraphQL
 {
     public class GraphQLUserContext
     {

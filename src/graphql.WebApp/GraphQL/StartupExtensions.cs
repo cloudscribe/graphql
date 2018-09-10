@@ -1,12 +1,6 @@
-﻿using graphql.WebApp.GraphQL;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Http;
 using GraphQL.Server;
-using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -21,10 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddServicesForCloudscribeCore();
             services.AddGraphQLModelsForCloudscribeCore();
-
-
-            //services.AddSingleton<RootQueryType>();
-            //services.AddSingleton<ISchema, RootSchema>();
+            
             services.AddGraphQLCompositeSchemaAndQuery();
 
             services.AddGraphQL(_ =>
@@ -32,7 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 _.EnableMetrics = true;
                 _.ExposeExceptions = true;
             })
-            .AddUserContextBuilder(httpContext => new graphql.WebApp.GraphQL.GraphQLUserContext { User = httpContext.User });
+            .AddUserContextBuilder(httpContext => new cloudscribe.Extensions.GraphQL.GraphQLUserContext { User = httpContext.User });
 
 
             return services;
