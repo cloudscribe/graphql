@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Reflection;
+using cloudscribe.Core.Services.GraphQL.InputModels;
+
 
 namespace cloudscribe.Core.Services.GraphQL
 {
@@ -63,6 +66,32 @@ namespace cloudscribe.Core.Services.GraphQL
                 var commands = scopedServices.GetService<ISiteCommands>();
                 var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
                 site.SiteName = newName;
+                await commands.Update(site).ConfigureAwait(false);
+
+                return site;
+
+            }
+        }
+
+        public async Task<ISiteSettings> UpdateSite(Guid id, SiteUpdateModel patch, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var queries = scopedServices.GetService<ISiteQueries>();
+                var commands = scopedServices.GetService<ISiteCommands>();
+                var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
+                //site.SiteName = newName;
+                if(!string.IsNullOrEmpty(patch.SiteName))
+                {
+                    site.SiteName = patch.SiteName;
+                }
+                if(patch.AllowPersistentLogin.HasValue)
+                {
+                    site.AllowPersistentLogin = patch.AllowPersistentLogin.Value;
+                }
+                
+
                 await commands.Update(site).ConfigureAwait(false);
 
                 return site;

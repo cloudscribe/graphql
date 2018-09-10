@@ -1,4 +1,5 @@
 ﻿using cloudscribe.Core.Services.GraphQL;
+using cloudscribe.Core.Services.GraphQL.InputModels;
 using cloudscribe.Extensions.GraphQL;
 using GraphQL.Types;
 using System;
@@ -32,6 +33,26 @@ namespace cloudscribe.Core.Models.GraphQL
                 }
 
             );
+
+            //FieldAsync<SiteType>(
+            //    "updateSite",
+            //    arguments: new QueryArguments(
+            //        new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
+            //        new QueryArgument<NonNullGraphType<SiteUpdateInputType>> { Name = "updateSite", Description = "an object to patch site properties" }
+            //    ),
+            //    resolve: async context =>
+            //    {
+            //        var id = context.GetArgument<Guid>("id");
+            //        var patch = context.GetArgument<SiteUpdateModel>("updateSite");
+                   
+
+            //        return await context.TryAsyncResolve(
+            //            async c => await siteService.UpdateSite(id, patch)
+            //        );
+
+            //    }
+
+            //);
 
         }
     }
