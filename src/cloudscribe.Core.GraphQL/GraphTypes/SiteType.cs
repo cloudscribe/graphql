@@ -1,9 +1,10 @@
-﻿using GraphQL.Types;
+﻿using cloudscribe.Core.Models;
+using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Core.Models.GraphQL
+namespace cloudscribe.Core.GraphQL.GraphTypes
 {
     public class SiteType : ObjectGraphType<ISiteSettings>
     {

@@ -13,9 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
 
-            services.AddServicesForCloudscribeCore();
-            services.AddGraphQLModelsForCloudscribeCore();
-            
+            services.AddGraphQLForCloudscribeCore();
             services.AddGraphQLCompositeSchemaAndQuery();
 
             services.AddGraphQL(_ =>

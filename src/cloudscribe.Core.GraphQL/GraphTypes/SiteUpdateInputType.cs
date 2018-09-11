@@ -1,10 +1,10 @@
-﻿using cloudscribe.Core.Services.GraphQL.InputModels;
+﻿using cloudscribe.Core.GraphQL.Models;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Core.Models.GraphQL
+namespace cloudscribe.Core.GraphQL.GraphTypes
 {
     public class SiteUpdateInputType : InputObjectGraphType<SiteUpdateModel>
     {

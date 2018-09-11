@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Core.Models.GraphQL
+namespace cloudscribe.Core.GraphQL.GraphTypes
 {
     class SiteUserType
     {

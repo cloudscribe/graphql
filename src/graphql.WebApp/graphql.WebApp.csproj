@@ -64,9 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cloudscribe.Core.Models.GraphQL\cloudscribe.Core.Models.GraphQL.csproj" />
-    <ProjectReference Include="..\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj" />
+    <ProjectReference Include="..\cloudscribe.Core.GraphQL\cloudscribe.Core.GraphQL.csproj" />
     <ProjectReference Include="..\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj" />
+    <ProjectReference Include="..\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj" />
   </ItemGroup>
 
 

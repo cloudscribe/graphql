@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.WebApp", "src\graph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.IntegrationTests", "test\graphql.IntegrationTests\graphql.IntegrationTests.csproj", "{B30E1EEA-C9E1-4800-8C3D-D14C58399438}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Models.GraphQL", "src\cloudscribe.Core.Models.GraphQL\cloudscribe.Core.Models.GraphQL.csproj", "{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.GraphQL", "src\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj", "{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Services.GraphQL", "src\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj", "{45334909-80EC-4BFC-9392-F244BA8DFCF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Core.GraphQL", "src\cloudscribe.Core.GraphQL\cloudscribe.Core.GraphQL.csproj", "{5D3887AF-FBEC-4D98-96B2-22A1883328AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Extensions.GraphQL", "src\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj", "{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.SimpleContent.GraphQL", "src\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj", "{35C3709D-1CC2-401A-8218-0506AF9E4691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,18 +31,18 @@ Global
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45334909-80EC-4BFC-9392-F244BA8DFCF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3887AF-FBEC-4D98-96B2-22A1883328AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3887AF-FBEC-4D98-96B2-22A1883328AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3887AF-FBEC-4D98-96B2-22A1883328AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3887AF-FBEC-4D98-96B2-22A1883328AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,9 +50,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A1592269-258F-48AA-A722-CBC55EEA3C75} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438} = {B72E95CA-797B-4EBD-9793-AA00E75A0F6F}
-		{99BED8D3-3A7A-4F00-99AA-D9775A5CC1F6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
-		{45334909-80EC-4BFC-9392-F244BA8DFCF7} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{5D3887AF-FBEC-4D98-96B2-22A1883328AA} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{35C3709D-1CC2-401A-8218-0506AF9E4691} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}

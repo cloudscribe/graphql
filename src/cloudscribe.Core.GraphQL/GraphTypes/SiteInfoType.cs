@@ -1,6 +1,7 @@
-﻿using GraphQL.Types;
+﻿using cloudscribe.Core.Models;
+using GraphQL.Types;
 
-namespace cloudscribe.Core.Models.GraphQL
+namespace cloudscribe.Core.GraphQL.GraphTypes
 {
     public class SiteInfoType : ObjectGraphType<ISiteInfo>
     {

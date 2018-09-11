@@ -3,17 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="cloudscribe.Core.Models" Version="3.0.6" />
+    <PackageReference Include="cloudscribe.SimpleContent.Models" Version="4.0.2" />
     <PackageReference Include="GraphQL" Version="2.0.0" />
 
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-    
+
   </ItemGroup>
-  
+
   <ItemGroup>
-    <ProjectReference Include="..\cloudscribe.Core.Services.GraphQL\cloudscribe.Core.Services.GraphQL.csproj" />
+
     <ProjectReference Include="..\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj" />
   </ItemGroup>
 

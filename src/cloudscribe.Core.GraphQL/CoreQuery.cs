@@ -1,11 +1,12 @@
-﻿using cloudscribe.Core.Services.GraphQL;
+﻿using cloudscribe.Core.GraphQL.GraphTypes;
+using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Extensions.GraphQL;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Core.Models.GraphQL
+namespace cloudscribe.Core.GraphQL
 {
     public class CoreQuery : ObjectGraphType<object>, IGraphQueryMarker
     {
