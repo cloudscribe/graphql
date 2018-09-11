@@ -6,7 +6,7 @@ using System.Text;
 
 namespace cloudscribe.Core.GraphQL.GraphTypes
 {
-    public class SiteType : ObjectGraphType<ISiteSettings>
+    public class SiteType : ObjectGraphType<ISiteContext>
     {
         public SiteType()
         {

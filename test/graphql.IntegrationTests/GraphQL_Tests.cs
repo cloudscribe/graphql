@@ -49,7 +49,7 @@ namespace graphql.IntegrationTests
             {
                 Query = @"
                     {
-                      sites {
+                      siteList {
                         id,
                         aliasId,
                         siteName,
@@ -63,7 +63,7 @@ namespace graphql.IntegrationTests
             // Act
             var response = await client.SendQueryAsync(request);
             
-            var result = response.GetDataFieldAs<List<SiteInfo>>("sites");
+            var result = response.GetDataFieldAs<List<SiteInfo>>("siteList");
 
             var id = result[0].Id.ToString();
 

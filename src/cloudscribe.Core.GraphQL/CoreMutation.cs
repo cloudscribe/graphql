@@ -1,10 +1,9 @@
 ﻿using cloudscribe.Core.GraphQL.GraphTypes;
+using cloudscribe.Core.GraphQL.Models;
 using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Extensions.GraphQL;
 using GraphQL.Types;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace cloudscribe.Core.GraphQL
 {
@@ -34,25 +33,25 @@ namespace cloudscribe.Core.GraphQL
 
             );
 
-            //FieldAsync<SiteType>(
-            //    "updateSite",
-            //    arguments: new QueryArguments(
-            //        new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
-            //        new QueryArgument<NonNullGraphType<SiteUpdateInputType>> { Name = "updateSite", Description = "an object to patch site properties" }
-            //    ),
-            //    resolve: async context =>
-            //    {
-            //        var id = context.GetArgument<Guid>("id");
-            //        var patch = context.GetArgument<SiteUpdateModel>("updateSite");
-                   
+            FieldAsync<SiteType>(
+                "updateSite",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
+                    new QueryArgument<NonNullGraphType<SiteUpdateInputType>> { Name = "updateSite", Description = "an object to patch site properties" }
+                ),
+                resolve: async context =>
+                {
+                    var id = context.GetArgument<Guid>("id");
+                    var patch = context.GetArgument<SiteUpdateModel>("updateSite");
 
-            //        return await context.TryAsyncResolve(
-            //            async c => await siteService.UpdateSite(id, patch)
-            //        );
 
-            //    }
+                    return await context.TryAsyncResolve(
+                        async c => await siteService.UpdateSite(id, patch)
+                    );
 
-            //);
+                }
+
+            );
 
         }
     }

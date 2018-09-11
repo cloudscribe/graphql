@@ -17,7 +17,7 @@ namespace cloudscribe.Core.GraphQL
             Name = "CoreQuery";
 
             FieldAsync<ListGraphType<SiteInfoType>>(
-                "sites",
+                "siteList",
                 resolve: async context =>
                 {
                     return await context.TryAsyncResolve(async c => await siteService.GetAllSites(c.CancellationToken));
@@ -26,7 +26,7 @@ namespace cloudscribe.Core.GraphQL
 
 
             FieldAsync<SiteType>(
-                "site",
+                "siteFromId",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" }
                 ),
@@ -38,8 +38,26 @@ namespace cloudscribe.Core.GraphQL
                     );
                     
                 }
-
             );
+
+            FieldAsync<SiteType>(
+                "siteFromRequest",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "hostName", Description = "The host name corresponding to the site" },
+                    new QueryArgument<StringGraphType> { Name = "firstFolderSegment", Description = "the first folder segment for resolving folder based sites" }
+
+                ),
+                resolve: async context =>
+                {
+                    var hostName = context.GetArgument<string>("hostName");
+                    var firstFolderSegment = context.GetArgument<string>("firstFolderSegment");
+                return await context.TryAsyncResolve(
+                    async c => await siteService.GetSite(hostName, firstFolderSegment, c.CancellationToken).ConfigureAwait(false)
+                    );
+
+                }
+            );
+
         }
     }
 }

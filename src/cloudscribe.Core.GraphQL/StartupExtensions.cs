@@ -2,9 +2,6 @@
 using cloudscribe.Core.GraphQL.GraphTypes;
 using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Extensions.GraphQL;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -14,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<SiteType>();
             services.AddSingleton<SiteInfoType>();
+            services.AddSingleton<SiteUpdateInputType>();
 
             services.AddSingleton<IGraphQueryMarker, CoreQuery>();
             services.AddSingleton<IGraphMutationMarker, CoreMutation>();

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
 using cloudscribe.Core.GraphQL.Models;
-
+using cloudscribe.Core.Web.Components;
 
 namespace cloudscribe.Core.GraphQL.Services
 {
@@ -46,16 +46,29 @@ namespace cloudscribe.Core.GraphQL.Services
             }      
         }
 
-        public async Task<ISiteSettings> GetSite(Guid id, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<ISiteContext> GetSite(Guid id, CancellationToken cancellationToken = default(CancellationToken))
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 var scopedServices = scope.ServiceProvider;
                 var queries = scopedServices.GetService<ISiteQueries>();
-                return await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
+                var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
+                return site as ISiteContext;
 
             }
         }
+
+        public async Task<ISiteContext> GetSite(string hostName, string firstFolderSegment, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var siteResolver = scopedServices.GetService<ISiteContextResolver>();
+                return await siteResolver.ResolveSite(hostName, firstFolderSegment, cancellationToken).ConfigureAwait(false);
+
+            }
+        }
+
 
         public async Task<ISiteSettings> UpdateSiteName(Guid id, string newName, CancellationToken cancellationToken = default(CancellationToken))
         {
