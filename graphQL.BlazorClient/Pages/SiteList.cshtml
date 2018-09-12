@@ -1,0 +1,118 @@
+﻿@page "/sitelist"
+@using GraphQL.Common.Request
+@using cloudscribe.Core.Models
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@using Newtonsoft.Json.Linq
+@using GraphQL.Client.Http
+@using System.Text
+@inject HttpClient Http
+
+@responseFromG
+
+@if (siteList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>aliasid</th>
+                <th>folder</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var site in siteList)
+            {
+                <tr>
+                    <td>@site.Id</td>
+                    <td>@site.SiteName</td>
+                    <td>@site.AliasId</td>
+                    <td>@site.SiteFolderName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+
+    List<SiteInfo> siteList = null;
+    string responseFromG = "";
+
+    protected override async Task OnInitAsync()
+    {
+
+        const string query = @"{
+                ""query"": ""query { siteList { id, aliasId, siteName, siteFolderName } }""
+            }";
+        var content = new StringContent(query, Encoding.UTF8, "application/json");
+
+
+        var response = await Http.PostAsync("https://localhost:44396/graphql", content);
+        response.EnsureSuccessStatusCode();
+        responseFromG = await response.Content.ReadAsStringAsync();
+        //{"data":{"siteList":[{"id":"5961f387-accd-49dc-b962-44029d0803ae","aliasId":"s1","siteName":"GraphQL Demo","siteFolderName":null}]}}
+        var jobj = JObject.Parse(responseFromG);
+        // var s = jobj["data"]["siteList"];
+
+        IList<JToken> results = jobj["data"]["siteList"].Children().ToList();
+
+        var serializer = new JsonSerializer();
+        serializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+        siteList = new List<SiteInfo>();
+        foreach (JToken result in results)
+        {
+            // JToken.ToObject is a helper method that uses JsonSerializer internally
+            //var site = result.ToObject<SiteInfo>(serializer);
+            var site = new SiteInfo()
+            {
+                Id = new Guid(result["id"].ToString()),
+                AliasId = result["aliasId"].ToString(),
+                SiteName = result["siteName"].ToString()
+
+            };
+            siteList.Add(site);
+        }
+
+
+
+        //siteList = s.ToObject<List<SiteInfo>>();
+
+        //var request = new GraphQLRequest
+        //{
+        //    Query = @"
+        //        {
+        //          siteList {
+        //            id,
+        //            aliasId,
+        //            siteName,
+        //            siteFolderName
+        //          }
+        //        }"
+        //};
+
+        //var clientOptions = new GraphQLHttpClientOptions
+        //{
+        //    EndPoint = new Uri("https://localhost:44396/graphql"),
+        //    JsonSerializerSettings = new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() }
+        //};
+
+        //var graphClient = Http.AsGraphQLClient(clientOptions);
+
+        //var response = await graphClient.SendQueryAsync(request);
+        ////response.
+
+        //responseFromG = response.Errors.ToString();
+        //siteList = response.GetDataFieldAs<List<SiteInfo>>("siteList");
+
+
+    }
+
+}

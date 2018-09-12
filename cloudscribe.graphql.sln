@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.IntegrationTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.GraphQL", "src\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj", "{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.Core.GraphQL", "src\cloudscribe.Core.GraphQL\cloudscribe.Core.GraphQL.csproj", "{5D3887AF-FBEC-4D98-96B2-22A1883328AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.GraphQL", "src\cloudscribe.Core.GraphQL\cloudscribe.Core.GraphQL.csproj", "{5D3887AF-FBEC-4D98-96B2-22A1883328AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudscribe.SimpleContent.GraphQL", "src\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj", "{35C3709D-1CC2-401A-8218-0506AF9E4691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.SimpleContent.GraphQL", "src\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj", "{35C3709D-1CC2-401A-8218-0506AF9E4691}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "graphQL.BlazorClient", "graphQL.BlazorClient\graphQL.BlazorClient.csproj", "{4D460EC2-166C-4737-B1D3-D8D7E07D7A17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D460EC2-166C-4737-B1D3-D8D7E07D7A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D460EC2-166C-4737-B1D3-D8D7E07D7A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D460EC2-166C-4737-B1D3-D8D7E07D7A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D460EC2-166C-4737-B1D3-D8D7E07D7A17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{5D3887AF-FBEC-4D98-96B2-22A1883328AA} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{35C3709D-1CC2-401A-8218-0506AF9E4691} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{4D460EC2-166C-4737-B1D3-D8D7E07D7A17} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}
