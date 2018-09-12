@@ -1,10 +1,10 @@
 ﻿@page "/sitelist"
 @using cloudscribe.Core.Models
+@using GraphQL.Common.Request;
 @using System.Text
 @inject HttpClient Http
 
-
-@if (siteList == null)
+@if (model == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -21,7 +21,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var site in siteList)
+            @foreach (var site in model.Data.SiteList)
             {
                 <tr>
                     <td>@site.Id</td>
@@ -36,37 +36,49 @@ else
 
 @functions {
 
-    List<SiteInfo> siteList = null;
+    SiteListModel model = null;
     string responseFromG = "";
 
     protected override async Task OnInitAsync()
     {
-        const string query = @"{
-                ""query"": ""query { siteList { id, aliasId, siteName, siteFolderName } }""
-            }";
-        var content = new StringContent(query, Encoding.UTF8, "application/json");
+        var request = new GraphQLRequest
+        {
+            Query = @"
+                    {
+                      siteList {
+                        id,
+                        aliasId,
+                        siteName,
+                        siteFolderName
+                      }
+                    }"
+        };
 
+        var query = Json.Serialize(request);
+
+        var content = new StringContent(query, Encoding.UTF8, "application/json");
         var response = await Http.PostAsync("https://localhost:44396/graphql", content);
         response.EnsureSuccessStatusCode();
         responseFromG = await response.Content.ReadAsStringAsync();
 
-        var model = Json.Deserialize<MyModel>(responseFromG);
-        siteList = model.Data.SiteList;
-
+        model = Json.Deserialize<SiteListModel>(responseFromG);
+       
     }
 
     // these models are only needed because the response format is:
     //{"data":{"siteList":[{"id":"5961f387-accd-49dc-b962-44029d0803ae","aliasId":"s1","siteName":"GraphQL Demo","siteFolderName":null}]}}
     // and this provides something easy to deserialize from the response
-    class MyModel
+    class SiteListModel
     {
-        public Data Data { get; set; }
+        public DataResult Data { get; set; }
+
+        public class DataResult
+        {
+            public List<SiteInfo> SiteList { get; set; }
+        }
     }
 
-    class Data
-    {
-        public List<SiteInfo> SiteList { get; set; }
-    }
+
 
 
 }
