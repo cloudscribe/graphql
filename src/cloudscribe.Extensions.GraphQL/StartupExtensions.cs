@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<CompositeQuery>();
             services.AddSingleton<CompositeMutation>();
+            services.AddSingleton<CompositeSubscription>();
             services.AddSingleton<ISchema, CompositeSchema>();
 
 
