@@ -37,11 +37,10 @@ else
 @functions {
 
     SiteListModel model = null;
-    string responseFromG = "";
-
+    
     protected override async Task OnInitAsync()
     {
-        var request = new GraphQLRequest
+        var query = new GraphQLRequest
         {
             Query = @"
                     {
@@ -54,14 +53,11 @@ else
                     }"
         };
 
-        var query = Json.Serialize(request);
-
-        var content = new StringContent(query, Encoding.UTF8, "application/json");
-        var response = await Http.PostAsync("https://localhost:44396/graphql", content);
+        var queryJson = Json.Serialize(query);
+        var response = await Http.PostAsync("https://localhost:44396/graphql", new StringContent(queryJson, Encoding.UTF8, "application/json"));
         response.EnsureSuccessStatusCode();
-        responseFromG = await response.Content.ReadAsStringAsync();
-
-        model = Json.Deserialize<SiteListModel>(responseFromG);
+        var result = await response.Content.ReadAsStringAsync();
+        model = Json.Deserialize<SiteListModel>(result);
        
     }
 
