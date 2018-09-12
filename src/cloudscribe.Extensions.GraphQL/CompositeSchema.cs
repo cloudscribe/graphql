@@ -14,16 +14,13 @@ namespace cloudscribe.Extensions.GraphQL
             ) : base(resolver)
         {
             Query = resolver.Resolve<CompositeQuery>();
+
             if(graphMutationMarkers.Any())
             {
                 Mutation = resolver.Resolve<CompositeMutation>();
             }
-            //var mutList = graphMutationMarkers.ToList();
-            //if(mutList.Count > 0)
-            //{
-            //    Mutation = resolver.Resolve<CompositeMutation>();
-            //}
-            if(graphMutationMarkers.Any())
+            
+            if(graphSubscriptionMarkers.Any())
             {
                 Subscription = resolver.Resolve<CompositeSubscription>();
             }

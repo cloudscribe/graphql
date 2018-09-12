@@ -72,7 +72,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         // add your IdentityServer client apps and apis to allow access to them
                         options.AddPolicy("default", policy =>
                         {
-                            policy.WithOrigins("http://localhost:63720", "http://localhost:63720")
+                            policy.WithOrigins("http://localhost:63720", "https://localhost:44396")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         });
