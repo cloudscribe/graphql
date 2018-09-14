@@ -32,7 +32,7 @@
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0" />
 
-    <!--<PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.5.1" />-->
+    
 
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
 
@@ -62,6 +62,8 @@
     <PackageReference Include="cloudscribe.Web.Localization" Version="2.0.*" />
     
     <PackageReference Include="Microsoft.AspNetCore.App" />
+
+    <!--<PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.5.1" PrivateAssets="all" />-->
     
   </ItemGroup>
 
@@ -69,6 +71,7 @@
     <ProjectReference Include="..\cloudscribe.Core.GraphQL\cloudscribe.Core.GraphQL.csproj" />
     <ProjectReference Include="..\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj" />
     <ProjectReference Include="..\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj" />
+    <ProjectReference Include="..\graphQL.BlazorClient\graphQL.BlazorClient.csproj" />
   </ItemGroup>
 
 

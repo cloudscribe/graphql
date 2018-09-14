@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
+using System.Net.Mime;
 //using System.Linq;
 //using System.Net.Mime;
 
@@ -192,6 +194,7 @@ namespace graphql.WebApp
             });
 
             //app.UseBlazor<graphQL.BlazorClient.Program>();
+           // app.Map("/blazor", child => { child.UseBlazor<graphQL.BlazorClient.Program>(); });
 
         }
 
