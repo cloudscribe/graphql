@@ -19,6 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.SimpleContent.G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphQL.BlazorClient", "src\graphQL.BlazorClient\graphQL.BlazorClient.csproj", "{7044F4E7-E40A-4479-9675-03A248506DB3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Blazor", "src\cloudscribe.Core.Blazor\cloudscribe.Core.Blazor.csproj", "{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.Blazor.Config", "src\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj", "{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.Blazor.Oidc", "src\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj", "{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +55,18 @@ Global
 		{7044F4E7-E40A-4479-9675-03A248506DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7044F4E7-E40A-4479-9675-03A248506DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7044F4E7-E40A-4479-9675-03A248506DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +78,9 @@ Global
 		{5D3887AF-FBEC-4D98-96B2-22A1883328AA} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{35C3709D-1CC2-401A-8218-0506AF9E4691} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{7044F4E7-E40A-4479-9675-03A248506DB3} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}

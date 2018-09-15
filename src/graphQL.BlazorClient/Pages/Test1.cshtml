@@ -1,0 +1,21 @@
+﻿@page "/test1"
+@using cloudscribe.Extensions.Blazor.Config
+@inject HttpClient Http
+
+
+<h2>Login Test</h2>
+
+@oidcAuthority
+
+
+@functions {
+    string oidcAuthority = "";
+
+    protected override async Task OnInitAsync()
+    {
+        oidcAuthority = await AppSettings.Get("authority");
+
+
+    }
+
+}

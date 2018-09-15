@@ -9,7 +9,14 @@
     <link href="css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <app>Loading...</app>
+    <app  id="appSettings"
+         data-authority="https://localhost:44396/"
+         data-client-id="blazorClient"
+         data-redirect-uri="http://localhost:24793/oidccallback"
+         data-scopes="openid profile idserverapi" 
+         data-post-logout-redirect-uri="http://localhost:24793/"
+         data-graphql-api-uri="https://localhost:44396/graphql"
+         >Loading...</app>
 
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
