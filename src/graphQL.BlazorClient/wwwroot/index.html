@@ -10,11 +10,12 @@
 </head>
 <body>
     <app  id="appSettings"
-         data-authority="https://localhost:44396/"
-         data-client-id="blazorClient"
-         data-redirect-uri="http://localhost:24793/oidccallback"
-         data-scopes="openid profile idserverapi" 
-         data-post-logout-redirect-uri="http://localhost:24793/"
+         data-oidc-authority="https://localhost:44396/"
+         data-oidc-client-id="blazorClient"
+         data-oidc-redirect-uri="http://localhost:24793/oidccallback"
+         data-oidc-scopes="openid profile idserverapi" 
+         data-oidc-post-logout-redirect-uri="http://localhost:24793/"
+         data-oidc-response-type="id_token token"
          data-graphql-api-uri="https://localhost:44396/graphql"
          >Loading...</app>
 
