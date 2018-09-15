@@ -1,18 +1,20 @@
 ﻿@page "/oidc-callback"
+@using cloudscribe.Extensions.Blazor.Oidc
 
 <h2>callback</h2>
 
-@oidcAuthority
 
 
 @functions {
-string oidcAuthority = "";
+    string oidcAuthority = "";
 
-protected override async Task OnInitAsync()
-{
-    
+    UserManager userManager;
 
+    protected override async Task OnInitAsync()
+    {
+        userManager = await UserManager.GetUserManager();
+        await userManager.SignInRedirectCallback();
 
-}
+    }
 
 }

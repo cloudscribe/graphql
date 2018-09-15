@@ -76,5 +76,14 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         //    return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
         //}
 
+        /// <summary>
+        /// Returns promise to remove from any storage the currently authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public async Task RemoveUser()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.removeUser");
+        }
+
     }
 }

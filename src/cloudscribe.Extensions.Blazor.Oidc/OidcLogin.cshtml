@@ -1,0 +1,28 @@
+﻿@using cloudscribe.Extensions.Blazor.Oidc
+
+@if (currentUser == null)
+{
+    @*<button class="btn btn-primary" onclick="@userManager.SignInRedirect">Sign In</button>*@
+   
+    <span>not signed in</span>
+}
+else
+{
+    <div>
+        Welcome
+    </div>
+}
+
+
+@functions {
+
+UserManager userManager = null;
+User currentUser = null;
+
+protected override async Task OnInitAsync()
+{
+    userManager = await UserManager.GetUserManager();
+    currentUser = await userManager.GetUser();
+}
+
+}

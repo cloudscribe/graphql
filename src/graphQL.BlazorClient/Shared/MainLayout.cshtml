@@ -1,4 +1,5 @@
 @inherits BlazorLayoutComponent
+@addTagHelper *, cloudscribe.Extensions.Blazor.Oidc
 
 <div class="sidebar">
     <NavMenu />
@@ -7,6 +8,7 @@
 <div class="main">
     <div class="top-row px-4">
         <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        <OidcLogin />
     </div>
 
     <div class="content px-4">
