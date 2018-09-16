@@ -8,12 +8,8 @@
 
     protected override async Task OnInitAsync()
     {
-
         await oidc.RemoveUser();
-        Console.WriteLine("signout callback");
-
         UriHelper.NavigateTo("/");
-
     }
 
 }

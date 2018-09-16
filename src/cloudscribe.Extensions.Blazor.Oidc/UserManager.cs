@@ -64,7 +64,9 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// <returns>If there is no authenticated user, return null. Else, return the current authenticated user</returns>
         public async Task<User> GetUser()
         {
-            return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
+            var user = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
+            //user.Name = await JSRuntime.Current.InvokeAsync<string>("oidcJsFunctions.getUserName");
+            return user;
         }
 
         /// <summary>

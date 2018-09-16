@@ -36,6 +36,12 @@ window.oidcJsFunctions = {
         return window.UserManager.signoutRedirect();
     },
 
+    //getUserName: function () {
+    //    var user = getUser().then();
+    //    //console.log(promise);
+    //    return promise.profile.name;
+    //},
+
     getUser: function () {
         var promise = window.UserManager.getUser();
         //console.log(promise);

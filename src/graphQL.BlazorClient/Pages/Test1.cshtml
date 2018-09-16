@@ -1,20 +1,31 @@
 ﻿@page "/test1"
 @using cloudscribe.Extensions.Blazor.Config
+@using cloudscribe.Extensions.Blazor.Oidc
 @inject HttpClient Http
+@inject OidcService  oidc
 
 
-<h2>Login Test</h2>
+<h2>Test</h2>
+
+
 
 @oidcAuthority
+</ br>
+@serializedUesr
 
 
 @functions {
+    string serializedUesr = "";
     string oidcAuthority = "";
 
     protected override async Task OnInitAsync()
     {
         oidcAuthority = await AppSettings.Get("oidcAuthority");
 
+        if (oidc.CurrentUser != null)
+        {
+            serializedUesr = Json.Serialize(oidc.CurrentUser);
+        }
 
     }
 

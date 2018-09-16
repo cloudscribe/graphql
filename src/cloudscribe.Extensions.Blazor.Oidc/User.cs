@@ -2,6 +2,10 @@
 {
     public class User
     {
+        //public string Name { get; set; }
+
+        //public string Email { get; set; }
+
         /// <summary>
         /// Gets or sets the user scope
         /// </summary>
@@ -21,5 +25,13 @@
         /// Gets or sets the user token type
         /// </summary>
         public string Token_Type { get; set; }
+
+        public ProfileProps Profile { get; set; }
+
+        public class ProfileProps
+        {
+            public string Name { get; set; }
+            public string Email { get; set; }
+        }
     }
 }

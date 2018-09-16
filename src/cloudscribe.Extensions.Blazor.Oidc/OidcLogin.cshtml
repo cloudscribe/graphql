@@ -6,37 +6,32 @@
     <button class="btn btn-link ml-md-auto" onclick="@SignIn">Sign In</button> 
 }
 else
-{  
+{
+    <span>Welcome @oidc.CurrentUser.Profile.Name </span>
     <button class="btn btn-link ml-md-auto" onclick="@SignOut">Sign Out</button>   
 }
 
-
 @functions {
-
-    //UserManager userManager = null;
-    //User currentUser = null;
+    string userName = "";
 
     async Task SignIn()
     {
         await oidc.SignInPopup();
-        
     }
 
     async Task SignOut()
     {
-        
         await oidc.SignOut();
-        
     }
-
 
     protected override async Task OnInitAsync()
     {
         oidc.OnChange += StateHasChanged;
         await oidc.Init();
-
-        //userManager = await UserManager.GetUserManager();
-        //currentUser = await oidc.GetUser();
+        if(oidc.CurrentUser != null && oidc.CurrentUser.Profile != null)
+        {
+            userName = oidc.CurrentUser.Profile.Name;
+        }
     }
 
 }

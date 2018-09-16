@@ -5,15 +5,9 @@
 @inject OidcService  oidc
 
 @functions {
-   
     protected override async Task OnInitAsync()
     {
-        
         await oidc.SignInRedirectCallback();
-        Console.WriteLine("signin callback");
-
         UriHelper.NavigateTo("/");
-
     }
-
 }
