@@ -67,6 +67,15 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
         }
 
+        /// <summary>
+        /// Returns promise to trigger a redirect of the current window to the end session endpoint
+        /// </summary>
+        /// <returns></returns>
+        public async Task SignOut()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirect");
+        }
+
         ///// <summary>
         ///// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
         ///// </summary>

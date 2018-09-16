@@ -2,36 +2,40 @@
 
 @if (currentUser == null)
 {
-    <button class="btn btn-link" onclick="@SignIn">Sign In</button>
-
-   
+    <button class="btn btn-link ml-md-auto" onclick="@SignIn">Sign In</button> 
 }
 else
-{
-    <div>
-        Welcome
-    </div>
+{  
+    <button class="btn btn-link ml-md-auto" onclick="@SignOut">Sign Out</button>   
 }
 
 
 @functions {
 
-UserManager userManager = null;
-User currentUser = null;
+    UserManager userManager = null;
+    User currentUser = null;
 
-async Task SignIn()
-{
-    if (userManager != null)
+    async Task SignIn()
     {
-        await userManager.SignInRedirect();
+        if (userManager != null)
+        {
+            await userManager.SignInRedirect();
+        }
     }
-}
+
+    async Task SignOut()
+    {
+        if (userManager != null)
+        {
+            await userManager.SignOut();
+        }
+    }
 
 
-protected override async Task OnInitAsync()
-{
-    userManager = await UserManager.GetUserManager();
-    currentUser = await userManager.GetUser();
-}
+    protected override async Task OnInitAsync()
+    {
+        userManager = await UserManager.GetUserManager();
+        currentUser = await userManager.GetUser();
+    }
 
 }

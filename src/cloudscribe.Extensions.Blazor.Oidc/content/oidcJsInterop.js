@@ -32,7 +32,7 @@ window.oidcJsFunctions = {
     //    return window.UserManager.signinSilent();
     //},
 
-    signOut: function () {
+    signoutRedirect: function () {
         return window.UserManager.signoutRedirect();
     },
 
