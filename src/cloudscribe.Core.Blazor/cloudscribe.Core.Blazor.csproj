@@ -18,6 +18,21 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.5.1" />
+
+    <PackageReference Include="cloudscribe.Core.Models" Version="3.0.6" />
+    <PackageReference Include="GraphQL.Common" Version="2.0.0-*" />
+    
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj" />
+    <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Content Update="Pages\SiteList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>-->
 
 </Project>
