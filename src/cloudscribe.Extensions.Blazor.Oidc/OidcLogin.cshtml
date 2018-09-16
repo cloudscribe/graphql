@@ -1,6 +1,7 @@
 ﻿@using cloudscribe.Extensions.Blazor.Oidc
+@inject OidcService  oidc
 
-@if (currentUser == null)
+@if (oidc.CurrentUser == null)
 {
     <button class="btn btn-link ml-md-auto" onclick="@SignIn">Sign In</button> 
 }
@@ -12,30 +13,29 @@ else
 
 @functions {
 
-    UserManager userManager = null;
-    User currentUser = null;
+    //UserManager userManager = null;
+    //User currentUser = null;
 
     async Task SignIn()
     {
-        if (userManager != null)
-        {
-            await userManager.SignInRedirect();
-        }
+        await oidc.SignInRedirect();
+        
     }
 
     async Task SignOut()
     {
-        if (userManager != null)
-        {
-            await userManager.SignOut();
-        }
+        
+        await oidc.SignOut();
+        
     }
 
 
-    protected override async Task OnInitAsync()
+    protected override void OnInit()
     {
-        userManager = await UserManager.GetUserManager();
-        currentUser = await userManager.GetUser();
+        oidc.OnChange += StateHasChanged;
+
+        //userManager = await UserManager.GetUserManager();
+        //currentUser = await oidc.GetUser();
     }
 
 }

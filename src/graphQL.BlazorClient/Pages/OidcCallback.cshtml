@@ -2,6 +2,7 @@
 @using cloudscribe.Extensions.Blazor.Oidc
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
+@inject OidcService  oidc
 
 @functions {
     string oidcAuthority = "";
@@ -10,9 +11,11 @@
 
     protected override async Task OnInitAsync()
     {
-        userManager = await UserManager.GetUserManager();
-        await userManager.SignInRedirectCallback();
+        //userManager = await UserManager.GetUserManager();
+        //await userManager.SignInRedirectCallback();
         //var currentUser = await userManager.GetUser();
+        await oidc.SignInRedirectCallback();
+
         UriHelper.NavigateTo("/");
 
     }

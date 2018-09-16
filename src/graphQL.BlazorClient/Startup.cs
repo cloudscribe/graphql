@@ -1,4 +1,5 @@
 using cloudscribe.Extensions.Blazor.Config;
+using cloudscribe.Extensions.Blazor.Oidc;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,7 @@ namespace graphQL.BlazorClient
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<AppSettings>();
+            services.AddSingleton<OidcService>();
         }
 
         public void Configure(IBlazorApplicationBuilder app)
