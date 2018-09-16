@@ -1,0 +1,19 @@
+﻿@page "/oidc-signout-callback"
+@using cloudscribe.Extensions.Blazor.Oidc
+@using Microsoft.AspNetCore.Blazor.Services
+@inject IUriHelper UriHelper
+@inject OidcService  oidc
+
+@functions {
+
+    protected override async Task OnInitAsync()
+    {
+
+        await oidc.RemoveUser();
+        Console.WriteLine("signout callback");
+
+        UriHelper.NavigateTo("/");
+
+    }
+
+}

@@ -24,4 +24,10 @@
     <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="OidcSigninCallback.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

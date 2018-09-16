@@ -32,6 +32,13 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             }
         }
 
+        public async Task Init()
+        {
+            await EnsureUserManager();
+            _currentUser = await _userManager.GetUser();
+
+        }
+
         /// <summary>
         /// Returns promise to trigger a redirect of the current window to the authorization endpoint.
         /// </summary>
@@ -99,7 +106,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task SignOut()
         {
             await EnsureUserManager();
-
+            //await _userManager.RemoveUser();
             await _userManager.SignOut();
             NotifyStateChanged();
         }

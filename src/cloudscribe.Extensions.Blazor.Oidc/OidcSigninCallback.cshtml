@@ -1,20 +1,16 @@
-﻿@page "/oidc-callback"
+﻿@page "/oidc-signin-callback"
 @using cloudscribe.Extensions.Blazor.Oidc
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
 @inject OidcService  oidc
 
 @functions {
-    string oidcAuthority = "";
-
-    UserManager userManager;
-
+   
     protected override async Task OnInitAsync()
     {
-        //userManager = await UserManager.GetUserManager();
-        //await userManager.SignInRedirectCallback();
-        //var currentUser = await userManager.GetUser();
+        
         await oidc.SignInRedirectCallback();
+        Console.WriteLine("signin callback");
 
         UriHelper.NavigateTo("/");
 
