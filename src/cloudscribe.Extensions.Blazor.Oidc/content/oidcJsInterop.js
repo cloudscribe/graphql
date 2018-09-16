@@ -4,9 +4,12 @@ window.oidcJsFunctions = {
     
     ensureUserManager: function (config) {
         if (window.UserManager === undefined) {
+            console.log(config);
+
             window.UserManager = new Oidc.UserManager(config);
         }
-        return window.UserManager;
+        //return window.UserManager;
+        return null;
     },
 
     signinRedirect: function () {
@@ -34,7 +37,9 @@ window.oidcJsFunctions = {
     },
 
     getUser: function () {
-        return window.UserManager.getUser();
+        var promise = window.UserManager.getUser();
+        //console.log(promise);
+        return promise;
     },
 
     removeUser: function () {

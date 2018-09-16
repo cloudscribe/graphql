@@ -2,9 +2,9 @@
 
 @if (currentUser == null)
 {
-    @*<button class="btn btn-primary" onclick="@userManager.SignInRedirect">Sign In</button>*@
+    <button class="btn btn-link" onclick="@SignIn">Sign In</button>
+
    
-    <span>not signed in</span>
 }
 else
 {
@@ -18,6 +18,15 @@ else
 
 UserManager userManager = null;
 User currentUser = null;
+
+async Task SignIn()
+{
+    if (userManager != null)
+    {
+        await userManager.SignInRedirect();
+    }
+}
+
 
 protected override async Task OnInitAsync()
 {

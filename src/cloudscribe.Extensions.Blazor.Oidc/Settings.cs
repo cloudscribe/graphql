@@ -12,26 +12,26 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         public string Authority { get; set; }
 
-        public string ClientId { get; set; }
+        public string Client_id { get; set; }
 
-        public string RedirectUri { get; set; }
+        public string Redirect_uri { get; set; }
 
-        public string ResponseType { get; set; }
+        public string Response_type { get; set; }
 
         public string Scopes { get; set; }
 
-        public string PostLogoutRedirectUri { get; set; }
+        public string Post_logout_redirect_uri { get; set; }
 
         public static async Task<Settings> GetSettings()
         {
             var settings = new Settings()
             {
                 Authority = await AppSettings.Get("oidcAuthority"),
-                ClientId = await AppSettings.Get("oidcClientId"),
-                RedirectUri = await AppSettings.Get("oidcRedirectUrl"),
-                ResponseType = await AppSettings.Get("oidcResponseType"),
+                Client_id = await AppSettings.Get("oidcClientId"),
+                Redirect_uri = await AppSettings.Get("oidcRedirectUri"),
+                Response_type = await AppSettings.Get("oidcResponseType"),
                 Scopes = await AppSettings.Get("oidcScopes"),
-                PostLogoutRedirectUri = await AppSettings.Get("oidcPostLogoutRedirectUri")
+                Post_logout_redirect_uri = await AppSettings.Get("oidcPostLogoutRedirectUri")
 
             };
 

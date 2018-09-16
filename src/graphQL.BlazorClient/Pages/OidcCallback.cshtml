@@ -14,6 +14,7 @@
     {
         userManager = await UserManager.GetUserManager();
         await userManager.SignInRedirectCallback();
+        var currentUser = await userManager.GetUser();
 
     }
 

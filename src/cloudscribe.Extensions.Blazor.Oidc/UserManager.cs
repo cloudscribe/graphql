@@ -16,7 +16,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public static async Task<UserManager> GetUserManager()
         {
             var settings = await Settings.GetSettings();
-            var um = await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.ensureUserManager", settings);
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.ensureUserManager", settings);
 
             return new UserManager();
         }
@@ -28,7 +28,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// <returns></returns>
         public async Task SignInRedirect()
         {
-            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signInRedirect");
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinRedirect");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// <returns></returns>
         public async Task<User> SignInRedirectCallback()
         {
-             return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInRedirectCallback"); 
+             return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinRedirectCallback"); 
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// <returns></returns>
         public async Task SignInPopupCallback()
         {
-            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signInPopupCallback"); 
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinPopupCallback"); 
         }
 
         /// <summary>
