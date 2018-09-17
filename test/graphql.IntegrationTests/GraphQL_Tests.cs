@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using System.Net;
 
 namespace graphql.IntegrationTests
 {
@@ -46,8 +47,52 @@ namespace graphql.IntegrationTests
 
         //}
 
+        [Theory]
+        [InlineData("/.well-known/openid-configuration")]
+        public async Task T10000_CanReachDiscoveryEndpoint(string url)
+        {
+            // Arrange
+            var client = GetUnauthenticatedClient();
+
+            // Act
+            var response = await client.GetAsync(url);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/api/Identity")]
+        public async Task T10020_GetShouldNotAllowAnonymousUser(string url)
+        {
+            //Arrange
+            var client = GetUnauthenticatedClient();
+
+            //Act
+            var response = await client.GetAsync(url);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/api/Identity")]
+        public async Task T10030_GetShouldReturnOkForAdmin(string url)
+        {
+            //Arrange
+            var client = await GetAuthenticatedClient("admin@admin.com");
+
+            //Act
+            var response = await client.GetAsync(url);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        }
+
+
         [Fact]
-        public async Task T10010_ReturnOkForSitesQuery()
+        public async Task T10040_ReturnOkForSitesQuery()
         {
             // Arrange
             var request = new GraphQLRequest
