@@ -1,8 +1,5 @@
-﻿using cloudscribe.Core.GraphQL.Models;
+﻿using cloudscribe.Core.ApiModels;
 using GraphQL.Types;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace cloudscribe.Core.GraphQL.GraphTypes
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace cloudscribe.Core.GraphQL.Models
+namespace cloudscribe.Core.ApiModels
 {
     public class SiteUpdateModel
     {

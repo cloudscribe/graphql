@@ -18,6 +18,10 @@ namespace cloudscribe.Core.GraphQL.GraphTypes
             Field(x => x.RequireCookieConsent).Description("A boolean indicating if cookie consent is required");
             Field(x => x.UseEmailForLogin).Description("A boolean indicating if email is used for login vs a separate username");
 
+            Field(x => x.PreferredHostName, nullable: true).Description("used for host based multitenancy");
+
+            Field(x => x.CreatedUtc,type: typeof(DateTimeGraphType)).Description("The creation date");
+            Field(x => x.LastModifiedUtc, type: typeof(DateTimeGraphType)).Description("The last modified date");
 
         }
     }

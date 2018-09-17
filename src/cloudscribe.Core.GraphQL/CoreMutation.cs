@@ -1,5 +1,5 @@
-﻿using cloudscribe.Core.GraphQL.GraphTypes;
-using cloudscribe.Core.GraphQL.Models;
+﻿using cloudscribe.Core.ApiModels;
+using cloudscribe.Core.GraphQL.GraphTypes;
 using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Extensions.GraphQL;
 using GraphQL.Types;

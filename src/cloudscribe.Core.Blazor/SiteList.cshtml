@@ -41,14 +41,14 @@ else
         var query = new GraphQLRequest
         {
             Query = @"
-    {
-      siteList {
-        id,
-        aliasId,
-        siteName,
-        siteFolderName
-      }
-    }"
+            {
+              siteList {
+                id,
+                aliasId,
+                siteName,
+                siteFolderName
+              }
+            }"
         };
 
         var queryJson = Json.Serialize(query);
@@ -69,7 +69,7 @@ else
 
         public class DataResult
         {
-            public List<SiteInfo> SiteList { get; set; }
+            public List<SiteDescriptor> SiteList { get; set; }
         }
     }
 
