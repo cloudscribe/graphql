@@ -3,7 +3,7 @@ using cloudscribe.Extensions.Blazor.Oidc;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace graphQL.BlazorClient
+namespace sourceDev.BlazorApp
 {
     public class Startup
     {

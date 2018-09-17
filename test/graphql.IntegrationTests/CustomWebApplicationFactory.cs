@@ -1,5 +1,4 @@
 ﻿using graphql.IntegrationTests.Helpers;
-using graphql.WebApp;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sourceDev.WebApp;
 
 namespace graphql.IntegrationTests
 {
@@ -47,7 +47,7 @@ namespace graphql.IntegrationTests
                 .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
                 {
                     options.Authority = "http://localhost";
-                    options.ApiName = "idserverapi";
+                    options.ApiName = "api";
                     options.ApiSecret = "secret";
                     options.RequireHttpsMetadata = false;
                     options.SaveToken = true;

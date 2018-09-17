@@ -4,7 +4,7 @@ using GraphQL.Server;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class StartupExtensions
+    public static class GraphQLConfig
     {
         public static IServiceCollection AddGraphQLServices(this IServiceCollection services)
         {
@@ -26,5 +26,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
+
     }
 }

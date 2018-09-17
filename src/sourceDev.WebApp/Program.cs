@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
-namespace graphql.WebApp
+namespace sourceDev.WebApp
 {
     public class Program
     {

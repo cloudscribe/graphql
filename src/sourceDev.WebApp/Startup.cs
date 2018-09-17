@@ -1,21 +1,16 @@
 ﻿using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
-//using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Linq;
-using System.Net.Mime;
-//using System.Linq;
-//using System.Net.Mime;
 
-namespace graphql.WebApp
+
+namespace sourceDev.WebApp
 {
     public class Startup
     {
@@ -108,15 +103,6 @@ namespace graphql.WebApp
             // This is a custom extension method in Config/RoutingAndMvc.cs
             services.SetupMvc(_sslIsAvailable);
 
-            //services.AddResponseCompression(options =>
-            //{
-            //    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
-            //    {
-            //        MediaTypeNames.Application.Octet,
-            //        WasmMediaTypeNames.Application.Wasm,
-            //    });
-            //});
-
 
         }
 
@@ -148,9 +134,6 @@ namespace graphql.WebApp
             }
             app.UseStaticFiles();
             app.UseCloudscribeCommonStaticFiles();
-
-            //app.UseResponseCompression();
-
             app.UseCookiePolicy();
 
             app.UseRequestLocalization(localizationOptionsAccessor.Value);
@@ -192,9 +175,6 @@ namespace graphql.WebApp
                 // you can change or add routes there
                 routes.UseCustomRoutes(useFolders);
             });
-
-            //app.UseBlazor<graphQL.BlazorClient.Program>();
-           // app.Map("/blazor", child => { child.UseBlazor<graphQL.BlazorClient.Program>(); });
 
         }
 

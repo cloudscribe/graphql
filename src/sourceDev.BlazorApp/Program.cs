@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace graphQL.BlazorClient
+namespace sourceDev.BlazorApp
 {
     public class Program
     {

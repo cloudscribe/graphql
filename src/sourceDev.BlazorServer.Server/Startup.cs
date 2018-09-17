@@ -15,7 +15,7 @@ namespace sourceDev.BlazorServer.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // Adds the Server-Side Blazor services, and those registered by the app project's startup.
-            services.AddServerSideBlazor<graphQL.BlazorClient.Startup>();
+            services.AddServerSideBlazor<sourceDev.BlazorApp.Startup>();
 
             services.AddResponseCompression(options =>
             {
@@ -38,7 +38,7 @@ namespace sourceDev.BlazorServer.Server
             }
 
             // Use component registrations and static files from the app project.
-            app.UseServerSideBlazor<graphQL.BlazorClient.Startup>();
+            app.UseServerSideBlazor<sourceDev.BlazorApp.Startup>();
 
         }
     }

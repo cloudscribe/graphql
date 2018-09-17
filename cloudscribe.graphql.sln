@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1F86FC96-EAD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B72E95CA-797B-4EBD-9793-AA00E75A0F6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.WebApp", "src\graphql.WebApp\graphql.WebApp.csproj", "{A1592269-258F-48AA-A722-CBC55EEA3C75}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphql.IntegrationTests", "test\graphql.IntegrationTests\graphql.IntegrationTests.csproj", "{B30E1EEA-C9E1-4800-8C3D-D14C58399438}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.GraphQL", "src\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj", "{8D3A7CD6-D7DE-411B-A974-70118A35D3B6}"
@@ -17,15 +15,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.GraphQL", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.SimpleContent.GraphQL", "src\cloudscribe.SimpleContent.GraphQL\cloudscribe.SimpleContent.GraphQL.csproj", "{35C3709D-1CC2-401A-8218-0506AF9E4691}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "graphQL.BlazorClient", "src\graphQL.BlazorClient\graphQL.BlazorClient.csproj", "{7044F4E7-E40A-4479-9675-03A248506DB3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Core.Blazor", "src\cloudscribe.Core.Blazor\cloudscribe.Core.Blazor.csproj", "{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.Blazor.Config", "src\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj", "{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.Blazor.Oidc", "src\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj", "{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sourceDev.BlazorServer.Server", "src\sourceDev.BlazorServer.Server\sourceDev.BlazorServer.Server.csproj", "{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sourceDev.BlazorServer.Server", "src\sourceDev.BlazorServer.Server\sourceDev.BlazorServer.Server.csproj", "{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sourceDev.WebApp", "src\sourceDev.WebApp\sourceDev.WebApp.csproj", "{796A31CA-0CD8-414A-9895-3B2AA036F21F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sourceDev.BlazorApp", "src\sourceDev.BlazorApp\sourceDev.BlazorApp.csproj", "{8581F021-B23E-4AD6-99D7-6EE62DB2A738}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1592269-258F-48AA-A722-CBC55EEA3C75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,10 +49,6 @@ Global
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C3709D-1CC2-401A-8218-0506AF9E4691}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7044F4E7-E40A-4479-9675-03A248506DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7044F4E7-E40A-4479-9675-03A248506DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7044F4E7-E40A-4479-9675-03A248506DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7044F4E7-E40A-4479-9675-03A248506DB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,21 +65,29 @@ Global
 		{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796A31CA-0CD8-414A-9895-3B2AA036F21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796A31CA-0CD8-414A-9895-3B2AA036F21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796A31CA-0CD8-414A-9895-3B2AA036F21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796A31CA-0CD8-414A-9895-3B2AA036F21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8581F021-B23E-4AD6-99D7-6EE62DB2A738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8581F021-B23E-4AD6-99D7-6EE62DB2A738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8581F021-B23E-4AD6-99D7-6EE62DB2A738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8581F021-B23E-4AD6-99D7-6EE62DB2A738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A1592269-258F-48AA-A722-CBC55EEA3C75} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{B30E1EEA-C9E1-4800-8C3D-D14C58399438} = {B72E95CA-797B-4EBD-9793-AA00E75A0F6F}
 		{8D3A7CD6-D7DE-411B-A974-70118A35D3B6} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{5D3887AF-FBEC-4D98-96B2-22A1883328AA} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{35C3709D-1CC2-401A-8218-0506AF9E4691} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
-		{7044F4E7-E40A-4479-9675-03A248506DB3} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{C62F261A-CD4C-4D47-B059-4C7FA069E4F4} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{3CDE545D-00A1-4CA2-9BD8-43B21E77AD28} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{B2F932E5-A5F4-4DA9-BAD4-B08DD24F80E3} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{F0798ED0-B3AB-46A0-97F4-AF5D6EDEA4E3} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{796A31CA-0CD8-414A-9895-3B2AA036F21F} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{8581F021-B23E-4AD6-99D7-6EE62DB2A738} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}

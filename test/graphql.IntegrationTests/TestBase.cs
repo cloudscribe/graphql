@@ -1,4 +1,4 @@
-﻿using graphql.WebApp;
+﻿using sourceDev.WebApp;
 using GraphQL.Client.Http;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -67,7 +67,7 @@ namespace graphql.IntegrationTests
                 Address = "http://localhost/connect/token",
                 ClientId = "Test",
                 ClientSecret = "secret",
-                Scope = "irapi",
+                Scope = "api",
                 UserName = userName,
                 Password = password
             };
