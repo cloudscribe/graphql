@@ -122,6 +122,41 @@ namespace graphql.IntegrationTests
             
         }
 
-       
+        [Fact]
+        public async Task T10050_ReturnOkForSiteQuery()
+        {
+            // Arrange
+            var request = new GraphQLRequest
+            {
+                Query = @"
+				query MyQuery($siteId: ID!){
+					siteFromId (id: $siteId) {
+                        id,
+                        aliasId,
+                        siteName,
+                        privacyPolicy
+                      }
+				}",
+                Variables = new
+                {
+                    siteId = "5961f387-accd-49dc-b962-44029d0803ae"
+                }
+            };
+            
+            var client = await GetAuthenticatedGraphQLClient();
+
+            // Act
+            var response = await client.SendQueryAsync(request);
+
+            var result = response.GetDataFieldAs<SiteSettings>("siteFromId");
+
+            Assert.NotNull(result);
+
+            //Assert
+            Assert.Equal("5961f387-accd-49dc-b962-44029d0803ae", result.Id.ToString());
+
+        }
+
+
     }
 }
