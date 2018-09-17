@@ -29,10 +29,5 @@
     <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <Content Update="Pages\SiteList.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>-->
 
 </Project>
