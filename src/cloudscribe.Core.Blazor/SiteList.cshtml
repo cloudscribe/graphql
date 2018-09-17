@@ -34,13 +34,13 @@ else
 
 @functions {
 
-SiteListModel model = null;
+    SiteListModel model = null;
 
-protected override async Task OnInitAsync()
-{
-    var query = new GraphQLRequest
+    protected override async Task OnInitAsync()
     {
-        Query = @"
+        var query = new GraphQLRequest
+        {
+            Query = @"
     {
       siteList {
         id,
@@ -49,28 +49,29 @@ protected override async Task OnInitAsync()
         siteFolderName
       }
     }"
-    };
+        };
 
-    var queryJson = Json.Serialize(query);
-    var response = await Http.PostAsync("https://localhost:44396/graphql", new StringContent(queryJson, Encoding.UTF8, "application/json"));
-    response.EnsureSuccessStatusCode();
-    var result = await response.Content.ReadAsStringAsync();
-    model = Json.Deserialize<SiteListModel>(result);
+        var queryJson = Json.Serialize(query);
+        var endPoint = await AppSettings.Get("graphqlApiUri");
+        var response = await Http.PostAsync(endPoint, new StringContent(queryJson, Encoding.UTF8, "application/json"));
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadAsStringAsync();
+        model = Json.Deserialize<SiteListModel>(result);
 
-}
-
-// these models are only needed because the response format is:
-//{"data":{"siteList":[{"id":"5961f387-accd-49dc-b962-44029d0803ae","aliasId":"s1","siteName":"GraphQL Demo","siteFolderName":null}]}}
-// and this provides something easy to deserialize from the response
-class SiteListModel
-{
-    public DataResult Data { get; set; }
-
-    public class DataResult
-    {
-        public List<SiteInfo> SiteList { get; set; }
     }
-}
+
+    // these models are only needed because the response format is:
+    //{"data":{"siteList":[{"id":"5961f387-accd-49dc-b962-44029d0803ae","aliasId":"s1","siteName":"GraphQL Demo","siteFolderName":null}]}}
+    // and this provides something easy to deserialize from the response
+    class SiteListModel
+    {
+        public DataResult Data { get; set; }
+
+        public class DataResult
+        {
+            public List<SiteInfo> SiteList { get; set; }
+        }
+    }
 
 
 
