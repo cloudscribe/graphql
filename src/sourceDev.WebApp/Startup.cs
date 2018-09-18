@@ -97,10 +97,23 @@ namespace sourceDev.WebApp
             services.SetupMvc(_sslIsAvailable);
 
             // This is a custom extension method in Config/IdentityServerIntegration.cs
+            // the integration tests set this up different so this is false in appsetings.Test.json
             var setupApiAuthentication = _configuration.GetValue<bool>("AppSettings:SetupApiAuthentication");
             if (setupApiAuthentication)
             {
                 services.SetupIdentityServerApiAuthentication();
+            }
+            // the integration tests only use Bearer auth so need to make it default for testing
+            var forceBeaerAuth = _configuration.GetValue<bool>("AppSettings:ForceBearerAuth");
+
+            if(forceBeaerAuth)
+            {
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "Bearer";
+                    //options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                    //options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                });
             }
 
 

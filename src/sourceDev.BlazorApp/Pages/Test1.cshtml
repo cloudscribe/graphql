@@ -24,7 +24,8 @@
 
         if (oidc.CurrentUser != null)
         {
-            serializedUesr = Json.Serialize(oidc.CurrentUser);
+            //serializedUesr = Json.Serialize(oidc.CurrentUser);
+            serializedUesr = oidc.CurrentUser.Id_Token;
         }
 
     }

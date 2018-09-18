@@ -1,6 +1,8 @@
 ﻿using GraphQL;
+using GraphQL.Authorization.AspNetCore;
 using GraphQL.Http;
 using GraphQL.Server;
+using GraphQL.Validation;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,6 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
+
+            services.AddTransient<IValidationRule, AuthorizationValidationRule>();
 
             services.AddGraphQLForCloudscribeCore();
             services.AddGraphQLCompositeSchemaAndQuery();

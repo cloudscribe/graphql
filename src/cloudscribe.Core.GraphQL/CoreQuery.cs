@@ -5,6 +5,7 @@ using GraphQL.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GraphQL.Authorization.AspNetCore;
 
 namespace cloudscribe.Core.GraphQL
 {
@@ -22,7 +23,9 @@ namespace cloudscribe.Core.GraphQL
                 {
                     return await context.TryAsyncResolve(async c => await siteService.GetAllSites(c.CancellationToken));
                 }
-            );
+            )
+            .AuthorizeWith("AdminPolicy")
+            ;
 
 
             FieldAsync<SiteType>(

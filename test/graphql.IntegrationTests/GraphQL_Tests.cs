@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using System.Net;
+using cloudscribe.Core.ApiModels;
 
 namespace graphql.IntegrationTests
 {
@@ -92,7 +93,7 @@ namespace graphql.IntegrationTests
 
 
         [Fact]
-        public async Task T10040_ReturnOkForSitesQuery()
+        public async Task T10040_AdminCanGetSiteList()
         {
             // Arrange
             var request = new GraphQLRequest
@@ -113,7 +114,7 @@ namespace graphql.IntegrationTests
             // Act
             var response = await client.SendQueryAsync(request);
             
-            var result = response.GetDataFieldAs<List<SiteInfo>>("siteList");
+            var result = response.GetDataFieldAs<List<SiteDescriptor>>("siteList");
 
             var id = result[0].Id.ToString();
 

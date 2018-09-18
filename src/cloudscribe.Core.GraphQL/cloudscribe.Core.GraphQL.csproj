@@ -17,6 +17,8 @@
     <ProjectReference Include="..\cloudscribe.Core.ApiModels\cloudscribe.Core.ApiModels.csproj" />
    
     <ProjectReference Include="..\cloudscribe.Extensions.GraphQL\cloudscribe.Extensions.GraphQL.csproj" />
+   
+    <ProjectReference Include="..\GraphQL.Authorization.AspNetCore\GraphQL.Authorization.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

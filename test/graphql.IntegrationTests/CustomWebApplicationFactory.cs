@@ -55,6 +55,18 @@ namespace graphql.IntegrationTests
                     options.IntrospectionDiscoveryHandler = _testMessageHandler;
                     options.JwtBackChannelHandler = _testMessageHandler;
 
+                    options.ForwardDefaultSelector = ctx =>
+                     {
+                         if (ctx.Request.Path.StartsWithSegments("/api") || ctx.Request.Path.StartsWithSegments("/graphql"))
+                         {
+                             return IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                         }
+                         else
+                         {
+                             return "Identity.Application";
+                         }
+                     };
+
                 });
 
             });
