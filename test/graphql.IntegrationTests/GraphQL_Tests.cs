@@ -78,7 +78,7 @@ namespace graphql.IntegrationTests
 
         [Theory]
         [InlineData("/api/Identity")]
-        public async Task T10030_GetShouldReturnOkForAdmin(string url)
+        public async Task T10030_GetIdentityShouldReturnOkForAdmin(string url)
         {
             //Arrange
             var client = await GetAuthenticatedClient("admin@admin.com");

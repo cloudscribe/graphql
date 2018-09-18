@@ -1,1 +1,1 @@
-{"Required":false,"Emphasize":false,"ShowInDiscoveryDocument":false,"Enabled":true,"Name":"profile","DisplayName":"profile","Description":null,"UserClaims":[]}
+{"Required":false,"Emphasize":false,"ShowInDiscoveryDocument":false,"Enabled":true,"Name":"profile","DisplayName":"profile","Description":null,"UserClaims":["email","name"]}

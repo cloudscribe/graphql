@@ -30,7 +30,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 _.ExposeExceptions = true;
                
             })
-            //.AddUserContextBuilder(httpContext => new cloudscribe.Extensions.GraphQL.GraphQLUserContext { User = httpContext.User })
             .AddUserContextBuilder(UserContextBuilder.BuildUserContext)
             ;
 

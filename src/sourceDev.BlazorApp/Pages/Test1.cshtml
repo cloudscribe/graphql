@@ -18,22 +18,36 @@ Identity Token
     <textarea class="form-control">@identityToken</textarea>
 </div>
 
-
-@oidcAuthority
-</ br>
-@serializedUesr
+<div>
+    API Response
+    <textarea class="form-control">@apiResponse</textarea>
+</div>
+<div>
+    <button onclick="@GetApi">Make API Request</button>
+</div>
 
 
 @functions {
-    string serializedUesr = "";
-    string oidcAuthority = "";
+   
     string accessToken = "";
     string identityToken = "";
+    string apiResponse = "";
 
-    protected override async Task OnInitAsync()
+    async Task GetApi()
     {
-        oidcAuthority = await AppSettings.Get("oidcAuthority");
+        if (oidc.CurrentUser != null)
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", oidc.CurrentUser.Access_Token);
+        }
+        var url = "https://localhost:44396/api/Identity";
+        var response = await Http.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        apiResponse = await response.Content.ReadAsStringAsync();
+    }
 
+    protected override void OnInit()
+    {
+       
         if (oidc.CurrentUser != null)
         {
             //serializedUesr = Json.Serialize(oidc.CurrentUser);

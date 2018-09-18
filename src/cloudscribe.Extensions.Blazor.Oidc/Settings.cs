@@ -18,7 +18,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         public string Response_type { get; set; }
 
-        public string Scopes { get; set; }
+        public string Scope { get; set; }
 
         public string Post_logout_redirect_uri { get; set; }
 
@@ -30,7 +30,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
                 Client_id = await AppSettings.Get("oidcClientId"),
                 Redirect_uri = await AppSettings.Get("oidcRedirectUri"),
                 Response_type = await AppSettings.Get("oidcResponseType"),
-                Scopes = await AppSettings.Get("oidcScopes"),
+                Scope = await AppSettings.Get("oidcScopes"),
                 Post_logout_redirect_uri = await AppSettings.Get("oidcPostLogoutRedirectUri")
 
             };
