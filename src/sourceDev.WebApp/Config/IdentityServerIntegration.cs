@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -27,6 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 try
                 {
+                    IdentityModelEventSource.ShowPII = true; //To show detail of error and see the problem
+
                     var idsBuilder = services.AddIdentityServerConfiguredForCloudscribe(options =>
                     {
                         options.UserInteraction.ErrorUrl = "/oops/error";
@@ -96,22 +99,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddAuthentication()
                 .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.Authority = "https://localhost:44399";
+                    options.Authority = "https://localhost:44396";
 
                     options.ApiName = "api";
                     options.ApiSecret = "secret";
-
-                    //options.ForwardDefaultSelector = ctx =>
-                    // {
-                    //     if (ctx.Request.Path.StartsWithSegments("/api") || ctx.Request.Path.StartsWithSegments("/graphql"))
-                    //     {
-                    //         return IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                    //     }
-                    //     else
-                    //     {
-                    //         return "Identity.Application";
-                    //     }
-                    // };
+                    
                 });
 
             return services;

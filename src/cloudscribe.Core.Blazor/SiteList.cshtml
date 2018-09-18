@@ -1,5 +1,6 @@
 ﻿
 @inject HttpClient Http
+@inject OidcService  oidc
 <h2>Site List </h2>
 
 @if (model == null)
@@ -41,15 +42,19 @@ else
         var query = new GraphQLRequest
         {
             Query = @"
-            {
-              siteList {
-                id,
-                aliasId,
-                siteName,
-                siteFolderName
-              }
-            }"
+    {
+      siteList {
+        id,
+        aliasId,
+        siteName,
+        siteFolderName
+      }
+    }"
         };
+        if (oidc.CurrentUser != null)
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", oidc.CurrentUser.Id_Token);
+        }
 
         var queryJson = Json.Serialize(query);
         var endPoint = await AppSettings.Get("graphqlApiUri");

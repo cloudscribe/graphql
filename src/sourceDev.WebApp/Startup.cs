@@ -104,9 +104,9 @@ namespace sourceDev.WebApp
                 services.SetupIdentityServerApiAuthentication();
             }
             // the integration tests only use Bearer auth so need to make it default for testing
-            var forceBeaerAuth = _configuration.GetValue<bool>("AppSettings:ForceBearerAuth");
+            var forceBearerAuth = _configuration.GetValue<bool>("AppSettings:ForceBearerAuth");
 
-            if(forceBeaerAuth)
+            if(forceBearerAuth)
             {
                 services.AddAuthentication(options =>
                 {

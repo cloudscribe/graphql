@@ -7,6 +7,16 @@
 
 <h2>Test</h2>
 
+Access Token
+<div>
+    <textarea class="form-control">@accessToken</textarea>
+</div>
+
+
+Identity Token
+<div>
+    <textarea class="form-control">@identityToken</textarea>
+</div>
 
 
 @oidcAuthority
@@ -17,6 +27,8 @@
 @functions {
     string serializedUesr = "";
     string oidcAuthority = "";
+    string accessToken = "";
+    string identityToken = "";
 
     protected override async Task OnInitAsync()
     {
@@ -25,7 +37,8 @@
         if (oidc.CurrentUser != null)
         {
             //serializedUesr = Json.Serialize(oidc.CurrentUser);
-            serializedUesr = oidc.CurrentUser.Id_Token;
+            accessToken = oidc.CurrentUser.Access_Token;
+            identityToken = oidc.CurrentUser.Id_Token;
         }
 
     }

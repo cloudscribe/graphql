@@ -1,8 +1,10 @@
-﻿using GraphQL;
+﻿using cloudscribe.Extensions.GraphQL;
+using GraphQL;
 using GraphQL.Authorization.AspNetCore;
 using GraphQL.Http;
 using GraphQL.Server;
 using GraphQL.Validation;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddGraphQLServices(this IServiceCollection services)
         {
             services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+
+            //services.AddSingleton<IAuthenticationSchemeProvider, BearerSchemeProvider>();
 
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
@@ -24,8 +28,11 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 _.EnableMetrics = true;
                 _.ExposeExceptions = true;
+               
             })
-            .AddUserContextBuilder(httpContext => new cloudscribe.Extensions.GraphQL.GraphQLUserContext { User = httpContext.User });
+            //.AddUserContextBuilder(httpContext => new cloudscribe.Extensions.GraphQL.GraphQLUserContext { User = httpContext.User })
+            .AddUserContextBuilder(UserContextBuilder.BuildUserContext)
+            ;
 
 
             return services;
