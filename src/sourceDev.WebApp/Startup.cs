@@ -90,7 +90,7 @@ namespace sourceDev.WebApp
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddGraphQLServices();
+            services.AddGraphQLServices(_environment);
 
             //*** Important ***
             // This is a custom extension method in Config/RoutingAndMvc.cs

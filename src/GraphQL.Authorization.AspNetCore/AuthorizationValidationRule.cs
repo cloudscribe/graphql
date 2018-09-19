@@ -3,6 +3,7 @@ using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,15 @@ namespace GraphQL.Authorization.AspNetCore
     public class AuthorizationValidationRule : IValidationRule
     {
         private readonly IAuthorizationService _authorizationService;
+        private readonly AuthorizationValidationOptions _options;
 
-        public AuthorizationValidationRule(IAuthorizationService authorizationService)
+        public AuthorizationValidationRule(
+            IOptions<AuthorizationValidationOptions> optionsAccessor,
+            IAuthorizationService authorizationService
+            )
         {
             _authorizationService = authorizationService;
+            _options = optionsAccessor.Value;
         }
 
         public INodeVisitor Validate(ValidationContext context)
@@ -94,11 +100,14 @@ namespace GraphQL.Authorization.AspNetCore
                     stringBuilder.Append(operationType.ToString().ToLower());
                     stringBuilder.AppendLine(".");
 
-                    foreach (var failure in result.Failure.FailedRequirements)
+                    if(_options.IncludeErrorDetails)
                     {
-                        AppendFailureLine(stringBuilder, failure);
+                        foreach (var failure in result.Failure.FailedRequirements)
+                        {
+                            AppendFailureLine(stringBuilder, failure);
+                        }
                     }
-
+                   
                     context.ReportError(
                         new ValidationError(context.OriginalQuery, "authorization", stringBuilder.ToString(), node));
                 }
