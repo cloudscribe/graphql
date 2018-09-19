@@ -332,3 +332,4 @@ ASALocalRun/
 **/nodb_storage/projects/**/userlocation/**
 **/nodb_storage/projects/**/grantitem/**
 **/nodb_storage/projects/**/logitem/**
+**/nodb_storage/projects/**/contenthistory/**
