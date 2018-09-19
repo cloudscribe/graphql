@@ -22,6 +22,8 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         public string Post_logout_redirect_uri { get; set; }
 
+        public string Silent_redirect_uri { get; set; }
+
         public static async Task<Settings> GetSettings()
         {
             var settings = new Settings()
@@ -31,7 +33,8 @@ namespace cloudscribe.Extensions.Blazor.Oidc
                 Redirect_uri = await AppSettings.Get("oidcRedirectUri"),
                 Response_type = await AppSettings.Get("oidcResponseType"),
                 Scope = await AppSettings.Get("oidcScopes"),
-                Post_logout_redirect_uri = await AppSettings.Get("oidcPostLogoutRedirectUri")
+                Post_logout_redirect_uri = await AppSettings.Get("oidcPostLogoutRedirectUri"),
+                Silent_redirect_uri = await AppSettings.Get("oidcSilentRedirectUri"),
 
             };
 

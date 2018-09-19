@@ -78,14 +78,19 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirect");
         }
 
-        ///// <summary>
-        ///// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<User> SignInSilent()
-        //{
-        //    return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
-        //}
+        /// <summary>
+        /// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<User> SignInSilent()
+        {
+            return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
+        }
+
+        public async Task<User> SignInSilentCallback()
+        {
+            return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilentCallback");
+        }
 
         /// <summary>
         /// Returns promise to remove from any storage the currently authenticated user.

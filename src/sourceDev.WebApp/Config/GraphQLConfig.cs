@@ -31,6 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IValidationRule, AuthorizationValidationRule>();
 
             services.AddGraphQLForCloudscribeCore();
+            services.AddGraphQLForCloudscribeSimpleContent();
             services.AddGraphQLCompositeSchemaAndQuery();
 
             services.AddGraphQL(_ =>

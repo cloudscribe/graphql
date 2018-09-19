@@ -76,6 +76,23 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             return _currentUser;
         }
 
+        public async Task<User> SignInSilent()
+        {
+            await EnsureUserManager();
+
+            _currentUser = await _userManager.SignInSilent();
+
+            return _currentUser;
+        }
+
+        public async Task SignInSilentCallback()
+        {
+            await EnsureUserManager();
+
+            await _userManager.SignInSilentCallback();
+            //NotifyStateChanged();
+        }
+
         /// <summary>
         /// Returns promise to notify the opening window of response from the authorization endpoint.
         /// </summary>

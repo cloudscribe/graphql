@@ -1,0 +1,10 @@
+﻿@page "/oidc-silent-renew-callback"
+@inject OidcService  oidc
+
+@functions {
+
+    protected override async Task OnInitAsync()
+    {
+        await oidc.SignInPopupCallback();
+    }
+}

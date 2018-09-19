@@ -17,6 +17,7 @@
     <ProjectReference Include="..\cloudscribe.Core.Blazor\cloudscribe.Core.Blazor.csproj" />
     <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj" />
     <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj" />
+    <ProjectReference Include="..\cloudscribe.SimpleContent.Blazor\cloudscribe.SimpleContent.Blazor.csproj" />
   </ItemGroup>
 
 </Project>

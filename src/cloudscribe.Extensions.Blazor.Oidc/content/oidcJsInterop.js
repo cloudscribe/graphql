@@ -28,9 +28,13 @@ window.oidcJsFunctions = {
         return window.UserManager.signinPopupCallback();
     },
 
-    //signinSilent: function () {
-    //    return window.UserManager.signinSilent();
-    //},
+    signinSilent: function () {
+        return window.UserManager.signinSilent();
+    },
+
+    signinSilentCallback: function () {
+        return window.UserManager.signinSilentCallback();
+    },
 
     signoutRedirect: function () {
         return window.UserManager.signoutRedirect();

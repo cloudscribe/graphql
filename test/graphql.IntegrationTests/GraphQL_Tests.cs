@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Net;
 using cloudscribe.Core.ApiModels;
+using cloudscribe.SimpleContent.Models;
 
 namespace graphql.IntegrationTests
 {
@@ -217,6 +218,45 @@ namespace graphql.IntegrationTests
 
             //Assert
             Assert.Equal("5961f387-accd-49dc-b962-44029d0803ae", result["id"].ToString());
+
+        }
+
+        [Fact]
+        public async Task T10060_ReturnOkForPageQuery()
+        {
+            // Arrange
+            var request = new GraphQLRequest
+            {
+                Query = @"
+				query MyQuery($projectId: String!, $slug: String!){
+					getPageFromSlug (projectId: $projectId, slug: $slug) {
+                        id,
+                        projectId,
+                        title,
+                        content,
+                        metaDescription,
+                        author,
+                        pubDate
+                      }
+				}",
+                Variables = new
+                {
+                    projectId = "5961f387-accd-49dc-b962-44029d0803ae",
+                    slug = "home"
+                }
+            };
+
+            var client = await GetAuthenticatedGraphQLClient();
+
+            // Act
+            var response = await client.SendQueryAsync(request);
+
+            var result = response.GetDataFieldAs<Page>("getPageFromSlug");
+
+            Assert.NotNull(result);
+
+            //Assert
+            Assert.Equal("Home", result.Title);
 
         }
 

@@ -4,7 +4,7 @@ The primary purpose of this repository is as a learning excercise for me to lear
 
 The sourceDev.WebApp project in this solution is a cloudscribe MVC app, that also hosts the GraphQL endpoint and provides authentication to the sourceDev.BlazorApp using IdentityServer4. So the sourceDev.BlazorApp is the main SPA application and it authenticates against the sourceDev.WebApp project and consumes a GraphQL API from there as well. The GraphQL end point could be a separate standalone API project but for convenience and easier integration testing I've just included it in the main MVC app.
 
-The cloudscribe.Extensions.Blazor.oidc project is a Blazor library that does js interop around the oidc-client.js to make it easy to authenticated against openid connect ie using IdentityServer4 in this case.
+The cloudscribe.Extensions.Blazor.Oidc project is a Blazor library that does js interop around the oidc-client.js to make it easy to authenticate against openid connect ie using IdentityServer4 in this case.
 
 The solution uses NoDb file system storage, so it is pre-populated with data and anyone who downloads this repo and tries it out will have the same existing data.
 
