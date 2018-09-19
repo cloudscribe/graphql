@@ -10,6 +10,7 @@ using Xunit;
 using System.Net;
 using cloudscribe.Core.ApiModels;
 using cloudscribe.SimpleContent.Models;
+using cloudscribe.Pagination.Models;
 
 namespace graphql.IntegrationTests
 {
@@ -257,6 +258,55 @@ namespace graphql.IntegrationTests
 
             //Assert
             Assert.Equal("Home", result.Title);
+
+        }
+
+        [Fact]
+        public async Task T10070_CanGetPostList()
+        {
+            // Arrange
+            var request = new GraphQLRequest
+            {
+                Query = @"
+				query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, $pageSize : Int!){
+					postList (projectId: $projectId, category: $category, pageNumber: $pageNumber, pageSize: $pageSize) {
+                        pageNumber,
+                        pageSize,
+                        totalItems,
+                        data:posts {
+                          id,
+                          title,
+                          contentType,
+                          metaDescription,
+                          author,
+                          pubDate,
+                          content
+                          
+                        }
+                      }
+				}",
+                Variables = new
+                {
+                    projectId = "5961f387-accd-49dc-b962-44029d0803ae",
+                    category = "",
+                    pageNumber = 1,
+                    pageSize = 10
+                }
+            };
+
+            var client = await GetAuthenticatedGraphQLClient();
+
+            // Act
+            var response = await client.SendQueryAsync(request);
+
+            var result = response.GetDataFieldAs<PagedResult<Post>>("postList");
+
+
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.NotNull(result.Data[0]);
+            
 
         }
 
