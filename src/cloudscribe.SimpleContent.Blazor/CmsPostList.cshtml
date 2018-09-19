@@ -1,0 +1,80 @@
+﻿@inject HttpClient Http
+
+@if (model == null && errorModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (model != null)
+{
+    foreach(var post in model.Data.PostList.Data)
+    {
+        <CmsPost Post="@post" />
+    }
+
+}
+<GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
+
+@functions {
+
+PostListModel model = null;
+ErrorModel errorModel = null;
+
+protected override async Task OnInitAsync()
+{
+
+    var query = new GraphQLRequest
+    {
+        Query = @"
+query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, $pageSize : Int!){
+    postList (projectId: $projectId, category: $category, pageNumber: $pageNumber, pageSize: $pageSize) {
+        pageNumber,
+        pageSize,
+        totalItems,
+        data:posts {
+          id,
+          title,
+          contentType,
+          metaDescription,
+          author,
+          pubDate,
+          content
+
+        }
+      }
+}",
+        Variables = new
+        {
+            projectId = await AppSettings.Get("siteId"),
+            category = "",
+            pageNumber = 1,
+            pageSize = 10
+        }
+    };
+
+    var endPoint = await AppSettings.Get("graphqlApiUri");
+
+    var result = await Http.SendQuery<PostListModel>(endPoint, query);
+    if (result.SuccessResult != null)
+    {
+        model = result.SuccessResult;
+    }
+    else if (result.Errors != null)
+    {
+        errorModel = result.Errors;
+    }
+
+}
+
+
+
+class PostListModel
+{
+    public DataResult Data { get; set; }
+
+    public class DataResult
+    {
+        public PagedResult<Post> PostList { get; set; }
+    }
+}
+
+}

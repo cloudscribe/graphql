@@ -1,0 +1,15 @@
+﻿ @if (Post != null)
+{
+<h1>@Post.Title</h1>
+<div>
+    @((MarkupString)Post.Content)
+</div>
+
+}
+
+@functions {
+
+[Parameter]
+private Post Post { get; set; }
+
+}
