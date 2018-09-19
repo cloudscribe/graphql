@@ -11,7 +11,7 @@ The solution uses NoDb file system storage, so it is pre-populated with data and
 ## Try It Out
 
 1. Just run the sourceDev.WebApp and sourceDev.BlazorApp in the browser, ie right click each project and choose view in browser.
-2. Click the Sign In button in the Blazor app and it will oopen a popup login window from the MVC app. The login page shows the admin credentials to login with.
+2. Click the Sign In button in the Blazor app and it will open a popup login window from the MVC app. The login page shows the admin credentials to login with.
 3. The Site List page in the Blazor app is the first page I got working against the GraphQL endpoint, the site list is protected by an authorization policy so it only works if logged in as admin.
 
 ## Next Steps
@@ -24,6 +24,8 @@ I plan to flesh out a few more cloudscribe featues in GraphQL and Blazor includi
 * What about wysiwyg editors for rich content etc in Blazor. 
 * What about localization in Blazor?
 
+
+## Have questions or want to discuss it?
 
 [![Join the chat at https://gitter.im/joeaudette/cloudscribe](https://badges.gitter.im/joeaudette/cloudscribe.svg)](https://gitter.im/joeaudette/cloudscribe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
