@@ -32,16 +32,7 @@ else if(model != null)
         </tbody>
     </table>
 }
-else if(errorModel != null)
-{
-    <h2>Oops, something went wrong</h2>
-    <ul>
-        @foreach(var err in errorModel.Errors)
-        {
-            <li>@err.Message</li>
-        }
-    </ul>
-}
+<GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
 
 @functions {
 
@@ -92,11 +83,5 @@ else if(errorModel != null)
             public List<SiteDescriptor> SiteList { get; set; }
         }
     }
-
-
-
-
-
-
 
 }

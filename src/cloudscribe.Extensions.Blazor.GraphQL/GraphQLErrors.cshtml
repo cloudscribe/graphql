@@ -1,0 +1,20 @@
+﻿@if (ErrorModel != null)
+{
+    <h2>@Heading</h2>
+    <ul>
+        @foreach (var err in ErrorModel.Errors)
+        {
+            <li>@err.Message</li>
+        }
+    </ul>
+}
+
+@functions {
+
+[Parameter]
+private string Heading { get; set; } = "Oops, something went wrong.";
+
+[Parameter]
+private ErrorModel ErrorModel { get; set; }
+
+}
