@@ -124,7 +124,34 @@ namespace graphql.IntegrationTests
         }
 
         [Fact]
-        public async Task T10050_ReturnOkForSiteQuery()
+        public async Task T10050_AnonymousUserCannotGetSiteList()
+        {
+            // Arrange
+            var request = new GraphQLRequest
+            {
+                Query = @"
+                    {
+                      siteList {
+                        id,
+                        aliasId,
+                        siteName,
+                        siteFolderName
+                      }
+                    }"
+            };
+
+            var client = GetUnauthenticatedGraphQLClient();
+
+            // Act
+            var response = await client.SendQueryAsync(request);
+            
+            //Assert
+            Assert.Null(response.Data);
+
+        }
+
+        [Fact]
+        public async Task T10060_ReturnOkForSiteQuery()
         {
             // Arrange
             var request = new GraphQLRequest
