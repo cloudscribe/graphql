@@ -3,11 +3,11 @@
 @inject OidcService  oidc
 <h2>Site List </h2>
 
-@if (model == null)
+@if (model == null && errorModel == null)
 {
     <p><em>Loading...</em></p>
 }
-else
+else if(model != null)
 {
 
     <table class="table">
@@ -32,24 +32,35 @@ else
         </tbody>
     </table>
 }
+else if(errorModel != null)
+{
+    <h2>Oops, something went wrong</h2>
+    <ul>
+        @foreach(var err in errorModel.Errors)
+        {
+            <li>@err.Message</li>
+        }
+    </ul>
+}
 
 @functions {
 
     SiteListModel model = null;
+    ApiErrorModel errorModel = null;
 
     protected override async Task OnInitAsync()
     {
         var query = new GraphQLRequest
         {
             Query = @"
-    {
-      siteList {
-        id,
-        aliasId,
-        siteName,
-        siteFolderName
-      }
-    }"
+            {
+              siteList {
+                id,
+                aliasId,
+                siteName,
+                siteFolderName
+              }
+            }"
         };
         if (oidc.CurrentUser != null)
         {
@@ -61,7 +72,16 @@ else
         var response = await Http.PostAsync(endPoint, new StringContent(queryJson, Encoding.UTF8, "application/json"));
         response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadAsStringAsync();
-        model = Json.Deserialize<SiteListModel>(result);
+        
+        if (result.Contains("errors"))
+        {
+            errorModel = Json.Deserialize<ApiErrorModel>(result);
+        }
+        else
+        {
+            model = Json.Deserialize<SiteListModel>(result);
+        }
+
 
     }
 
@@ -77,6 +97,9 @@ else
             public List<SiteDescriptor> SiteList { get; set; }
         }
     }
+
+    
+
 
 
 

@@ -4,7 +4,7 @@ window.oidcJsFunctions = {
     
     ensureUserManager: function (config) {
         if (window.UserManager === undefined) {
-            console.log(config);
+            //console.log(config);
 
             window.UserManager = new Oidc.UserManager(config);
         }
