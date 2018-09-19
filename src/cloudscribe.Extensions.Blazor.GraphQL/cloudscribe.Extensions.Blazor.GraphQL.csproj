@@ -23,12 +23,4 @@
     
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\cloudscribe.Core.ApiModels\cloudscribe.Core.ApiModels.csproj" />
-    <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj" />
-    <ProjectReference Include="..\cloudscribe.Extensions.Blazor.GraphQL\cloudscribe.Extensions.Blazor.GraphQL.csproj" />
-    <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Oidc\cloudscribe.Extensions.Blazor.Oidc.csproj" />
-  </ItemGroup>
-
-
 </Project>

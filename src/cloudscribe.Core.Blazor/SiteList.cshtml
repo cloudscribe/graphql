@@ -46,7 +46,7 @@ else if(errorModel != null)
 @functions {
 
     SiteListModel model = null;
-    ApiErrorModel errorModel = null;
+    ErrorModel errorModel = null;
 
     protected override async Task OnInitAsync()
     {
@@ -66,21 +66,32 @@ else if(errorModel != null)
         {
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", oidc.CurrentUser.Access_Token);
         }
-
-        var queryJson = Json.Serialize(query);
         var endPoint = await AppSettings.Get("graphqlApiUri");
-        var response = await Http.PostAsync(endPoint, new StringContent(queryJson, Encoding.UTF8, "application/json"));
-        response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadAsStringAsync();
-        
-        if (result.Contains("errors"))
+
+        var result = await Http.SendQuery<SiteListModel>(endPoint, query);
+        if(result.SuccessResult != null)
         {
-            errorModel = Json.Deserialize<ApiErrorModel>(result);
+            model = result.SuccessResult;
         }
-        else
+        else if(result.Errors != null)
         {
-            model = Json.Deserialize<SiteListModel>(result);
+            errorModel = result.Errors;
         }
+
+        //var queryJson = Json.Serialize(query);
+
+        //var response = await Http.PostAsync(endPoint, new StringContent(queryJson, Encoding.UTF8, "application/json"));
+        //response.EnsureSuccessStatusCode();
+        //var result = await response.Content.ReadAsStringAsync();
+
+        //if (result.Contains("errors"))
+        //{
+        //    errorModel = Json.Deserialize<ApiErrorModel>(result);
+        //}
+        //else
+        //{
+        //    model = Json.Deserialize<SiteListModel>(result);
+        //}
 
 
     }
@@ -98,7 +109,7 @@ else if(errorModel != null)
         }
     }
 
-    
+
 
 
 

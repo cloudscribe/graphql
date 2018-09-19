@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace cloudscribe.Core.ApiModels
+namespace cloudscribe.Extensions.Blazor.GraphQL
 {
-    public class ApiErrorModel
+    public class ErrorModel
     {
         public List<ApiError> Errors { get; set; }
     }
