@@ -77,23 +77,7 @@ else if(errorModel != null)
         {
             errorModel = result.Errors;
         }
-
-        //var queryJson = Json.Serialize(query);
-
-        //var response = await Http.PostAsync(endPoint, new StringContent(queryJson, Encoding.UTF8, "application/json"));
-        //response.EnsureSuccessStatusCode();
-        //var result = await response.Content.ReadAsStringAsync();
-
-        //if (result.Contains("errors"))
-        //{
-        //    errorModel = Json.Deserialize<ApiErrorModel>(result);
-        //}
-        //else
-        //{
-        //    model = Json.Deserialize<SiteListModel>(result);
-        //}
-
-
+        
     }
 
     // this model structure is needed because the response format is:
