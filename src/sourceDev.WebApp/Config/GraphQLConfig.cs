@@ -4,7 +4,6 @@ using GraphQL.Authorization.AspNetCore;
 using GraphQL.Http;
 using GraphQL.Server;
 using GraphQL.Validation;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -17,8 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             )
         {
             services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-
-            //services.AddSingleton<IAuthenticationSchemeProvider, BearerSchemeProvider>();
+            
             if(hostingEnvironment.IsDevelopment())
             {
                 services.Configure<AuthorizationValidationOptions>(options =>

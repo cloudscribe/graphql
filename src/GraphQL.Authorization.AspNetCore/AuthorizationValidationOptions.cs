@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GraphQL.Authorization.AspNetCore
+﻿namespace GraphQL.Authorization.AspNetCore
 {
     public class AuthorizationValidationOptions
     {

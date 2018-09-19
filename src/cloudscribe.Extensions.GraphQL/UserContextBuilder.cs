@@ -8,13 +8,22 @@ namespace cloudscribe.Extensions.GraphQL
     {
         public static async Task<GraphQLUserContext> BuildUserContext(HttpContext context)
         {
-            var userContext = new GraphQLUserContext();
-            userContext.User = context.User;
-            var result = await context.AuthenticateAsync("Bearer");
-            if(result.Succeeded)
+            var userContext = new GraphQLUserContext
             {
-                userContext.User = result.Principal;
+                User = context.User
+            };
+            // if the default auth scheme is cookies
+            // users from remote clients that pass bearer token are not automatically authenticated
+
+            if(!context.User.Identity.IsAuthenticated)
+            {
+                var result = await context.AuthenticateAsync("Bearer");
+                if (result.Succeeded)
+                {
+                    userContext.User = result.Principal;
+                }
             }
+            
             return userContext;
 
         }
