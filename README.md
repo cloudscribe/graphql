@@ -8,6 +8,8 @@ The cloudscribe.Extensions.Blazor.oidc project is a Blazor library that does js 
 
 The solution uses NoDb file system storage, so it is pre-populated with data and anyone who downloads this repo and tries it out will have the same existing data.
 
+Learn more about [GraphQL.NET](https://github.com/graphql-dotnet/graphql-dotnet) and [Blazor](https://blazor.net/).
+
 ## Try It Out
 
 1. Just run the sourceDev.WebApp and sourceDev.BlazorApp in the browser, ie right click each project and choose view in browser.
