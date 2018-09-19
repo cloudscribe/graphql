@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Authorization.AspNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Extensions.Blazor.GraphQL", "src\cloudscribe.Extensions.Blazor.GraphQL\cloudscribe.Extensions.Blazor.GraphQL.csproj", "{7330CDE0-D7EE-4DEE-B436-BE7156C1DDC9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.SimpleContent.Blazor", "src\cloudscribe.SimpleContent.Blazor\cloudscribe.SimpleContent.Blazor.csproj", "{55DD47FB-E911-43C1-BE75-A63A0B17D478}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{7330CDE0-D7EE-4DEE-B436-BE7156C1DDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7330CDE0-D7EE-4DEE-B436-BE7156C1DDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7330CDE0-D7EE-4DEE-B436-BE7156C1DDC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55DD47FB-E911-43C1-BE75-A63A0B17D478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55DD47FB-E911-43C1-BE75-A63A0B17D478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55DD47FB-E911-43C1-BE75-A63A0B17D478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55DD47FB-E911-43C1-BE75-A63A0B17D478}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{69758FB2-A0F2-46B1-B174-A81FDAE44787} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{0F42FC15-A622-408F-81AB-4C8782965A30} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 		{7330CDE0-D7EE-4DEE-B436-BE7156C1DDC9} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
+		{55DD47FB-E911-43C1-BE75-A63A0B17D478} = {1F86FC96-EAD2-4C35-8C12-C930F5869E42}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E02B70-5273-4C2F-B0A7-C5E07D0076AC}
