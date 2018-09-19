@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace cloudscribe.Extensions.Blazor.GraphQL
+﻿namespace cloudscribe.Extensions.Blazor.GraphQL
 {
     public class GraphQLResult<T> where T : class
     {
