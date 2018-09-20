@@ -11,10 +11,10 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         }
 
-        [JSInvokable]
-        public string SayHello() {
-           return  "Hello,Joe!";
-        }
+        //[JSInvokable]
+        //public string SayHello() {
+        //   return  "Hello,Joe!";
+        //}
 
         public event Action OnChange;
 
@@ -39,7 +39,13 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             if(_currentUser == null)
             {
                 _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
-                //await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", _currentUser);
+                //if(_currentUser != null)
+                //{
+                //    await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", _currentUser);
+                //    var expires = _currentUser.GetExpirationTime();
+                //    await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", expires.ToString("s"));
+                //}
+                
             }
             
         }

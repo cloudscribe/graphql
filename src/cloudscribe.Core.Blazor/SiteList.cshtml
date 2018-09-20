@@ -53,10 +53,8 @@ else if(model != null)
               }
             }"
         };
-        if (oidc.CurrentUser != null)
-        {
-            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", oidc.CurrentUser.Access_Token);
-        }
+        await Http.AddBeaerTokenIfAuthenticated(oidc);
+        
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
         var result = await Http.SendQuery<SiteListModel>(endPoint, query);
@@ -68,7 +66,7 @@ else if(model != null)
         {
             errorModel = result.Errors;
         }
-        
+
     }
 
     // this model structure is needed because the response format is:

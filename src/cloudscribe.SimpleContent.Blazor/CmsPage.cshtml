@@ -1,4 +1,5 @@
 ﻿@inject HttpClient Http
+@inject OidcService  oidc
 
 @if (model == null && errorModel == null)
 {
@@ -10,7 +11,7 @@ else if (model != null)
     <div>
         @((MarkupString)model.Data.GetPageFromSlug.Content)
     </div>
-    
+
 }
 <GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
 
@@ -48,6 +49,7 @@ protected override async Task OnInitAsync()
 
     if (!string.IsNullOrWhiteSpace(PageSlug))
     {
+        await Http.AddBeaerTokenIfAuthenticated(oidc);
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
         var result = await Http.SendQuery<PageModel>(endPoint, query);

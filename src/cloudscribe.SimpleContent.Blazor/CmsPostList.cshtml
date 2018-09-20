@@ -1,4 +1,5 @@
 ﻿@inject HttpClient Http
+@inject OidcService  oidc
 
 @if (model == null && errorModel == null)
 {
@@ -6,7 +7,7 @@
 }
 else if (model != null)
 {
-    foreach(var post in model.Data.PostList.Data)
+    foreach (var post in model.Data.PostList.Data)
     {
         <CmsPost Post="@post" />
     }
@@ -25,23 +26,23 @@ protected override async Task OnInitAsync()
     var query = new GraphQLRequest
     {
         Query = @"
-query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, $pageSize : Int!){
-    postList (projectId: $projectId, category: $category, pageNumber: $pageNumber, pageSize: $pageSize) {
-        pageNumber,
-        pageSize,
-        totalItems,
-        data:posts {
-          id,
-          title,
-          contentType,
-          metaDescription,
-          author,
-          pubDate,
-          content
+            query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, $pageSize : Int!){
+            postList (projectId: $projectId, category: $category, pageNumber: $pageNumber, pageSize: $pageSize) {
+            pageNumber,
+            pageSize,
+            totalItems,
+            data:posts {
+              id,
+              title,
+              contentType,
+              metaDescription,
+              author,
+              pubDate,
+              content
 
-        }
-      }
-}",
+            }
+            }
+        }",
         Variables = new
         {
             projectId = await AppSettings.Get("siteId"),
@@ -50,6 +51,7 @@ query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, 
             pageSize = 10
         }
     };
+    await Http.AddBeaerTokenIfAuthenticated(oidc);
 
     var endPoint = await AppSettings.Get("graphqlApiUri");
 

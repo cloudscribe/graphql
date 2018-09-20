@@ -13,13 +13,15 @@ window.oidcJsFunctions = {
 
             
 
-            window.UserManager.events.addUserLoaded(function () {
+            window.UserManager.events.addUserLoaded(function (user) {
                 console.log("userLoaded");
+                console.log(user);
                
             });
 
             window.UserManager.events.addUserUnloaded(function () {
                 console.log("userUnloaded");
+                
 
             });
 
@@ -42,8 +44,8 @@ window.oidcJsFunctions = {
 
             });
 
-            dotnetHelper.invokeMethodAsync('SayHello')
-                .then(r => console.log(r));
+            //dotnetHelper.invokeMethodAsync('SayHello')
+            //    .then(r => console.log(r));
 
 
         }
