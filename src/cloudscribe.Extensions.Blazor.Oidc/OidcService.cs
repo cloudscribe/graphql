@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.JSInterop;
+using System;
 using System.Threading.Tasks;
 
 namespace cloudscribe.Extensions.Blazor.Oidc
@@ -12,11 +11,15 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         }
 
+        [JSInvokable]
+        public string SayHello() {
+           return  "Hello,Joe!";
+        }
+
         public event Action OnChange;
 
         private void NotifyStateChanged() => OnChange?.Invoke();
 
-        private UserManager _userManager = null;
         private User _currentUser = null;
 
         public User CurrentUser
@@ -26,17 +29,32 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         private async Task EnsureUserManager()
         {
-            if(_userManager == null)
+            var settings = await Settings.GetSettings();
+            
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.ensureUserManager", settings, new DotNetObjectRef(this));
+        }
+
+        private async Task EnsureUser()
+        {
+            if(_currentUser == null)
             {
-                _userManager = await UserManager.GetUserManager();
+                _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
+                //await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", _currentUser);
             }
+            
         }
 
         public async Task Init()
         {
             await EnsureUserManager();
-            _currentUser = await _userManager.GetUser();
+            await EnsureUser();
+            
+        }
 
+        //when the token has expired and been renewed we need to reload the user from js
+        public async Task ReloadUser()
+        {
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
         }
 
         /// <summary>
@@ -46,8 +64,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task SignInRedirect()
         {
             await EnsureUserManager();
-
-            await _userManager.SignInRedirect();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinRedirect");
         }
 
         /// <summary>
@@ -57,8 +74,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task<User> SignInRedirectCallback()
         {
             await EnsureUserManager();
-
-            _currentUser = await _userManager.SignInRedirectCallback();
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinRedirectCallback");
             NotifyStateChanged();
             return _currentUser;
         }
@@ -70,17 +86,16 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task<User> SignInPopup()
         {
             await EnsureUserManager();
-
-            _currentUser = await _userManager.SignInPopup();
-
+            _currentUser =  await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinPopup");
+            NotifyStateChanged();
             return _currentUser;
         }
 
         public async Task<User> SignInSilent()
         {
             await EnsureUserManager();
-
-            _currentUser = await _userManager.SignInSilent();
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
+            NotifyStateChanged();
 
             return _currentUser;
         }
@@ -88,9 +103,8 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task SignInSilentCallback()
         {
             await EnsureUserManager();
-
-            await _userManager.SignInSilentCallback();
-            //NotifyStateChanged();
+            await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilentCallback");
+            NotifyStateChanged();
         }
 
         /// <summary>
@@ -100,22 +114,11 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task SignInPopupCallback()
         {
             await EnsureUserManager();
-
-            await _userManager.SignInPopupCallback();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinPopupCallback");
             NotifyStateChanged();
         }
 
-        /// <summary>
-        /// Returns promise to load the User object for the currently authenticated user.
-        /// </summary>
-        /// <returns>If there is no authenticated user, return null. Else, return the current authenticated user</returns>
-        //public async Task<User> GetUser()
-        //{
-        //    await EnsureUserManager();
-
-        //    return await _userManager.GetUser();
-        //}
-
+       
         /// <summary>
         /// Returns promise to trigger a redirect of the current window to the end session endpoint
         /// </summary>
@@ -123,20 +126,11 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task SignOut()
         {
             await EnsureUserManager();
-            //await _userManager.RemoveUser();
-            await _userManager.SignOut();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirect");
             NotifyStateChanged();
         }
 
-        ///// <summary>
-        ///// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<User> SignInSilent()
-        //{
-        //    return await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
-        //}
-
+        
         /// <summary>
         /// Returns promise to remove from any storage the currently authenticated user.
         /// </summary>
@@ -144,8 +138,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task RemoveUser()
         {
             await EnsureUserManager();
-
-            await _userManager.RemoveUser();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.removeUser");
             NotifyStateChanged();
         }
 

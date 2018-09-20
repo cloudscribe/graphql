@@ -24,6 +24,8 @@ namespace cloudscribe.Extensions.Blazor.Oidc
 
         public string Silent_redirect_uri { get; set; }
 
+        public string AutomaticSilentRenew { get; set; } = "false";
+
         public static async Task<Settings> GetSettings()
         {
             var settings = new Settings()
@@ -35,7 +37,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
                 Scope = await AppSettings.Get("oidcScopes"),
                 Post_logout_redirect_uri = await AppSettings.Get("oidcPostLogoutRedirectUri"),
                 Silent_redirect_uri = await AppSettings.Get("oidcSilentRedirectUri"),
-
+                AutomaticSilentRenew = await AppSettings.Get("oidcAutomaticSilentRenew")
             };
 
             return settings;
