@@ -10,12 +10,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         {
 
         }
-
-        //[JSInvokable]
-        //public string SayHello() {
-        //   return  "Hello,Joe!";
-        //}
-
+        
         #region Events
 
         public event Action OnChange;
