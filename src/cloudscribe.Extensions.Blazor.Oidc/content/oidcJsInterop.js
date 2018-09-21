@@ -1,8 +1,12 @@
 window.oidcJsFunctions = {
 
+    logToConsole: function (someDotNetObject) {
+        console.log(someDotNetObject);
+    },
+
     // https://github.com/IdentityModel/oidc-client-js/wiki
     
-    ensureUserManager: function (config, dotnetHelper) {
+    ensureUserManager: function (config, dotnetOidcService) {
         if (window.UserManager === undefined) {
             console.log(config);
 
@@ -10,51 +14,50 @@ window.oidcJsFunctions = {
             //Oidc.Log.level = Oidc.Log.INFO; // Oidc.Log.NONE Oidc.Log.ERROR Oidc.Log.WARN Oidc.Log.INFO
 
             window.UserManager = new Oidc.UserManager(config);
-
             
-
             window.UserManager.events.addUserLoaded(function (user) {
-                console.log("userLoaded");
-                console.log(user);
-               
+                //console.log("userLoaded");
+                dotnetOidcService.invokeMethodAsync('JsUserLoadedCallback', user);
+                //.then(console.log("dotnetinterop invoked"));
+                //console.log("dotnetinterop invoked");
             });
 
             window.UserManager.events.addUserUnloaded(function () {
-                console.log("userUnloaded");
-                
-
-            });
-
-            window.UserManager.events.addAccessTokenExpired(function () {
-                console.log("accessTokenExpired");
-
+                //console.log("userUnloaded");
+                dotnetOidcService.invokeMethodAsync('JsUserUnLoadedCallback');
+                    //.then(r => console.log("dotnetinterop unload invoked"));
             });
 
             window.UserManager.events.addAccessTokenExpiring(function () {
-                console.log("token expiring...");
-                //window.UserManager.startSilentRenew();
+                //console.log("accessTokenExpiring");
+                dotnetOidcService.invokeMethodAsync('JsAccessTokenExpiringCallback');
             });
 
-            window.UserManager.events.addSilentRenewError(function () {
-                console.log("silentRenewError");
-
+            window.UserManager.events.addAccessTokenExpired(function () {
+                //console.log("accessTokenExpired");
+                dotnetOidcService.invokeMethodAsync('JsAccessTokenExpiredCallback');
             });
+            
+            window.UserManager.events.addSilentRenewError(function (err) {
+                //console.log("silentRenewError");
+                //console.log(err);
+                dotnetOidcService.invokeMethodAsync('JsSilentRenewError', err);
+            });
+
             window.UserManager.events.addUserSignedOut(function () {
-                console.log("silentRenewError");
-
+                //console.log("userSignedOut");
+                dotnetOidcService.invokeMethodAsync('JsUserSignedOut');
             });
-
-            //dotnetHelper.invokeMethodAsync('SayHello')
-            //    .then(r => console.log(r));
-
-
-        }
-        //return window.UserManager;
-        return null;
+            
+        }   
     },
 
-    logToConsole: function (someDotNetObject) {
-        console.log(someDotNetObject);
+    getUser: function () {
+        return window.UserManager.getUser();
+    },
+
+    removeUser: function () {
+        return window.UserManager.removeUser();
     },
 
     signinRedirect: function () {
@@ -63,14 +66,6 @@ window.oidcJsFunctions = {
 
     signinRedirectCallback: function () {
         return window.UserManager.signinRedirectCallback();
-    },
-
-    signinPopup: function () {
-        return window.UserManager.signinPopup();
-    },
-
-    signinPopupCallback: function () {
-        return window.UserManager.signinPopupCallback();
     },
 
     signinSilent: function () {
@@ -83,30 +78,36 @@ window.oidcJsFunctions = {
         return window.UserManager.signinSilentCallback();
     },
 
+    signinPopup: function () {
+        return window.UserManager.signinPopup();
+    },
+
+    signinPopupCallback: function () {
+        return window.UserManager.signinPopupCallback();
+    },
+    
     signoutRedirect: function () {
         return window.UserManager.signoutRedirect();
+    },
+
+    signoutRedirectCallback: function () {
+        return window.UserManager.signoutRedirectCallback();
     },
 
     startSilentRenew : function () {
         return window.UserManager.startSilentRenew ();
     },
 
-    //getUserName: function () {
-    //    var user = getUser().then();
-    //    //console.log(promise);
-    //    return promise.profile.name;
-    //},
-
-    getUser: function () {
-        var promise = window.UserManager.getUser();
-        //console.log(promise);
-        return promise;
+    stopSilentRenew: function () {
+        return window.UserManager.stopSilentRenew();
     },
 
-    removeUser: function () {
-        return window.UserManager.removeUser();
+    clearStaleState: function () {
+        return window.UserManager.clearStaleState();
+    },
+
+    querySessionStatus: function () {
+        return window.UserManager.querySessionStatus();
     }
-
-
-
+    
 };

@@ -16,9 +16,68 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         //   return  "Hello,Joe!";
         //}
 
+        #region Events
+
         public event Action OnChange;
+        public event Action OnUserLoaded;
+        public event Action OnUserUnloaded;
+        public event Action OnAccessTokenExpiring;
+        public event Action OnAccessTokenExpired;
+        public event Action OnUserSignedOut;
+        public event Action<string> OnSilentRenewError;
 
         private void NotifyStateChanged() => OnChange?.Invoke();
+        private void NotifyUserLoaded() => OnUserLoaded?.Invoke();
+        private void NotifyUserUnloaded() => OnUserUnloaded?.Invoke();
+        private void NotifyAccessTokenExpiring() => OnAccessTokenExpiring?.Invoke();
+        private void NotifyAccessTokenExpired() => OnAccessTokenExpired?.Invoke();
+        private void NotifyUserSignedOut() => OnUserSignedOut?.Invoke();
+        private void NotifySilentRenewError(string error) => OnSilentRenewError?.Invoke(error);
+
+
+        [JSInvokable]
+        public async Task JsUserLoadedCallback(User user)
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", user);
+            NotifyUserLoaded();
+        }
+
+        [JSInvokable]
+        public async Task JsUserUnLoadedCallback()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", "user unloaded");
+            NotifyUserUnloaded();
+        }
+
+        [JSInvokable]
+        public async Task JsAccessTokenExpiringCallback()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", "access token expiring");
+            NotifyAccessTokenExpiring();
+        }
+
+        [JSInvokable]
+        public async Task JsAccessTokenExpiredCallback()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", "access token expired");
+            NotifyAccessTokenExpired();
+        }
+
+        [JSInvokable]
+        public async Task JsUserSignedOut()
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", "user signed out");
+            NotifyUserSignedOut();
+        }
+
+        [JSInvokable]
+        public async Task JsSilentRenewError(string error)
+        {
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", $"silent renew error {error}");
+            NotifySilentRenewError(error);
+        }
+
+        #endregion
 
         private User _currentUser = null;
 
@@ -86,6 +145,30 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         }
 
         /// <summary>
+        /// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<User> SignInSilent()
+        {
+            await EnsureUserManager();
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
+            NotifyStateChanged();
+
+            return _currentUser;
+        }
+
+        /// <summary>
+        /// Returns promise to notify the parent window of response from the authorization endpoint.
+        /// </summary>
+        /// <returns></returns>
+        public async Task SignInSilentCallback()
+        {
+            await EnsureUserManager();
+            await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilentCallback");
+            NotifyStateChanged();
+        }
+
+        /// <summary>
         /// Returns promise to trigger a request (via a popup window) to the authorization endpoint. The result of the promise is the authenticated User.
         /// </summary>
         /// <returns></returns>
@@ -97,21 +180,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             return _currentUser;
         }
 
-        public async Task<User> SignInSilent()
-        {
-            await EnsureUserManager();
-            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
-            NotifyStateChanged();
-
-            return _currentUser;
-        }
-
-        public async Task SignInSilentCallback()
-        {
-            await EnsureUserManager();
-            await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilentCallback");
-            NotifyStateChanged();
-        }
+        
 
         /// <summary>
         /// Returns promise to notify the opening window of response from the authorization endpoint.
@@ -129,14 +198,25 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to trigger a redirect of the current window to the end session endpoint
         /// </summary>
         /// <returns></returns>
-        public async Task SignOut()
+        public async Task SignOutRedirect()
         {
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirect");
             NotifyStateChanged();
         }
 
-        
+        /// <summary>
+        /// Returns promise to process response from the end session endpoint.
+        /// </summary>
+        /// <returns></returns>
+        public async Task SignOutRedirectCallback()
+        {
+            await EnsureUserManager();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirectCallback");
+            NotifyStateChanged();
+        }
+
+
         /// <summary>
         /// Returns promise to remove from any storage the currently authenticated user.
         /// </summary>
@@ -146,6 +226,28 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.removeUser");
             NotifyStateChanged();
+        }
+
+        /// <summary>
+        /// Removes stale state entries in storage for incomplete authorize requests.
+        /// </summary>
+        /// <returns></returns>
+        public async Task ClearStaleState()
+        {
+            await EnsureUserManager();
+            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.clearStaleState");
+            NotifyStateChanged();
+        }
+
+        /// <summary>
+        /// Returns promise to query OP for user's current signin status. Returns object with session_state and subject identifier.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<object> QuerySessionStatus()
+        {
+            await EnsureUserManager();
+            return await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.querySessionStatus");
+            
         }
 
     }
