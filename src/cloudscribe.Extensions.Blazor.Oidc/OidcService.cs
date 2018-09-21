@@ -126,7 +126,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to trigger a redirect of the current window to the authorization endpoint.
         /// </summary>
         /// <returns></returns>
-        public async Task SignInRedirect()
+        public async Task SigninRedirect()
         {
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinRedirect");
@@ -136,7 +136,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to process response from the authorization endpoint. The result of the promise is the authenticated User.
         /// </summary>
         /// <returns></returns>
-        public async Task<User> SignInRedirectCallback()
+        public async Task<User> SigninRedirectCallback()
         {
             await EnsureUserManager();
             _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinRedirectCallback");
@@ -148,10 +148,10 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to trigger a silent request (via an iframe) to the authorization endpoint. The result of the promise is the authenticated User.
         /// </summary>
         /// <returns></returns>
-        public async Task<User> SignInSilent()
+        public async Task<User> SigninSilent()
         {
             await EnsureUserManager();
-            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilent");
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinSilent");
             NotifyStateChanged();
 
             return _currentUser;
@@ -161,10 +161,10 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to notify the parent window of response from the authorization endpoint.
         /// </summary>
         /// <returns></returns>
-        public async Task SignInSilentCallback()
+        public async Task SigninSilentCallback()
         {
             await EnsureUserManager();
-            await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signInSilentCallback");
+            _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinSilentCallback");
             NotifyStateChanged();
         }
 
@@ -172,7 +172,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to trigger a request (via a popup window) to the authorization endpoint. The result of the promise is the authenticated User.
         /// </summary>
         /// <returns></returns>
-        public async Task<User> SignInPopup()
+        public async Task<User> SigninPopup()
         {
             await EnsureUserManager();
             _currentUser =  await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.signinPopup");
@@ -186,7 +186,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to notify the opening window of response from the authorization endpoint.
         /// </summary>
         /// <returns></returns>
-        public async Task SignInPopupCallback()
+        public async Task SigninPopupCallback()
         {
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signinPopupCallback");
@@ -198,7 +198,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to trigger a redirect of the current window to the end session endpoint
         /// </summary>
         /// <returns></returns>
-        public async Task SignOutRedirect()
+        public async Task SignoutRedirect()
         {
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirect");
@@ -209,7 +209,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         /// Returns promise to process response from the end session endpoint.
         /// </summary>
         /// <returns></returns>
-        public async Task SignOutRedirectCallback()
+        public async Task SignoutRedirectCallback()
         {
             await EnsureUserManager();
             await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.signoutRedirectCallback");

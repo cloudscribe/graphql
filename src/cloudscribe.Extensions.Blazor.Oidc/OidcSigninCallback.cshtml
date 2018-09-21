@@ -7,7 +7,7 @@
 @functions {
     protected override async Task OnInitAsync()
     {
-        await oidc.SignInRedirectCallback();
+        await oidc.SigninRedirectCallback();
         UriHelper.NavigateTo("/");
     }
 }

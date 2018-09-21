@@ -7,7 +7,7 @@
 
 <h2>Test</h2>
 
-Access Token
+Access Token: Expires @expires
 <div>
     <textarea class="form-control">@accessToken</textarea>
 </div>
@@ -23,7 +23,7 @@ Identity Token
     <textarea class="form-control">@apiResponse</textarea>
 </div>
 <div>
-    <button onclick="@GetApi">Make API Request</button>
+    <button class="btn btn-primary" onclick="@GetApi">Make API Request</button>
 </div>
 
 
@@ -32,6 +32,7 @@ Identity Token
     string accessToken = "";
     string identityToken = "";
     string apiResponse = "";
+    string expires = "";
 
     async Task GetApi()
     {
@@ -53,6 +54,7 @@ Identity Token
             //serializedUesr = Json.Serialize(oidc.CurrentUser);
             accessToken = oidc.CurrentUser.Access_Token;
             identityToken = oidc.CurrentUser.Id_Token;
+            expires = oidc.CurrentUser.GetExpirationTime().ToString("s");
         }
 
     }

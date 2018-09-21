@@ -16,12 +16,12 @@ else
 
     async Task SignIn()
     {
-        await oidc.SignInPopup();
+        await oidc.SigninPopup();
     }
 
     async Task SignOut()
     {
-        await oidc.SignOut();
+        await oidc.SignoutRedirect();
     }
 
     protected override async Task OnInitAsync()

@@ -8,7 +8,7 @@
 
     protected override async Task OnInitAsync()
     {
-        await oidc.RemoveUser();
+        await oidc.SignoutRedirectCallback();
         UriHelper.NavigateTo("/");
     }
 
