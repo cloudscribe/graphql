@@ -23,7 +23,10 @@ else if(model != null)
             @foreach (var site in model.Data.SiteList)
             {
                 <tr>
-                    <td>@site.Id</td>
+                    <td>
+                        <a href='/editsite/@site.Id'>Edit</a>
+                        @site.Id
+                    </td>
                     <td>@site.SiteName</td>
                     <td>@site.AliasId</td>
                     <td>@site.SiteFolderName</td>

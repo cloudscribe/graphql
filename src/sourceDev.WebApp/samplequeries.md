@@ -38,11 +38,12 @@
                         posts {
                           id,
                           title,
-                          content,
                           contentType,
                           metaDescription,
                           author,
-                          pubDate
+                          pubDate,
+                          content
+                          
                         }
                       }
 				}
