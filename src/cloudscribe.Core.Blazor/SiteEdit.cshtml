@@ -84,50 +84,41 @@ else if (model != null)
 
     SiteEditModel model = null;
     ErrorModel errorModel = null;
+    ChangeTracker<CompanyInfoUpdateModel> changeTracker = null;
 
     async Task Update(UIMouseEventArgs e)
     {
         var mutation = new GraphQLRequest
         {
             Query = @"
-        mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
-        companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
-        id,
-        companyName,
-        companyCountry,
-        companyFax,
-        companyLocality,
-        companyPhone,
-        companyPostalCode,
-        companyPublicEmail,
-        companyWebsite,
-        companyRegion,
-        companyStreetAddress,
-        companyStreetAddress2
-        }
-        }",
-            Variables = new
-            {
-                siteId = SiteId,
-                update = new
-                {
-                    companyName = model.Data.CompanyInfo.CompanyName,
-                    companyCountry = model.Data.CompanyInfo.CompanyCountry,
-                    companyFax = model.Data.CompanyInfo.CompanyFax,
-                    companyLocality = model.Data.CompanyInfo.CompanyLocality,
-                    companyPhone = model.Data.CompanyInfo.CompanyPhone,
-                    companyPostalCode = model.Data.CompanyInfo.CompanyPostalCode,
-                    companyPublicEmail = model.Data.CompanyInfo.CompanyPublicEmail,
-                    companyWebsite = model.Data.CompanyInfo.CompanyWebsite,
-                    companyRegion = model.Data.CompanyInfo.CompanyRegion,
-                    companyStreetAddress = model.Data.CompanyInfo.CompanyStreetAddress,
-                    companyStreetAddress2 = model.Data.CompanyInfo.CompanyStreetAddress2
+            mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
+                companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
+                id,
+                companyName,
+                companyCountry,
+                companyFax,
+                companyLocality,
+                companyPhone,
+                companyPostalCode,
+                companyPublicEmail,
+                companyWebsite,
+                companyRegion,
+                companyStreetAddress,
+                companyStreetAddress2
                 }
-            }
+            }"
+
         };
 
+        var patch = changeTracker.GetChanges();
+        var variables = new
+        {
+            siteId = SiteId,
+            update = patch
+        };
 
-
+        mutation.Variables = variables;
+        
         await Http.AddBeaerTokenIfAuthenticated(oidc);
 
         var endPoint = await AppSettings.Get("graphqlApiUri");
@@ -148,22 +139,22 @@ else if (model != null)
         var query = new GraphQLRequest
         {
             Query = @"
-        query MyQuery($siteId: ID!){
-        companyInfo: siteFromId (id: $siteId) {
-        id,
-        companyName,
-        companyCountry,
-        companyFax,
-        companyLocality,
-        companyPhone,
-        companyPostalCode,
-        companyPublicEmail,
-        companyWebsite,
-        companyRegion,
-        companyStreetAddress,
-        companyStreetAddress2
-        }
-        }",
+                query MyQuery($siteId: ID!){
+                companyInfo: siteFromId (id: $siteId) {
+                id,
+                companyName,
+                companyCountry,
+                companyFax,
+                companyLocality,
+                companyPhone,
+                companyPostalCode,
+                companyPublicEmail,
+                companyWebsite,
+                companyRegion,
+                companyStreetAddress,
+                companyStreetAddress2
+                }
+            }",
             Variables = new
             {
                 siteId = SiteId
@@ -178,6 +169,7 @@ else if (model != null)
         if (result.SuccessResult != null)
         {
             model = result.SuccessResult;
+            changeTracker = new ChangeTracker<CompanyInfoUpdateModel>(model.Data.CompanyInfo);
         }
         else if (result.Errors != null)
         {

@@ -5,6 +5,7 @@ using cloudscribe.Extensions.GraphQL;
 using GraphQL.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
+using System.Collections.Generic;
 
 namespace cloudscribe.Core.GraphQL
 {
@@ -63,9 +64,8 @@ namespace cloudscribe.Core.GraphQL
                 resolve: async context =>
                 {
                     var id = context.GetArgument<Guid>("id");
-                    var patch = context.GetArgument<CompanyInfoUpdateModel>("updateSiteCompanyInfo");
-
-
+                    var patch = context.GetArgument<Dictionary<string, object>>("updateSiteCompanyInfo");
+                    
                     return await context.TryAsyncResolve(
                         async c => await siteService.UpdateSite(id, patch)
                     );
