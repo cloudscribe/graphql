@@ -1,6 +1,7 @@
 ﻿using cloudscribe.Core.ApiModels;
 using cloudscribe.Core.Models;
 using cloudscribe.Core.Web.Components;
+using cloudscribe.Extensions.GraphQL;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -83,7 +84,7 @@ namespace cloudscribe.Core.GraphQL.Services
                 var queries = scopedServices.GetService<ISiteQueries>();
                 var commands = scopedServices.GetService<ISiteCommands>();
                 var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
-                //site.SiteName = newName;
+
                 if(!string.IsNullOrEmpty(patch.SiteName))
                 {
                     site.SiteName = patch.SiteName;
@@ -109,64 +110,13 @@ namespace cloudscribe.Core.GraphQL.Services
                 var queries = scopedServices.GetService<ISiteQueries>();
                 var commands = scopedServices.GetService<ISiteCommands>();
                 var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
-
-                var model = new CompanyInfoUpdateModel();
-                var allowedProps = model.GetType().GetProperties();
-                var siteProps = site.GetType().GetProperties();
-
-                var comparer = StringComparer.OrdinalIgnoreCase;
-                var caseInsensitivePatch = new Dictionary<string, object>(patch, comparer);
-
-                foreach (var prop in allowedProps)
-                {
-                    foreach(var siteProp in siteProps)
-                    {
-                        if(siteProp.Name == prop.Name)
-                        {
-                            if(caseInsensitivePatch.ContainsKey(siteProp.Name))
-                            {
-                                var newValue = caseInsensitivePatch[siteProp.Name];
-                                siteProp.SetValue(site, Convert.ChangeType(newValue, siteProp.PropertyType), null); 
-                            }
-                        }
-                    }
-                }
-                
+                patch.ApplyPatch<CompanyInfoUpdateModel, ISiteSettings>(site);
                 await commands.Update(site).ConfigureAwait(false);
 
                 return site;
 
             }
         }
-
-        //public async Task<ISiteSettings> UpdateSite(Guid id, CompanyInfoUpdateModel patch, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    using (var scope = _serviceProvider.CreateScope())
-        //    {
-        //        var scopedServices = scope.ServiceProvider;
-        //        var queries = scopedServices.GetService<ISiteQueries>();
-        //        var commands = scopedServices.GetService<ISiteCommands>();
-        //        var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
-
-        //        site.CompanyCountry = patch.CompanyCountry;
-        //        site.CompanyFax = patch.CompanyFax;
-        //        site.CompanyLocality = patch.CompanyLocality;
-        //        site.CompanyName = patch.CompanyName;
-        //        site.CompanyPhone = patch.CompanyPhone;
-        //        site.CompanyPostalCode = patch.CompanyPostalCode;
-        //        site.CompanyPublicEmail = patch.CompanyPublicEmail;
-        //        site.CompanyRegion = patch.CompanyRegion;
-        //        site.CompanyStreetAddress = patch.CompanyStreetAddress;
-        //        site.CompanyStreetAddress2 = patch.CompanyStreetAddress2;
-        //        site.CompanyWebsite = patch.CompanyWebsite;
-
-
-        //        await commands.Update(site).ConfigureAwait(false);
-
-        //        return site;
-
-        //    }
-        //}
 
     }
 }
