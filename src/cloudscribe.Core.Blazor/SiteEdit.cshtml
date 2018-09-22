@@ -1,5 +1,7 @@
 ﻿@inject HttpClient Http
 @inject OidcService  oidc
+@inject Sotsera.Blazor.Toaster.IToaster toaster
+@inject IUriHelper UriHelper
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -76,7 +78,8 @@ else if (model != null)
     </div>
 }
 
-    <GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
+
+<GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
 
 @functions {
     [Parameter]
@@ -91,34 +94,34 @@ else if (model != null)
         var mutation = new GraphQLRequest
         {
             Query = @"
-            mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
-                companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
-                id,
-                companyName,
-                companyCountry,
-                companyFax,
-                companyLocality,
-                companyPhone,
-                companyPostalCode,
-                companyPublicEmail,
-                companyWebsite,
-                companyRegion,
-                companyStreetAddress,
-                companyStreetAddress2
-                }
-            }"
+mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
+    companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
+    id,
+    companyName,
+    companyCountry,
+    companyFax,
+    companyLocality,
+    companyPhone,
+    companyPostalCode,
+    companyPublicEmail,
+    companyWebsite,
+    companyRegion,
+    companyStreetAddress,
+    companyStreetAddress2
+    }
+}"
 
         };
 
         var patch = changeTracker.GetChanges();
-        var variables = new
+        mutation.Variables = new
         {
             siteId = SiteId,
             update = patch
         };
 
-        mutation.Variables = variables;
-        
+        //mutation.Variables = variables;
+
         await Http.AddBeaerTokenIfAuthenticated(oidc);
 
         var endPoint = await AppSettings.Get("graphqlApiUri");
@@ -127,10 +130,13 @@ else if (model != null)
         if (result.SuccessResult != null)
         {
             model = result.SuccessResult;
+            changeTracker = new ChangeTracker<CompanyInfoUpdateModel>(model.Data.CompanyInfo);
+            toaster.Success("Update Success!");
         }
         else if (result.Errors != null)
         {
             errorModel = result.Errors;
+            toaster.Error("Oops, something went wrong :(");
         }
     }
 
@@ -139,26 +145,27 @@ else if (model != null)
         var query = new GraphQLRequest
         {
             Query = @"
-                query MyQuery($siteId: ID!){
-                companyInfo: siteFromId (id: $siteId) {
-                id,
-                companyName,
-                companyCountry,
-                companyFax,
-                companyLocality,
-                companyPhone,
-                companyPostalCode,
-                companyPublicEmail,
-                companyWebsite,
-                companyRegion,
-                companyStreetAddress,
-                companyStreetAddress2
-                }
-            }",
-            Variables = new
-            {
-                siteId = SiteId
-            }
+    query MyQuery($siteId: ID!){
+    companyInfo: siteFromId (id: $siteId) {
+    id,
+    companyName,
+    companyCountry,
+    companyFax,
+    companyLocality,
+    companyPhone,
+    companyPostalCode,
+    companyPublicEmail,
+    companyWebsite,
+    companyRegion,
+    companyStreetAddress,
+    companyStreetAddress2
+    }
+}"
+        };
+
+        query.Variables = new
+        {
+            siteId = SiteId
         };
 
         await Http.AddBeaerTokenIfAuthenticated(oidc);

@@ -14,23 +14,14 @@ namespace cloudscribe.Core.GraphQL.Services
     {
         public SiteService(
             IServiceProvider serviceProvider,
-            //ISiteQueries siteQueries,
-            //ISiteCommands siteCommands,
             ILogger<SiteService> logger
             )
         {
             _serviceProvider = serviceProvider;
-            // _siteQueries = siteQueries;
-            //_siteCommands = siteCommands;
-
             _log = logger;
-
         }
 
         private readonly IServiceProvider _serviceProvider;
-
-        //private readonly ISiteQueries _siteQueries;
-        //private readonly ISiteCommands _siteCommands;
         private readonly ILogger _log;
 
         public async Task<List<ISiteInfo>> GetAllSites(CancellationToken cancellationToken = default(CancellationToken))
@@ -120,13 +111,13 @@ namespace cloudscribe.Core.GraphQL.Services
                 var site = await queries.Fetch(id, cancellationToken).ConfigureAwait(false);
 
                 var model = new CompanyInfoUpdateModel();
-                var modelProps = model.GetType().GetProperties();
+                var allowedProps = model.GetType().GetProperties();
                 var siteProps = site.GetType().GetProperties();
 
                 var comparer = StringComparer.OrdinalIgnoreCase;
                 var caseInsensitivePatch = new Dictionary<string, object>(patch, comparer);
 
-                foreach (var prop in modelProps)
+                foreach (var prop in allowedProps)
                 {
                     foreach(var siteProp in siteProps)
                     {
@@ -139,7 +130,6 @@ namespace cloudscribe.Core.GraphQL.Services
                             }
                         }
                     }
-  
                 }
                 
                 await commands.Update(site).ConfigureAwait(false);
