@@ -77,8 +77,6 @@ else if (model != null)
         <button name="submit" type="button" class="btn btn-primary" onclick="@Update">Save</button>
     </div>
 }
-
-
 <GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
 
 @functions {
@@ -93,37 +91,15 @@ else if (model != null)
     {
         var mutation = new GraphQLRequest
         {
-            Query = @"
-mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
-    companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
-    id,
-    companyName,
-    companyCountry,
-    companyFax,
-    companyLocality,
-    companyPhone,
-    companyPostalCode,
-    companyPublicEmail,
-    companyWebsite,
-    companyRegion,
-    companyStreetAddress,
-    companyStreetAddress2
-    }
-}"
-
+            Query = GraphQLQueryConstants.SiteCompanyInfoMutation,
+            Variables = new
+            {
+                siteId = SiteId,
+                update = changeTracker.GetChanges()
+            }
         };
-
-        var patch = changeTracker.GetChanges();
-        mutation.Variables = new
-        {
-            siteId = SiteId,
-            update = patch
-        };
-
-        //mutation.Variables = variables;
-
+        
         await Http.AddBeaerTokenIfAuthenticated(oidc);
-
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
         var result = await Http.SendQuery<SiteEditModel>(endPoint, mutation);
@@ -144,23 +120,7 @@ mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
     {
         var query = new GraphQLRequest
         {
-            Query = @"
-    query MyQuery($siteId: ID!){
-    companyInfo: siteFromId (id: $siteId) {
-    id,
-    companyName,
-    companyCountry,
-    companyFax,
-    companyLocality,
-    companyPhone,
-    companyPostalCode,
-    companyPublicEmail,
-    companyWebsite,
-    companyRegion,
-    companyStreetAddress,
-    companyStreetAddress2
-    }
-}"
+            Query = GraphQLQueryConstants.SingleSiteCompanyInfoQuery
         };
 
         query.Variables = new
@@ -169,7 +129,6 @@ mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
         };
 
         await Http.AddBeaerTokenIfAuthenticated(oidc);
-
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
         var result = await Http.SendQuery<SiteEditModel>(endPoint, query);
@@ -182,8 +141,6 @@ mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
         {
             errorModel = result.Errors;
         }
-
-
     }
 
     class SiteEditModel

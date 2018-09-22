@@ -46,18 +46,10 @@ else if(model != null)
     {
         var query = new GraphQLRequest
         {
-            Query = @"
-            {
-              siteList {
-                id,
-                aliasId,
-                siteName,
-                siteFolderName
-              }
-            }"
+            Query = GraphQLQueryConstants.SiteListQuery
         };
+
         await Http.AddBeaerTokenIfAuthenticated(oidc);
-        
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
         var result = await Http.SendQuery<SiteListModel>(endPoint, query);
@@ -72,9 +64,6 @@ else if(model != null)
 
     }
 
-    // this model structure is needed because the response format is:
-    //{"data":{"siteList":[{"id":"5961f387-accd-49dc-b962-44029d0803ae","aliasId":"s1","siteName":"GraphQL Demo","siteFolderName":null}]}}
-    // and this provides something easy to deserialize from the response
     class SiteListModel
     {
         public DataResult Data { get; set; }

@@ -18,60 +18,49 @@ else if (model != null)
 
 @functions {
 
-[Parameter]
-private string PageSlug { get; set; } = "home";
+    [Parameter]
+    private string PageSlug { get; set; } = "home";
 
-PageModel model = null;
-ErrorModel errorModel = null;
+    PageModel model = null;
+    ErrorModel errorModel = null;
 
-protected override async Task OnInitAsync()
-{
-    var query = new GraphQLRequest
+    protected override async Task OnInitAsync()
     {
-        Query = @"
-        query MyQuery($projectId: String!, $slug: String!){
-            getPageFromSlug (projectId: $projectId, slug: $slug) {
-                id,
-                projectId,
-                title,
-                content,
-                metaDescription,
-                author,
-                pubDate
-              }
-        }",
-        Variables = new
+        var query = new GraphQLRequest
         {
-            projectId = await AppSettings.Get("siteId"),
-            slug = PageSlug
-        }
-    };
+            Query = GraphQLQueryConstants.CmsPageQuery,
+            Variables = new
+            {
+                projectId = await AppSettings.Get("siteId"),
+                slug = PageSlug
+            }
+        };
 
-    if (!string.IsNullOrWhiteSpace(PageSlug))
-    {
-        await Http.AddBeaerTokenIfAuthenticated(oidc);
-        var endPoint = await AppSettings.Get("graphqlApiUri");
+        if (!string.IsNullOrWhiteSpace(PageSlug))
+        {
+            await Http.AddBeaerTokenIfAuthenticated(oidc);
+            var endPoint = await AppSettings.Get("graphqlApiUri");
 
-        var result = await Http.SendQuery<PageModel>(endPoint, query);
-        if (result.SuccessResult != null)
-        {
-            model = result.SuccessResult;
-        }
-        else if (result.Errors != null)
-        {
-            errorModel = result.Errors;
+            var result = await Http.SendQuery<PageModel>(endPoint, query);
+            if (result.SuccessResult != null)
+            {
+                model = result.SuccessResult;
+            }
+            else if (result.Errors != null)
+            {
+                errorModel = result.Errors;
+            }
         }
     }
-}
 
-class PageModel
-{
-    public DataResult Data { get; set; }
-
-    public class DataResult
+    class PageModel
     {
-        public Page GetPageFromSlug { get; set; }
+        public DataResult Data { get; set; }
+
+        public class DataResult
+        {
+            public Page GetPageFromSlug { get; set; }
+        }
     }
-}
 
 }

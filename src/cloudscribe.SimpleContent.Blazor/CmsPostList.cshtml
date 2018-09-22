@@ -25,24 +25,7 @@ protected override async Task OnInitAsync()
 
     var query = new GraphQLRequest
     {
-        Query = @"
-            query PostListQuery($projectId: String!, $category: String, $pageNumber : Int!, $pageSize : Int!){
-            postList (projectId: $projectId, category: $category, pageNumber: $pageNumber, pageSize: $pageSize) {
-            pageNumber,
-            pageSize,
-            totalItems,
-            data:posts {
-              id,
-              title,
-              contentType,
-              metaDescription,
-              author,
-              pubDate,
-              content
-
-            }
-            }
-        }",
+        Query = GraphQLQueryConstants.CmsPostListQuery,
         Variables = new
         {
             projectId = await AppSettings.Get("siteId"),
@@ -51,8 +34,8 @@ protected override async Task OnInitAsync()
             pageSize = 10
         }
     };
-    await Http.AddBeaerTokenIfAuthenticated(oidc);
 
+    await Http.AddBeaerTokenIfAuthenticated(oidc);
     var endPoint = await AppSettings.Get("graphqlApiUri");
 
     var result = await Http.SendQuery<PostListModel>(endPoint, query);
