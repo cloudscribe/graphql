@@ -2,6 +2,7 @@
 using cloudscribe.Core.GraphQL.GraphTypes;
 using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Extensions.GraphQL;
+using GraphQL.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
 
@@ -31,7 +32,7 @@ namespace cloudscribe.Core.GraphQL
 
                 }
 
-            );
+            ).AuthorizeWith("AdminPolicy");
 
             FieldAsync<SiteType>(
                 "updateSite",
@@ -51,7 +52,27 @@ namespace cloudscribe.Core.GraphQL
 
                 }
 
-            );
+            ).AuthorizeWith("AdminPolicy");
+
+            FieldAsync<SiteType>(
+                "updateSiteCompanyInfo",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
+                    new QueryArgument<NonNullGraphType<CompanyInfoUpdateType>> { Name = "updateSiteCompanyInfo", Description = "an object to patch site properties" }
+                ),
+                resolve: async context =>
+                {
+                    var id = context.GetArgument<Guid>("id");
+                    var patch = context.GetArgument<CompanyInfoUpdateModel>("updateSiteCompanyInfo");
+
+
+                    return await context.TryAsyncResolve(
+                        async c => await siteService.UpdateSite(id, patch)
+                    );
+
+                }
+
+            ).AuthorizeWith("AdminPolicy");
 
         }
     }

@@ -13,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<SiteInfoType>();
             services.AddSingleton<SiteUpdateInputType>();
 
+            services.AddSingleton<CompanyInfoUpdateType>();
+
             services.AddSingleton<IGraphQueryMarker, CoreQuery>();
             services.AddSingleton<IGraphMutationMarker, CoreMutation>();
 

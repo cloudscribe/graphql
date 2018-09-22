@@ -1,6 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+
+    <Description>A javascript interop wrapper to use oidc-client.js from C# in ASP.NET Core Blazor</Description>
+    <PackageIconUrl>https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/cloudscribe/graphql</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <VersionPrefix>0.5.0</VersionPrefix>
+    
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
@@ -24,10 +31,6 @@
     <ProjectReference Include="..\cloudscribe.Extensions.Blazor.Config\cloudscribe.Extensions.Blazor.Config.csproj" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <Content Update="OidcSigninCallback.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>-->
+  
 
 </Project>

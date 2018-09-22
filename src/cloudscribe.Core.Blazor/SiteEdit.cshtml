@@ -1,4 +1,6 @@
-﻿
+﻿@inject HttpClient Http
+@inject OidcService  oidc
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="sitelist">Site List</a></li>
@@ -6,15 +8,194 @@
     </ol>
 </nav>
 
-<h2>Edit Site</h2>
+<h2>Edit Site Company Info</h2>
 
-@SiteId
+@if (model == null && errorModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (model != null)
+{
+    <div class="form-group">
+        <label for="CompanyName">Name</label>
+        <input id="CompanyName" class="form-control" bind="@model.Data.CompanyInfo.CompanyName" />
+        <span data-validation-for="CompanyName" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyStreetAddress">Address1</label>
+        <input id="CompanyStreetAddress" class="form-control" bind="@model.Data.CompanyInfo.CompanyStreetAddress" />
+        <span data-validation-for="CompanyStreetAddress" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyStreetAddress2">Address2</label>
+        <input id="CompanyStreetAddress2" class="form-control" bind="@model.Data.CompanyInfo.CompanyStreetAddress2" />
+        <span data-validation-for="CompanyStreetAddress2" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyLocality">City</label>
+        <input id="CompanyLocality" class="form-control" bind="@model.Data.CompanyInfo.CompanyLocality" />
+        <span data-validation-for="CompanyLocality" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyCountry">Country</label>
+        <input id="CompanyCountry" class="form-control" bind="@model.Data.CompanyInfo.CompanyCountry" />
+        <span data-validation-for="CompanyCountry" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyRegion">State</label>
+        <input id="CompanyRegion" class="form-control" bind="@model.Data.CompanyInfo.CompanyRegion" />
+        <span data-validation-for="CompanyRegion" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyPostalCode">Postal Code</label>
+        <input id="CompanyPostalCode" class="form-control" bind="@model.Data.CompanyInfo.CompanyPostalCode" />
+        <span data-validation-for="CompanyPostalCode" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyPhone">Phone</label>
+        <input id="CompanyPhone" class="form-control" bind="@model.Data.CompanyInfo.CompanyPhone" />
+        <span data-validation-for="CompanyPhone" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyFax">Fax</label>
+        <input id="CompanyFax" class="form-control" bind="@model.Data.CompanyInfo.CompanyFax" />
+        <span asp-validation-for="CompanyFax" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyPublicEmail">Public Email</label>
+        <input id="CompanyPublicEmail" class="form-control" bind="@model.Data.CompanyInfo.CompanyPublicEmail" />
+        <span data-validation-for="CompanyPublicEmail" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <label for="CompanyWebsite">Website</label>
+        <input id="CompanyWebsite" class="form-control" bind="@model.Data.CompanyInfo.CompanyWebsite" />
+        <span data-validation-for="CompanyWebsite" class="invalid-feedback"></span>
+    </div>
+    <div class="form-group">
+        <button name="submit" type="button" class="btn btn-primary" onclick="@Update">Save</button>
+    </div>
+}
 
-
+    <GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
 
 @functions {
     [Parameter]
-    string SiteId { get; set; }
+    string SiteId { get; set; } = null;
+
+    SiteEditModel model = null;
+    ErrorModel errorModel = null;
+
+    async Task Update(UIMouseEventArgs e)
+    {
+        var mutation = new GraphQLRequest
+        {
+            Query = @"
+        mutation updateSiteCompanyInfo($siteId: ID!, $update: CompanyInfoUpdateInput!){
+        companyInfo: updateSiteCompanyInfo (id: $siteId, updateSiteCompanyInfo: $update) {
+        id,
+        companyName,
+        companyCountry,
+        companyFax,
+        companyLocality,
+        companyPhone,
+        companyPostalCode,
+        companyPublicEmail,
+        companyWebsite,
+        companyRegion,
+        companyStreetAddress,
+        companyStreetAddress2
+        }
+        }",
+            Variables = new
+            {
+                siteId = SiteId,
+                update = new
+                {
+                    companyName = model.Data.CompanyInfo.CompanyName,
+                    companyCountry = model.Data.CompanyInfo.CompanyCountry,
+                    companyFax = model.Data.CompanyInfo.CompanyFax,
+                    companyLocality = model.Data.CompanyInfo.CompanyLocality,
+                    companyPhone = model.Data.CompanyInfo.CompanyPhone,
+                    companyPostalCode = model.Data.CompanyInfo.CompanyPostalCode,
+                    companyPublicEmail = model.Data.CompanyInfo.CompanyPublicEmail,
+                    companyWebsite = model.Data.CompanyInfo.CompanyWebsite,
+                    companyRegion = model.Data.CompanyInfo.CompanyRegion,
+                    companyStreetAddress = model.Data.CompanyInfo.CompanyStreetAddress,
+                    companyStreetAddress2 = model.Data.CompanyInfo.CompanyStreetAddress2
+                }
+            }
+        };
+
+
+
+        await Http.AddBeaerTokenIfAuthenticated(oidc);
+
+        var endPoint = await AppSettings.Get("graphqlApiUri");
+
+        var result = await Http.SendQuery<SiteEditModel>(endPoint, mutation);
+        if (result.SuccessResult != null)
+        {
+            model = result.SuccessResult;
+        }
+        else if (result.Errors != null)
+        {
+            errorModel = result.Errors;
+        }
+    }
+
+    protected override async Task OnInitAsync()
+    {
+        var query = new GraphQLRequest
+        {
+            Query = @"
+        query MyQuery($siteId: ID!){
+        companyInfo: siteFromId (id: $siteId) {
+        id,
+        companyName,
+        companyCountry,
+        companyFax,
+        companyLocality,
+        companyPhone,
+        companyPostalCode,
+        companyPublicEmail,
+        companyWebsite,
+        companyRegion,
+        companyStreetAddress,
+        companyStreetAddress2
+        }
+        }",
+            Variables = new
+            {
+                siteId = SiteId
+            }
+        };
+
+        await Http.AddBeaerTokenIfAuthenticated(oidc);
+
+        var endPoint = await AppSettings.Get("graphqlApiUri");
+
+        var result = await Http.SendQuery<SiteEditModel>(endPoint, query);
+        if (result.SuccessResult != null)
+        {
+            model = result.SuccessResult;
+        }
+        else if (result.Errors != null)
+        {
+            errorModel = result.Errors;
+        }
+
+
+    }
+
+    class SiteEditModel
+    {
+        public DataResult Data { get; set; }
+
+        public class DataResult
+        {
+            public CompanyInfoUpdateModel CompanyInfo { get; set; }
+        }
+    }
 
 
 }
