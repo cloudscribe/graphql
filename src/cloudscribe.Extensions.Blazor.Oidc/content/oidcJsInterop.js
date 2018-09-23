@@ -52,6 +52,12 @@ window.oidcJsFunctions = {
         }   
     },
 
+    getRolesFromToken: function (accessToken) {
+        var decoded = jwt_decode(accessToken);
+        console.log(decoded);
+        return decoded.role;
+    },
+
     getUser: function () {
         return window.UserManager.getUser();
     },

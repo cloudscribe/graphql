@@ -1,5 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace cloudscribe.Extensions.Blazor.Oidc
@@ -81,6 +82,19 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             get { return _currentUser; }
         }
 
+        private List<string> _userRoles = new List<string>();
+
+        /// <summary>
+        /// Security should only really be enforced on the server.
+        /// This method is for convenience to show/hide things in the UI
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public bool IsInRole(string role)
+        {
+            return _userRoles.Contains(role);
+        }
+
         private async Task EnsureUserManager()
         {
             var settings = await Settings.GetSettings();
@@ -93,13 +107,14 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             if(_currentUser == null)
             {
                 _currentUser = await JSRuntime.Current.InvokeAsync<User>("oidcJsFunctions.getUser");
-                //if(_currentUser != null)
-                //{
-                //    await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", _currentUser);
-                //    var expires = _currentUser.GetExpirationTime();
-                //    await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", expires.ToString("s"));
-                //}
-                
+                if (_currentUser != null)
+                {
+                    _userRoles = await JSRuntime.Current.InvokeAsync<List<string>>("oidcJsFunctions.getRolesFromToken", _currentUser.Access_Token);
+                    //await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", _currentUser);
+                    //var expires = _currentUser.GetExpirationTime();
+                    //await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", expires.ToString("s"));
+                }
+
             }
             
         }
@@ -244,6 +259,16 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             return await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.querySessionStatus");
             
         }
+
+        //public async Task<List<string>> GetUserRoles()
+        //{
+        //    await Init();
+        //    if(_currentUser != null)
+        //    {
+        //        return await JSRuntime.Current.InvokeAsync<List<string>>("oidcJsFunctions.getRolesFromToken", _currentUser.Access_Token);
+        //    }
+        //    return new List<string>();
+        //}
 
     }
 }

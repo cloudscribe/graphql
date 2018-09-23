@@ -25,6 +25,14 @@ Identity Token
 <div>
     <button class="btn btn-primary" onclick="@GetApi">Make API Request</button>
 </div>
+@if(isServerAdmin)
+{
+    <div>In ServerAdmins role</div>
+}
+@if(isAdmin)
+{
+    <div>In Administrators role</div>
+}
 
 
 @functions {
@@ -33,6 +41,8 @@ Identity Token
     string identityToken = "";
     string apiResponse = "";
     string expires = "";
+    bool isServerAdmin;
+    bool isAdmin;
 
     async Task GetApi()
     {
@@ -55,6 +65,9 @@ Identity Token
             accessToken = oidc.CurrentUser.Access_Token;
             identityToken = oidc.CurrentUser.Id_Token;
             expires = oidc.CurrentUser.GetExpirationTime().ToString("s");
+            //UserRoles = await oidc.GetUserRoles();
+            isServerAdmin = oidc.IsInRole("ServerAdmins");
+            isAdmin = oidc.IsInRole("Administrators");
         }
 
     }
