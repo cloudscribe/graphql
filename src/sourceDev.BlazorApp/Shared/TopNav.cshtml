@@ -1,0 +1,44 @@
+﻿
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a href="" class="navbar-brand">graphQL.BlazorClient</a>
+    <button onclick=@ToggleNavMenu class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class=@(collapseNavMenu ? "collapse navbar-collapse" : null)  id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto" role="menubar">
+            <li class="nav-item">
+                <NavLink class="nav-link" href="" Match=NavLinkMatch.All>
+                    Home
+                </NavLink>
+            </li>
+            <li class="nav-item ">
+                <NavLink class="nav-link" href="postlist">
+                    Blog
+                </NavLink>
+            </li>
+            <li class="nav-item ">
+                <NavLink class="nav-link" href="sitelist">
+                    Administration
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="test1">
+                    Test1
+                </NavLink>
+            </li>
+            
+        </ul>
+        <OidcLogin />
+    </div>
+</nav>
+
+
+@functions {
+bool collapseNavMenu = true;
+
+void ToggleNavMenu()
+{
+    collapseNavMenu = !collapseNavMenu;
+}
+}

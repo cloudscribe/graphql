@@ -3,35 +3,49 @@
 
 @if (oidc.CurrentUser == null)
 {
-    <button class="btn btn-link ml-md-auto" onclick="@SignIn">Sign In</button> 
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+       
+        <li class="nav-item">
+            <a class="nav-link login-link" onclick="@SignIn">Sign In</a>
+        </li>
+    </ul>
+    
 }
 else
 {
-    <span>Welcome @oidc.CurrentUser.Profile.Name </span>
-    <button class="btn btn-link ml-md-auto" onclick="@SignOut">Sign Out</button>   
+    <ul class="navbar-nav ml-auto my-2 my-lg-0" role="menubar">
+        <li class="nav-item dropdown">
+            <span class="nav-link user-welcome">Welcome @oidc.CurrentUser.Profile.Name </span>
+
+        </li>
+        <li class="nav-item">
+            <a class="nav-link logout-link" onclick="@SignOut">Sign Out</a>
+        </li>
+    </ul>
+
 }
 
 @functions {
-    string userName = "";
+string userName = "";
 
-    async Task SignIn()
-    {
-        await oidc.SigninPopup();
-    }
+async Task SignIn()
+{
+    await oidc.SigninPopup();
+}
 
-    async Task SignOut()
-    {
-        await oidc.SignoutRedirect();
-    }
+async Task SignOut()
+{
+    await oidc.SignoutRedirect();
+}
 
-    protected override async Task OnInitAsync()
+protected override async Task OnInitAsync()
+{
+    oidc.OnChange += StateHasChanged;
+    await oidc.Init();
+    if (oidc.CurrentUser != null && oidc.CurrentUser.Profile != null)
     {
-        oidc.OnChange += StateHasChanged;
-        await oidc.Init();
-        if(oidc.CurrentUser != null && oidc.CurrentUser.Profile != null)
-        {
-            userName = oidc.CurrentUser.Profile.Name;
-        }
+        userName = oidc.CurrentUser.Profile.Name;
     }
+}
 
 }
