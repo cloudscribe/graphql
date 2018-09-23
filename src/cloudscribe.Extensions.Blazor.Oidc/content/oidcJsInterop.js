@@ -8,7 +8,7 @@ window.oidcJsFunctions = {
     
     ensureUserManager: function (config, dotnetOidcService) {
         if (window.UserManager === undefined) {
-            console.log(config);
+            //console.log(config);
 
             //Oidc.Log.logger = console;
             //Oidc.Log.level = Oidc.Log.INFO; // Oidc.Log.NONE Oidc.Log.ERROR Oidc.Log.WARN Oidc.Log.INFO
@@ -54,7 +54,7 @@ window.oidcJsFunctions = {
 
     getRolesFromToken: function (accessToken) {
         var decoded = jwt_decode(accessToken);
-        console.log(decoded);
+        //console.log(decoded);
         return decoded.role;
     },
 
@@ -75,12 +75,12 @@ window.oidcJsFunctions = {
     },
 
     signinSilent: function () {
-        console.log("signinSilent");
+        //console.log("signinSilent");
         return window.UserManager.signinSilent();
     },
 
     signinSilentCallback: function () {
-        console.log("signinSilentCallback");
+        //console.log("signinSilentCallback");
         return window.UserManager.signinSilentCallback();
     },
 
