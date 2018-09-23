@@ -21,7 +21,7 @@ namespace sourceDev.BlazorApp
 
         public void Configure(IBlazorApplicationBuilder app)
         {
-            app.AddComponent<App>("app");
+            app.AddComponent<App>("body");
         }
     }
 }
