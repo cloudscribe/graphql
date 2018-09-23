@@ -41,6 +41,7 @@ namespace Microsoft.Extensions.DependencyInjection
                
             })
             .AddUserContextBuilder(UserContextBuilder.BuildUserContext)
+            .AddWebSockets()
             ;
 
 

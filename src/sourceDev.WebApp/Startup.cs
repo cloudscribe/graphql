@@ -171,6 +171,9 @@ namespace sourceDev.WebApp
                 }
             }
 
+
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<ISchema>("/graphql");
             // add http for Schema at default url /graphql
             app.UseGraphQL<ISchema>("/graphql");
 

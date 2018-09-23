@@ -11,7 +11,7 @@ namespace cloudscribe.Extensions.GraphQL
 
             foreach (var marker in graphSubscriptionMarkers)
             {
-                var q = marker as ObjectGraphType;
+                var q = marker as ObjectGraphType<object>;
                 foreach (var f in q.Fields)
                 {
                     AddField(f);

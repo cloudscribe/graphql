@@ -17,43 +17,43 @@ namespace cloudscribe.Core.GraphQL
         {
             Name = "CoreMutation";
 
-            FieldAsync<SiteType>(
-                "updateSiteName",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
-                    new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "newName", Description = "The new name for the site" }
-                ),
-                resolve: async context =>
-                {
-                    var id = context.GetArgument<Guid>("id");
-                    var newName = context.GetArgument<string>("newName");
-                    return await context.TryAsyncResolve(
-                        async c => await siteService.UpdateSiteName(id, newName)
-                    );
+            //FieldAsync<SiteType>(
+            //    "updateSiteName",
+            //    arguments: new QueryArguments(
+            //        new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
+            //        new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "newName", Description = "The new name for the site" }
+            //    ),
+            //    resolve: async context =>
+            //    {
+            //        var id = context.GetArgument<Guid>("id");
+            //        var newName = context.GetArgument<string>("newName");
+            //        return await context.TryAsyncResolve(
+            //            async c => await siteService.UpdateSiteName(id, newName)
+            //        );
 
-                }
+            //    }
 
-            ).AuthorizeWith("AdminPolicy");
+            //).AuthorizeWith("AdminPolicy");
 
-            FieldAsync<SiteType>(
-                "updateSite",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
-                    new QueryArgument<NonNullGraphType<SiteUpdateInputType>> { Name = "updateSite", Description = "an object to patch site properties" }
-                ),
-                resolve: async context =>
-                {
-                    var id = context.GetArgument<Guid>("id");
-                    var patch = context.GetArgument<SiteUpdateModel>("updateSite");
+            //FieldAsync<SiteType>(
+            //    "updateSite",
+            //    arguments: new QueryArguments(
+            //        new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "id of the site" },
+            //        new QueryArgument<NonNullGraphType<SiteUpdateInputType>> { Name = "updateSite", Description = "an object to patch site properties" }
+            //    ),
+            //    resolve: async context =>
+            //    {
+            //        var id = context.GetArgument<Guid>("id");
+            //        var patch = context.GetArgument<SiteUpdateModel>("updateSite");
 
 
-                    return await context.TryAsyncResolve(
-                        async c => await siteService.UpdateSite(id, patch)
-                    );
+            //        return await context.TryAsyncResolve(
+            //            async c => await siteService.UpdateSite(id, patch)
+            //        );
 
-                }
+            //    }
 
-            ).AuthorizeWith("AdminPolicy");
+            //).AuthorizeWith("AdminPolicy");
 
             FieldAsync<SiteType>(
                 "updateSiteCompanyInfo",
@@ -72,7 +72,9 @@ namespace cloudscribe.Core.GraphQL
 
                 }
 
-            ).AuthorizeWith("AdminPolicy");
+            )
+            .AuthorizeWith("AdminPolicy")
+            ;
 
         }
     }

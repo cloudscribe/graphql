@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,10 +22,15 @@ namespace cloudscribe.Core.GraphQL.Services
         {
             _serviceProvider = serviceProvider;
             _log = logger;
+            whenSiteUpdated = new Subject<SiteSettings>();
         }
 
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger _log;
+
+        private readonly Subject<SiteSettings> whenSiteUpdated;
+
+        public IObservable<SiteSettings> WhenSiteUpdated => this.whenSiteUpdated.AsObservable();
 
         public async Task<List<ISiteInfo>> GetAllSites(CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -113,6 +120,10 @@ namespace cloudscribe.Core.GraphQL.Services
                 patch.ApplyPatch<CompanyInfoUpdateModel, ISiteSettings>(site);
                 await commands.Update(site).ConfigureAwait(false);
 
+                var sc = site as SiteSettings;
+
+                whenSiteUpdated.OnNext(sc);
+                
                 return site;
 
             }

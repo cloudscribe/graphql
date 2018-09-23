@@ -65,16 +65,17 @@ namespace GraphQL.Authorization.AspNetCore
             ValidationContext context,
             OperationType operationType)
         {
-            if (userContext == null)
+            
+            if (type == null || !type.RequiresAuthorization())
+            {
+                return;
+            }
+
+            if (userContext == null) // this is null for subscriptions
             {
                 throw new ArgumentNullException(
                     nameof(userContext),
                     $"You must register a user context that implements {nameof(IProvideClaimsPrincipal)}.");
-            }
-
-            if (type == null || !type.RequiresAuthorization())
-            {
-                return;
             }
 
             var policyNames = type.GetPolicies();
