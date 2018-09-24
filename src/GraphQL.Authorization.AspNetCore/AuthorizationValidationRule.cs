@@ -40,12 +40,7 @@ namespace GraphQL.Authorization.AspNetCore
             return new EnterLeaveListener(_ =>
             {
                 var operationType = OperationType.Query;
-
-                // this could leak info about hidden fields or types in error messages
-                // it would be better to implement a filter on the Schema so it
-                // acts as if they just don't exist vs. an auth denied error
-                // - filtering the Schema is not currently supported
-
+                
                 _.Match<Operation>(astType =>
                 {
                     operationType = astType.OperationType;
@@ -78,7 +73,7 @@ namespace GraphQL.Authorization.AspNetCore
                 return;
             }
 
-            if (userContext == null) // this is null for subscriptions
+            if (userContext == null) 
             {
                 throw new ArgumentNullException(
                     nameof(userContext),

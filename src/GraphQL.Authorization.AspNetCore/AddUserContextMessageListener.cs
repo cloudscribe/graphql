@@ -1,9 +1,6 @@
 ﻿using GraphQL.Server.Transports.Subscriptions.Abstractions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
 namespace GraphQL.Authorization.AspNetCore
@@ -28,7 +25,6 @@ namespace GraphQL.Authorization.AspNetCore
                 };
                 // if the default auth scheme is cookies
                 // users from remote clients that pass bearer token are not automatically authenticated
-
                 if (!httpContext.User.Identity.IsAuthenticated)
                 {
                     var result = await httpContext.AuthenticateAsync("Bearer");
@@ -38,9 +34,7 @@ namespace GraphQL.Authorization.AspNetCore
                     }
                 }
                 context.Properties.TryAdd("UserContext", userContext);
-                //context.Properties.AddOrUpdate<string, object>("UserContext", userContext);
-            }
-            
+            }   
         }
 
         public Task HandleAsync(MessageHandlingContext context)

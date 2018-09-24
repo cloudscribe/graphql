@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace cloudscribe.Extensions.GraphQL
+namespace GraphQL.Authorization.AspNetCore
 {
     public static class UserContextBuilder
     {
@@ -16,7 +16,7 @@ namespace cloudscribe.Extensions.GraphQL
             // if the default auth scheme is cookies
             // users from remote clients that pass bearer token are not automatically authenticated
 
-            if(!context.User.Identity.IsAuthenticated)
+            if (!context.User.Identity.IsAuthenticated)
             {
                 var result = await context.AuthenticateAsync("Bearer");
                 if (result.Succeeded)
@@ -24,7 +24,7 @@ namespace cloudscribe.Extensions.GraphQL
                     userContext.User = result.Principal;
                 }
             }
-            
+
             return userContext;
 
         }
