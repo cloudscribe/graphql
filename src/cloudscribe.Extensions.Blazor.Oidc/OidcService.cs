@@ -264,15 +264,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
             
         }
 
-        //public async Task<List<string>> GetUserRoles()
-        //{
-        //    await Init();
-        //    if(_currentUser != null)
-        //    {
-        //        return await JSRuntime.Current.InvokeAsync<List<string>>("oidcJsFunctions.getRolesFromToken", _currentUser.Access_Token);
-        //    }
-        //    return new List<string>();
-        //}
+       
 
     }
 }
