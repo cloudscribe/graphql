@@ -1,4 +1,5 @@
-﻿
+﻿@inject OidcService oidc
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <a href="" class="navbar-brand">graphQL.BlazorClient</a>
     <button onclick=@ToggleNavMenu class="navbar-toggler" type="button">
@@ -13,13 +14,8 @@
                 </NavLink>
             </li>
             <li class="nav-item ">
-                <NavLink class="nav-link" href="postlist">
+                <NavLink class="nav-link" href="blog">
                     Blog
-                </NavLink>
-            </li>
-            <li class="nav-item ">
-                <NavLink class="nav-link" href="sitelist">
-                    Administration
                 </NavLink>
             </li>
             <li class="nav-item">
@@ -27,7 +23,17 @@
                     Test1
                 </NavLink>
             </li>
-            
+            @if (oidc.IsInRole("Administrators"))
+            {
+                <li class="nav-item ">
+                    <NavLink class="nav-link" href="siteadmin">
+                        Administration
+                    </NavLink>
+                </li>
+            }
+
+
+
         </ul>
         <OidcLogin />
     </div>
@@ -35,10 +41,18 @@
 
 
 @functions {
-bool collapseNavMenu = true;
+    bool collapseNavMenu = true;
 
-void ToggleNavMenu()
-{
-    collapseNavMenu = !collapseNavMenu;
-}
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    protected override async Task OnInitAsync()
+    {
+        oidc.OnChange += StateHasChanged;
+        await oidc.Init();
+        
+    }
+
+
 }
