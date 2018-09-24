@@ -8,7 +8,7 @@ The cloudscribe.Extensions.Blazor.Oidc project is a Blazor library that does js 
 
 The solution uses NoDb file system storage, so it is pre-populated with data and anyone who downloads this repo and tries it out will have the same existing data.
 
-Learn more about [cloudscribe](https://www.cloudscribe.com/), [GraphQL.NET](https://github.com/graphql-dotnet/graphql-dotnet), and [Blazor](https://blazor.net/).
+Learn more about [cloudscribe](https://www.cloudscribe.com/), [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet), and [Blazor (.NET in the web browser)](https://blazor.net/).
 
 ## Try It Out
 
@@ -18,13 +18,14 @@ Learn more about [cloudscribe](https://www.cloudscribe.com/), [GraphQL.NET](http
 
 I've tried to make the Blazor Client mirror the MVC Site. Though only a few cloudscribe features are implemented so far, they use the same layout and urls as in the MVC app. The home page of the Blazor client gets it content from GraphQL services on top of cloudscribe SimpleContent, so the same home page content is in both the Blazor app and the MVC app. The Blog in the Blazor client gets the post list from a graphql query built on top of cloudscribe SimpleContent. The Site List page under Administrartion gets the list of sites from GraphQL query on top of cloudscribe Core and the Company Info edit page uses both GraphQL queries and mutation on top of cloudscribe Core services. 
 
-## Technologies and Concepts Illustrated in this solution
+## Technologies, Techniques, and Concepts Illustrated in this solution
 
 * Authenticating a Blazor Client with IdentityServer4
-* Implementing graphql on top of existing cloudscribe services
+* Implementing graphql on top of existing cloudscribe services using GraphQL for .NET
 * A plugin system for adding query, mutation, and subscription from separate libraries into a Composite GraphQL Schema, Query, Mutation, and Subscription.
 * Authorization of graphql operations and fields using ASP.NET Core Authorization policies
 * Consuming graphql from Blazor HttpClient
+* Implementing a GraphQL Mutation as a patch, sending only the changed values similar to JsonPatch
 
 ## Next Steps
 
