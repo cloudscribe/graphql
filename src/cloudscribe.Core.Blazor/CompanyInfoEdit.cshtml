@@ -3,14 +3,7 @@
 @inject Sotsera.Blazor.Toaster.IToaster toaster
 @inject IUriHelper UriHelper
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="sitelist">Site List</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit Site</li>
-    </ol>
-</nav>
-
-<h2>Edit Site Company Info</h2>
+<h2>Company Info</h2>
 
 @if (model == null && errorModel == null)
 {
@@ -98,7 +91,7 @@ else if (model != null)
                 update = changeTracker.GetChanges()
             }
         };
-        
+
         await Http.AddBeaerTokenIfAuthenticated(oidc);
         var endPoint = await AppSettings.Get("graphqlApiUri");
 
@@ -118,6 +111,11 @@ else if (model != null)
 
     protected override async Task OnInitAsync()
     {
+        if (string.IsNullOrEmpty(SiteId))
+        {
+            SiteId = await AppSettings.Get("siteId");
+        }
+
         var query = new GraphQLRequest
         {
             Query = GraphQLQueryConstants.SingleSiteCompanyInfoQuery
