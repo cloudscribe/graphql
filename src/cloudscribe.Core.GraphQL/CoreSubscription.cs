@@ -2,6 +2,7 @@
 using cloudscribe.Core.GraphQL.Services;
 using cloudscribe.Core.Models;
 using cloudscribe.Extensions.GraphQL;
+using GraphQL.Authorization.AspNetCore;
 using GraphQL.Resolvers;
 using GraphQL.Subscription;
 using GraphQL.Types;
@@ -31,7 +32,9 @@ namespace cloudscribe.Core.GraphQL
                     Type = typeof(SiteType),
                     Resolver = new FuncFieldResolver<ISiteContext>(ResolveSite),
                     Subscriber = new EventStreamResolver<SiteSettings>(SubscribeById),
-                });
+                })
+                .AuthorizeWith("AdminPolicy")
+                ;
         }
 
         private readonly SiteService _siteService;

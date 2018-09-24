@@ -17,19 +17,11 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             
-            if(hostingEnvironment.IsDevelopment())
-            {
-                services.Configure<AuthorizationValidationOptions>(options =>
-                {
-                    options.IncludeErrorDetails = true;
-                });
-            }
+            services.AddGraphQLAuthorization(hostingEnvironment.IsDevelopment());
 
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
-
-            services.AddTransient<IValidationRule, AuthorizationValidationRule>();
-
+            
             services.AddGraphQLForCloudscribeCore();
             services.AddGraphQLForCloudscribeSimpleContent();
             services.AddGraphQLCompositeSchemaAndQuery();

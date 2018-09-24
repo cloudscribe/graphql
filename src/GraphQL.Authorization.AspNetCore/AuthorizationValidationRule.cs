@@ -1,4 +1,5 @@
 ﻿using GraphQL.Language.AST;
+using GraphQL.Server.Transports.Subscriptions.Abstractions;
 using GraphQL.Types;
 using GraphQL.Validation;
 using Microsoft.AspNetCore.Authorization;
@@ -29,6 +30,12 @@ namespace GraphQL.Authorization.AspNetCore
         public INodeVisitor Validate(ValidationContext context)
         {
             var userContext = context.UserContext as IProvideClaimsPrincipal;
+
+            if(userContext == null && context.UserContext is MessageHandlingContext)
+            {
+                var subscriptionContext = context.UserContext as MessageHandlingContext;
+                userContext = subscriptionContext.Get<GraphQLUserContext>("UserContext") as IProvideClaimsPrincipal;
+            }
 
             return new EnterLeaveListener(_ =>
             {
