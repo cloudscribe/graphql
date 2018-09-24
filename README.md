@@ -18,7 +18,7 @@ Learn more about [GraphQL.NET](https://github.com/graphql-dotnet/graphql-dotnet)
 
 I've tried to make the Blazor Client mirror the MVC Site. Though only a few cloudscribe features are implemented so far, they use the same layout and urls as in the MVC app. The home page of the Blazor client gets it content from GraphQL services on top of cloudscribe SimpleContent, so the same home page content is in both the Blazor app and the MVC app. The Blog in the Blazor client gets the post list from a graphql query built on top of cloudscribe SimpleContent. The Site List page under Administrartion gets the list of sites from GraphQL query on top of cloudscribe Core and the Company Info edit page uses both GraphQL queries and mutation on top of cloudscribe Core services. 
 
-## Technologied and Concepts Illustrated in this solution
+## Technologies and Concepts Illustrated in this solution
 
 * Authenticating a Blazor Client with IdentityServer4
 * Implementing graphql on top of existing cloudscribe services
