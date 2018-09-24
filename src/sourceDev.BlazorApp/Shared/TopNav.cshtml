@@ -1,7 +1,7 @@
 ﻿@inject OidcService oidc
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <a href="" class="navbar-brand">graphQL.BlazorClient</a>
+    <a href="" class="navbar-brand">@SiteName Blazor</a>
     <button onclick=@ToggleNavMenu class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,6 +41,10 @@
 
 
 @functions {
+
+    [Parameter]
+    string SiteName { get; set; } = "graphQL.BlazorClient";
+
     bool collapseNavMenu = true;
 
     void ToggleNavMenu()
@@ -51,7 +55,7 @@
     {
         oidc.OnChange += StateHasChanged;
         await oidc.Init();
-        
+
     }
 
 

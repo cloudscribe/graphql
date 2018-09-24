@@ -15,7 +15,7 @@
             }";
 
         public const string SingleSiteCompanyInfoQuery = @"
-                query MyQuery($siteId: ID!){
+                query CompanyInfoQuery($siteId: ID!){
                 companyInfo: siteFromId (id: $siteId) {
                 id,
                 companyName,
@@ -29,6 +29,21 @@
                 companyRegion,
                 companyStreetAddress,
                 companyStreetAddress2
+                }
+            }";
+
+
+        public const string SiteContextQuery = @"
+                query CompanyInfoQuery($siteId: ID!){
+                site: siteFromId (id: $siteId) {
+                id,
+                siteName,
+                aliasId,
+                siteFolderName,
+                preferredHostName,
+                timeZoneId,
+                createdUtc,
+                lastModifiedUtc
                 }
             }";
 

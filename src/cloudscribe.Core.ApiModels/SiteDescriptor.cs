@@ -14,6 +14,8 @@ namespace cloudscribe.Core.ApiModels
 
         public string PreferredHostName { get; set; }
 
+        public string TimeZoneId { get; set; } = "America/New_York";
+
         public DateTime CreatedUtc { get; set; } = DateTime.UtcNow;
         public DateTime LastModifiedUtc { get; set; } = DateTime.UtcNow;
     }

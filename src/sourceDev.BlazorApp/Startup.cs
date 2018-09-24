@@ -1,3 +1,4 @@
+using cloudscribe.Core.Blazor;
 using cloudscribe.Extensions.Blazor.Oidc;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ namespace sourceDev.BlazorApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<OidcService>();
+            services.AddSingleton<SiteContextService>();
 
             services.AddToaster(config =>
             {

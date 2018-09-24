@@ -23,7 +23,7 @@ namespace cloudscribe.Core.ApiModels
 
         public string AddThisDotComUsername { get; set; }
 
-        public string TimeZoneId { get; set; } = "America/New_York";
+        
 
         public string CompanyName { get; set; }
 

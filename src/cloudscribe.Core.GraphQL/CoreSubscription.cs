@@ -32,9 +32,6 @@ namespace cloudscribe.Core.GraphQL
                     Resolver = new FuncFieldResolver<ISiteContext>(ResolveSite),
                     Subscriber = new EventStreamResolver<SiteSettings>(SubscribeById),
                 });
-
-            
-
         }
 
         private readonly SiteService _siteService;

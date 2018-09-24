@@ -1,7 +1,8 @@
 ﻿@inherits BlazorLayoutComponent
+@inject SiteContextService siteService
 
 <header>
-    <TopNav />
+    <TopNav SiteName="@siteName" />
 </header>
 <div id="wrapper" class="container-fluid cs-container flex-fill">
     <div class="row mainrow">
@@ -12,9 +13,30 @@
 </div>
 <footer class="sticky-bottom border pt-2 d-flex h-100 flex-wrap flex-grow justify-content-center">
     <div class="p-2">
-
+        @if (errorModel != null)
+        {
+            <GraphQLErrors ErrorModel="@errorModel" Heading="Oops, something went wrong" />
+        }
     </div>
-    <div class="p-2 text-nowrap">Copyright &copy; @DateTime.Now.Year -  graphQL.BlazorClient</div>
+    <div class="p-2 text-nowrap">Copyright &copy; @DateTime.Now.Year -  @siteName  Blazor</div>
 </footer>
 
 <toastContainer />
+
+@functions {    
+    string siteName = "graphQL.BlazorClient";
+
+    ErrorModel errorModel = null;
+
+    protected override async Task OnInitAsync()
+    {
+        await siteService.Init();
+        if(siteService.CurrentSite != null)
+        {
+            siteName = siteService.CurrentSite.SiteName;
+        }
+        errorModel = siteService.Errors;
+    }
+
+
+}
