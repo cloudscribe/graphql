@@ -1,9 +1,7 @@
-﻿using cloudscribe.Extensions.GraphQL;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Authorization.AspNetCore;
 using GraphQL.Http;
 using GraphQL.Server;
-using GraphQL.Validation;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.Extensions.DependencyInjection

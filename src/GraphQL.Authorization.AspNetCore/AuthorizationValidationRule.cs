@@ -34,7 +34,7 @@ namespace GraphQL.Authorization.AspNetCore
             if(userContext == null && context.UserContext is MessageHandlingContext)
             {
                 var subscriptionContext = context.UserContext as MessageHandlingContext;
-                userContext = subscriptionContext.Get<GraphQLUserContext>("UserContext") as IProvideClaimsPrincipal;
+                userContext = subscriptionContext.Get<IProvideClaimsPrincipal>("UserContext");
             }
 
             return new EnterLeaveListener(_ =>
