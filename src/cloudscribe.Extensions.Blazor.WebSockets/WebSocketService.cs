@@ -83,6 +83,18 @@ namespace cloudscribe.Extensions.Blazor.WebSockets
             }
         }
 
-        
+        public async Task SendConnectionInitWithBearerToken(string socketName, string bearerToken)
+        {
+            if (IsOpen(socketName))
+            {
+                await JSRuntime.Current.InvokeAsync<object>("websocketInterop.sendConnectionInitWithToken", socketName, bearerToken);
+            }
+            else
+            {
+                await JSRuntime.Current.InvokeAsync<object>("websocketInterop.logToConsole", $"could not send bearer token because socket {socketName} is not open");
+            }
+        }
+
+
     }
 }

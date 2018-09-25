@@ -1,6 +1,7 @@
 ﻿using GraphQL.Authorization.AspNetCore;
 using GraphQL.Server.Transports.Subscriptions.Abstractions;
 using GraphQL.Validation;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<IValidationRule, AuthorizationValidationRule>();
             services.AddTransient<IOperationMessageListener, AddUserContextMessageListener>();
+            services.TryAddTransient<IWebSocketRequestAuthorizationPreHandler, NoopWebSocketRequestAuthorizationPreHandler>();
 
             return services;
         }

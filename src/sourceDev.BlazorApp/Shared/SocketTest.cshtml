@@ -20,13 +20,21 @@
     private string SocketName { get; set; } = "graphqlsocket";
 
     private string subscribeMessage = "{\"id\":\"1\",\"type\":\"start\",\"payload\":{\"query\":\"subscription SiteUpdatedSubscription($siteId : ID!) { siteUpdated(id:$siteId) { siteName, companyName  }}\",\"variables\":{\"siteId\":\"5961f387-accd-49dc-b962-44029d0803ae\"},\"operationName\":\"SiteUpdatedSubscription\"}}";
+    //private string subscribeMessage = "{\"query\":\"subscription SiteUpdatedSubscription($siteId : ID!) { siteUpdated(id:$siteId) { siteName, companyName  }}\",\"variables\":{\"siteId\":\"5961f387-accd-49dc-b962-44029d0803ae\"},\"operationName\":\"SiteUpdatedSubscription\"}}";
+    private string bearerToken = "";
+
 
     protected override async Task OnInitAsync()
     {
+        if(oidc.CurrentUser != null)
+        {
+            bearerToken = oidc.CurrentUser.Access_Token;
+        }
+
         socketService.OnSocketOpened += SocketOpened;
         socketService.OnSocketClosed += SocketClosed;
         socketService.OnMessageRecieved += MessageRecieved;
-        await socketService.CreateSocket(SocketName, SocketUrl, new string[] {"graphql-ws" });
+        await socketService.CreateSocket(SocketName, SocketUrl, new string[] {"graphql-ws", bearerToken });
     }
 
     async Task SendMessage()
@@ -48,6 +56,8 @@
     void SocketOpened(string socketName)
     {
         canStart = true;
+        //var task = socketService.SendConnectionInitWithBearerToken(SocketName, bearerToken);
+        //task.RunSynchronously();
     }
     void SocketClosed(string socketName)
     {

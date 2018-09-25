@@ -173,22 +173,19 @@ namespace sourceDev.WebApp
 
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<ISchema>("/graphql");
-            // add http for Schema at default url /graphql
-            app.UseGraphQL<ISchema>("/graphql");
+            app.UseGraphQLWebSockets<ISchema>("/graphql"); // for subscriptions
+            app.UseGraphQL<ISchema>("/graphql"); //for queries and mutations
 
             // use graphql-playground at default url /ui/playground
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 Path = "/ui/playground"
+                 
             });
 
             app.UseMvc(routes =>
             {
                 var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
-                //*** IMPORTANT ***
-                // this is in Config/RoutingAndMvc.cs
-                // you can change or add routes there
                 routes.UseCustomRoutes(useFolders);
             });
 

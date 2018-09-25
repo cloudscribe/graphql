@@ -15,8 +15,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             
-            services.AddGraphQLAuthorization(hostingEnvironment.IsDevelopment());
-
             services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
             
@@ -24,6 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddGraphQLForCloudscribeSimpleContent();
             services.AddGraphQLCompositeSchemaAndQuery();
 
+            services.AddTransient<IWebSocketRequestAuthorizationPreHandler, BearerTokenAsExtraProtocolWebSocketRequestAuthorizationPreHandler>();
+
+            services.AddGraphQLAuthorization(hostingEnvironment.IsDevelopment());
             services.AddGraphQL(_ =>
             {
                 _.EnableMetrics = true;

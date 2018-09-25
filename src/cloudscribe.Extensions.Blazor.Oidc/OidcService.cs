@@ -35,7 +35,7 @@ namespace cloudscribe.Extensions.Blazor.Oidc
         public async Task JsUserLoadedCallback(User user)
         {
             _userRoles = await JSRuntime.Current.InvokeAsync<List<string>>("oidcJsFunctions.getRolesFromToken", user.Access_Token);              
-            await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", user);
+            //await JSRuntime.Current.InvokeAsync<object>("oidcJsFunctions.logToConsole", user);
             NotifyUserLoaded();
         }
 

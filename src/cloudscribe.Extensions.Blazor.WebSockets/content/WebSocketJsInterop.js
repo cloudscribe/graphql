@@ -45,6 +45,23 @@ window.websocketInterop = {
         }
     },
 
+    sendConnectionInitWithToken: function (socketName, bearerToekn) {
+        var socket = window.websocketInterop._socketset[socketName];
+        if (socket) {
+            var msg = {
+                type: "connection_init",
+                payload: {
+                    Authorization : bearerToekn
+                }
+            };
+            socket.send(msg);
+
+
+        } else {
+            console.log("no socket found for " + socketName);
+        }
+    },
+
     closeSocket(dotNetService, socketName) {
         var socket = window.websocketInterop._socketset[socketName];
         if (socket) {

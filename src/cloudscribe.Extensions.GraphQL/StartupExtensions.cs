@@ -11,8 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<CompositeMutation>();
             services.AddSingleton<CompositeSubscription>();
             services.AddSingleton<ISchema, CompositeSchema>();
-
-
+            
             return services;
         }
     }

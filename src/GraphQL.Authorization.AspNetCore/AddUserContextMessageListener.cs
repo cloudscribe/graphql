@@ -7,18 +7,28 @@ namespace GraphQL.Authorization.AspNetCore
 {
     public class AddUserContextMessageListener : IOperationMessageListener
     {
-        public AddUserContextMessageListener(IHttpContextAccessor httpContextAccessor)
+        public AddUserContextMessageListener(
+            IHttpContextAccessor httpContextAccessor,
+            IWebSocketRequestAuthorizationPreHandler webSocketPreHandler
+            )
         {
             _httpContextAccessor = httpContextAccessor;
+            _webSocketPreHandler = webSocketPreHandler;
         }
 
         private IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebSocketRequestAuthorizationPreHandler _webSocketPreHandler;
 
         public async Task BeforeHandleAsync(MessageHandlingContext context)
         {
             var httpContext = _httpContextAccessor.HttpContext;
             if(httpContext != null)
             {
+                if(httpContext.WebSockets.IsWebSocketRequest && (!httpContext.User.Identity.IsAuthenticated))
+                {
+                    await _webSocketPreHandler.PrepareContext(httpContext);
+                }
+
                 var userContext = new GraphQLUserContext
                 {
                     User = httpContext.User
