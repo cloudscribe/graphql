@@ -8,7 +8,11 @@ The cloudscribe.Extensions.Blazor.Oidc project is a Blazor library that does js 
 
 The solution uses NoDb file system storage, so it is pre-populated with data and anyone who downloads this repo and tries it out will have the same existing data.
 
-Learn more about [cloudscribe](https://www.cloudscribe.com/) (a set of .netstandard libraries that can be assembled into ASP.NET Core web applications providing multi-tenant site, user, and role management and a really user friendly and powerful content engine), [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet) (an alternative for traditional REST APIs created by Facebook, ported to .NET by @joemcbride et al.), and [Blazor ](https://blazor.net/) (.NET/C#/Razor in the web browser, an alternative to javascript UI frameworks like React, Angular, Vue, etc.).
+### Learn more about
+
+* [cloudscribe](https://www.cloudscribe.com/) (a set of .netstandard libraries that can be assembled into ASP.NET Core web applications providing multi-tenant site, user, and role management and a really user friendly and powerful content engine) 
+*[GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet) (an alternative for traditional REST APIs created by Facebook ([official docs](https://graphql.org/learn/)), ported to .NET by @joemcbride et al.)
+* [Blazor ](https://blazor.net/) (.NET/C#/Razor in the web browser, an alternative to javascript UI frameworks like React, Angular, Vue, etc.).
 
 ## Try It Out
 
@@ -21,11 +25,12 @@ I've tried to make the Blazor Client mirror the MVC Site. Though only a few clou
 ## Technologies, Techniques, and Concepts Illustrated in this solution
 
 * Authenticating a Blazor Client with IdentityServer4
-* Implementing graphql on top of existing cloudscribe services using GraphQL for .NET
+* Integration tests for API endpoints protected by IdentityServer Authentication (Bearer token authentication)
+* Implementing graphql query, mutation, and subscription types on top of existing cloudscribe services using GraphQL for .NET
 * A plugin system for adding query, mutation, and subscription from separate libraries into a Composite GraphQL Schema, Query, Mutation, and Subscription.
 * Authorization of graphql operations and fields using ASP.NET Core Authorization policies
-* Consuming graphql from Blazor HttpClient
 * Implementing a GraphQL Mutation as a patch, sending only the changed values similar to JsonPatch
+* Consuming graphql from Blazor HttpClient
 
 ## Next Steps
 
