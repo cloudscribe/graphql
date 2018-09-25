@@ -11,7 +11,7 @@ The solution uses NoDb file system storage, so it is pre-populated with data and
 ### Learn more about
 
 * [cloudscribe](https://www.cloudscribe.com/) (a set of .netstandard libraries that can be assembled into ASP.NET Core web applications providing multi-tenant site, user, and role management and a really user friendly and powerful content engine) 
-*[GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet) (an alternative for traditional REST APIs created by Facebook ([official docs](https://graphql.org/learn/)), ported to .NET by @joemcbride et al.)
+* [GraphQL for .NET](https://github.com/graphql-dotnet/graphql-dotnet) (an alternative for traditional REST APIs created by Facebook ([official docs](https://graphql.org/learn/)), ported to .NET by @joemcbride et al.)
 * [Blazor ](https://blazor.net/) (.NET/C#/Razor in the web browser, an alternative to javascript UI frameworks like React, Angular, Vue, etc.).
 
 ## Try It Out
