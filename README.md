@@ -31,7 +31,7 @@ I've tried to make the Blazor Client mirror the MVC Site. Though only a few clou
 * Authorization of graphql operations and fields using ASP.NET Core Authorization policies
 * Implementing a GraphQL Mutation as a patch, sending only the changed values similar to JsonPatch
 * Consuming graphql from Blazor HttpClient
-* Consuming a GraphQL Subscription using WebSockets from Blazor -- coming soone
+* Consuming a GraphQL Subscription using WebSockets from Blazor -- coming soon
 
 ## Next Steps
 
