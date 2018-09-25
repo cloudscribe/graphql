@@ -24,7 +24,7 @@ I've tried to make the Blazor Client mirror the MVC Site. Though only a few clou
 
 ## Technologies, Techniques, and Concepts Illustrated in this solution
 
-* Authenticating a Blazor Client with IdentityServer4
+* Authenticating a Blazor Client with IdentityServer4/OpenId Connnect
 * Integration tests for API endpoints protected by IdentityServer Authentication (Bearer token authentication)
 * Implementing graphql query, mutation, and subscription types on top of existing cloudscribe services using GraphQL for .NET
 * A plugin system for adding query, mutation, and subscription from separate libraries into a Composite GraphQL Schema, Query, Mutation, and Subscription.
