@@ -1,0 +1,65 @@
+﻿@inject WebSocketsService socketService
+@inject OidcService  oidc
+@inject Sotsera.Blazor.Toaster.IToaster toaster
+
+@if (canStart && !didStart)
+{
+    <button class="btn btn-primary" onclick="@SendMessage">Subscribe</button>
+}
+@if (didStart)
+{
+    <button class="btn btn-warning" onclick="@CloseSocket">Stop</button>
+}
+
+@functions {
+
+    [Parameter]
+    private string SocketUrl { get; set; } = "wss://localhost:44396/graphql";
+
+    [Parameter]
+    private string SocketName { get; set; } = "graphqlsocket";
+
+    private string subscribeMessage = "{\"id\":\"1\",\"type\":\"start\",\"payload\":{\"query\":\"subscription SiteUpdatedSubscription($siteId : ID!) { siteUpdated(id:$siteId) { siteName, companyName  }}\",\"variables\":{\"siteId\":\"5961f387-accd-49dc-b962-44029d0803ae\"},\"operationName\":\"SiteUpdatedSubscription\"}}";
+
+    protected override async Task OnInitAsync()
+    {
+        socketService.OnSocketOpened += SocketOpened;
+        socketService.OnSocketClosed += SocketClosed;
+        socketService.OnMessageRecieved += MessageRecieved;
+        await socketService.CreateSocket(SocketName, SocketUrl, new string[] {"graphql-ws" });
+    }
+
+    async Task SendMessage()
+    {
+        await socketService.SendMessage(SocketName, subscribeMessage);
+        didStart = true;
+    }
+
+    async Task CloseSocket()
+    {
+        await socketService.CloseSocket(SocketName);
+        canStart = false;
+        didStart = false;
+    }
+
+    bool canStart;
+    bool didStart;
+
+    void SocketOpened(string socketName)
+    {
+        canStart = true;
+    }
+    void SocketClosed(string socketName)
+    {
+
+    }
+    void MessageRecieved(string socketName, string message)
+    {
+        if (SocketName == socketName)
+        {
+            toaster.Info(message);
+        }
+
+    }
+
+}

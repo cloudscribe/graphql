@@ -4,14 +4,12 @@ window.websocketInterop = {
         console.log(someDotNetObject);
     },
 
-    _socketset: {
-
-    },
+    _socketset: {},
 
     createSocket: function (dotNetService, socketName, url, protocols) {
 
-        var socketWrapper = function (dotNetService, url, protocalls) {
-            var theSocket = new WebSocket(url, protocalls);
+        var socketWrapper = function (dotNetService, url, protocols) {
+            var theSocket = new WebSocket(url, protocols);
             theSocket.onopen = function (event) {
                 dotNetService.invokeMethodAsync('JsSocketOpenCallback', socketName);
             };
@@ -23,20 +21,23 @@ window.websocketInterop = {
 
                         break;
                     case "data":
-                        dotNetService.invokeMethodAsync('JsSocketOnMessageCallback', socketName, msg.payload);
+                        dotNetService.invokeMethodAsync('JsSocketOnMessageCallback', socketName, JSON.stringify(msg.payload));
                         break;
-
                 }
- 
+            };
+            theSocket.onerror = function (event) {
+                console.error("WebSocket error observed:", event);
+
             };
 
+            return theSocket;
         };
 
-        _socketset[socketName] = socketWrapper;
+        window.websocketInterop._socketset[socketName] = socketWrapper(dotNetService, url, protocols);
     },
 
     sendMessage: function (socketName, message) {
-        var socket = _socketset[name];
+        var socket = window.websocketInterop._socketset[socketName];
         if (socket) {
             socket.send(message);
         } else {
@@ -45,7 +46,7 @@ window.websocketInterop = {
     },
 
     closeSocket(dotNetService, socketName) {
-        var socket = _socketset[name];
+        var socket = window.websocketInterop._socketset[socketName];
         if (socket) {
             socket.close();
             dotNetService.invokeMethodAsync('JsSocketClosedCallback', socketName);

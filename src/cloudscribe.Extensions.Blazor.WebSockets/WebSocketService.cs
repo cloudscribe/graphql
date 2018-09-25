@@ -17,7 +17,7 @@ namespace cloudscribe.Extensions.Blazor.WebSockets
         {
 
         }
-
+        private List<string> _addedSockets = new List<string>();
         private List<string> _openSockets = new List<string>();
 
         public event Action<string> OnSocketOpened;
@@ -53,12 +53,22 @@ namespace cloudscribe.Extensions.Blazor.WebSockets
 
         public async Task CreateSocket(string socketName, string url, string[] protocols)
         {   
-            await JSRuntime.Current.InvokeAsync<object>("websocketInterop.createSocket", new DotNetObjectRef(this), socketName, url, protocols);
+            if(!_addedSockets.Contains(socketName) && ! _openSockets.Contains(socketName))
+            {
+                await JSRuntime.Current.InvokeAsync<object>("websocketInterop.createSocket", new DotNetObjectRef(this), socketName, url, protocols);
+                _addedSockets.Add(socketName);
+            }
+            
         }
 
         public bool IsOpen(string sockletName)
         {
             return _openSockets.Contains(sockletName);
+        }
+
+        public async Task CloseSocket(string socketName)
+        {
+            await JSRuntime.Current.InvokeAsync<object>("websocketInterop.closeSocket", new DotNetObjectRef(this), socketName);
         }
 
         public async Task SendMessage(string socketName, string message)
