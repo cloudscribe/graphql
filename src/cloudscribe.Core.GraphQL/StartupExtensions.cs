@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddGraphQLForCloudscribeCore(this IServiceCollection services)
         {
             services.AddSingleton<SiteType>();
-            services.AddSingleton<SiteUpdatedEvent>();
+            services.AddSingleton<SiteUserInfoType>();
             services.AddSingleton<SiteInfoType>();
             services.AddSingleton<SiteUpdateInputType>();
 

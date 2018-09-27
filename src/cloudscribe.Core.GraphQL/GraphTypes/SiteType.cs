@@ -1,4 +1,5 @@
-﻿using cloudscribe.Core.Models;
+﻿using cloudscribe.Core.GraphQL.Services;
+using cloudscribe.Core.Models;
 using GraphQL.Authorization.AspNetCore;
 using GraphQL.Types;
 using System;
@@ -9,8 +10,19 @@ namespace cloudscribe.Core.GraphQL.GraphTypes
 {
     public class SiteType : ObjectGraphType<ISiteContext>
     {
-        public SiteType()
+        public SiteType(SiteService siteService)
         {
+
+            FieldAsync<ListGraphType<SiteInfoType>>(
+                "list",
+                resolve: async context =>
+                {
+                    return await context.TryAsyncResolve(async c => await siteService.GetAllSites(c.CancellationToken));
+                }
+            )
+            .AuthorizeWith("AdminPolicy")
+            ;
+
             // public fields
             Field(x => x.Id, type: typeof(IdGraphType)).Description("The Uniqueidentifier of the site a guid");
             Field(x => x.AliasId).Description("A friendlier unique id");

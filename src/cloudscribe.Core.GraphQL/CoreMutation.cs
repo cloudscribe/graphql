@@ -64,8 +64,10 @@ namespace cloudscribe.Core.GraphQL
                 resolve: async context =>
                 {
                     var id = context.GetArgument<Guid>("id");
+                    //var model = context.GetArgument<CompanyInfoUpdateType>("updateSiteCompanyInfo");
+
                     var patch = context.GetArgument<Dictionary<string, object>>("updateSiteCompanyInfo");
-                    
+
                     return await context.TryAsyncResolve(
                         async c => await siteService.UpdateSite(id, patch)
                     );
