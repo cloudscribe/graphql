@@ -12,26 +12,22 @@ namespace cloudscribe.SimpleContent.GraphQL.Services
     public class PageService
     {
         public PageService(
-            IServiceProvider serviceProvider,
+            IPageQueriesSingleton pageQueries,
             ILogger<PageService> logger
             )
         {
-            _serviceProvider = serviceProvider;
+            _pageQueries = pageQueries;
             _log = logger;
         }
 
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IPageQueriesSingleton _pageQueries;
         private readonly ILogger _log;
 
         public async Task<IPage> GetPageBySlug(string projectId, string slug, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var queries = scopedServices.GetService<IPageQueries>();
-                return await queries.GetPageBySlug(projectId, slug, cancellationToken).ConfigureAwait(false);
-                
-            }
+           
+            return await _pageQueries.GetPageBySlug(projectId, slug, cancellationToken).ConfigureAwait(false);
+               
         }
 
     }

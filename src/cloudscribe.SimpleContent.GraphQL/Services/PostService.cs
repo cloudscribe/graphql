@@ -13,15 +13,15 @@ namespace cloudscribe.SimpleContent.GraphQL.Services
     public class PostService
     {
         public PostService(
-            IServiceProvider serviceProvider,
+            IPostQueriesSingleton postQueries,
             ILogger<PageService> logger
             )
         {
-            _serviceProvider = serviceProvider;
+            _postQueries = postQueries;
             _log = logger;
         }
 
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IPostQueriesSingleton _postQueries;
         private readonly ILogger _log;
 
         public async Task<PagedResult<IPost>> GetPosts(
@@ -33,34 +33,26 @@ namespace cloudscribe.SimpleContent.GraphQL.Services
             CancellationToken cancellationToken = default(CancellationToken)
             )
         {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var queries = scopedServices.GetService<IPostQueries>();
-                var posts = await queries.GetPosts(projectId, category, includeUnpublished, pageNumber, pageSize, cancellationToken).ConfigureAwait(false);
+           
+            var posts = await _postQueries.GetPosts(projectId, category, includeUnpublished, pageNumber, pageSize, cancellationToken).ConfigureAwait(false);
      
-                var result = new PagedResult<IPost>
-                {
-                    TotalItems = posts.TotalItems,
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    Data = posts.Data
-                };
-                return result;
+            var result = new PagedResult<IPost>
+            {
+                TotalItems = posts.TotalItems,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = posts.Data
+            };
+            return result;
 
-            }
+            
         }
 
         public async Task<IPost> GetPostBySlug(string projectId, string slug, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var queries = scopedServices.GetService<IPostQueries>();
-                var result = await queries.GetPostBySlug(projectId, slug, cancellationToken).ConfigureAwait(false);
-                return result.Post;
-
-            }
+            var result = await _postQueries.GetPostBySlug(projectId, slug, cancellationToken).ConfigureAwait(false);
+            return result.Post;
+           
         }
 
     }

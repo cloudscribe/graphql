@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="cloudscribe.SimpleContent.Models" Version="4.0.2" />
+    <PackageReference Include="cloudscribe.SimpleContent.Models" Version="4.0.3" />
 
-    <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.3" />
+    <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.4" />
     
     <PackageReference Include="GraphQL" Version="2.0.0" />
 
