@@ -9,10 +9,11 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration config
             )
         {
-            services.AddCloudscribeCoreNoDbStorage();
+            var useSingletons = true; // needed for graphql services to be singleton
+            services.AddCloudscribeCoreNoDbStorage(useSingletons);
             services.AddCloudscribeLoggingNoDbStorage(config);
 
-            services.AddNoDbStorageForSimpleContent();
+            services.AddNoDbStorageForSimpleContent(useSingletons);
 
             return services;
         }

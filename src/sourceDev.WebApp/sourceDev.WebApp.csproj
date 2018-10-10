@@ -38,7 +38,7 @@
     <PackageReference Include="cloudscribe.Core.Web" Version="3.1.20" />
     <PackageReference Include="cloudscribe.Core.CompiledViews.Bootstrap4" Version="3.1.12" />
     <PackageReference Include="cloudscribe.Web.StaticFiles" Version="1.0.6" />
-    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.6" />
+    <PackageReference Include="cloudscribe.Core.Storage.NoDb" Version="3.0.8" />
     
     <PackageReference Include="cloudscribe.Core.SimpleContent" Version="4.0.2" />
     <PackageReference Include="cloudscribe.SimpleContent.Web" Version="4.0.11" />
@@ -47,7 +47,7 @@
     <PackageReference Include="cloudscribe.SimpleContent.MetaWeblog" Version="4.0.4" />
     <PackageReference Include="cloudscribe.SimpleContent.Syndication" Version="4.0.3" />
     <PackageReference Include="cloudscribe.SimpleContent.ContentTemplates.Bootstrap4" Version="1.0.7" />
-    <PackageReference Include="cloudscribe.SimpleContent.Storage.NoDb" Version="4.0.3" />
+    <PackageReference Include="cloudscribe.SimpleContent.Storage.NoDb" Version="4.0.5" />
 
     <PackageReference Include="cloudscribe.Logging.Web" Version="3.0.8" />
     <PackageReference Include="cloudscribe.Logging.NoDb" Version="3.0.3" />
