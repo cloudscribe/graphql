@@ -45,7 +45,4 @@ What is done so far is just experimental proof of concept but trying to build a 
 * What about dynamic menu items
 
 
-## Have questions or want to discuss it?
-
-[![Join the chat at https://gitter.im/joeaudette/cloudscribe](https://badges.gitter.im/joeaudette/cloudscribe.svg)](https://gitter.im/joeaudette/cloudscribe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+If you have questions please visit our community forum https://www.cloudscribe.com/forum
